@@ -12,28 +12,8 @@
     flex-direction: column;
 }
 
-#google-c{
-    color:#4285F4;
-}
-
-#google-s{
-    color:#DB4437;
-}
-
-#google-4{
-    color:	#F4B400;
-}
-
-#google-3{
-    color:	#4285F4;
-}
-
-#google-0-1{
-    color:	#0F9D58;
-}
-
-#google-0-2{
-    color:#DB4437;
+#title {
+    color: black;
 }
 
 .google-colors{
@@ -88,4 +68,8 @@
 
 .episode-desc{
     font-family: 'Montserrat', sans-serif;
+}
+
+#search-icon{
+    cursor: pointer;
 }
