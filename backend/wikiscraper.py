@@ -1,31 +1,38 @@
 import json
-import wikipedia
+import mediawiki
+from mediawiki import MediaWiki
 import time
 
-start_time = time.time()  # track start time of program
 
+wiki = MediaWiki()
+start_time = time.time()  # track start time of program
 valid_exercises = {}
 
 with open("data/gymDataset.json", "r", encoding="utf-8") as openfile:
     data = json.load(openfile)
 openfile.close()
 
+progress = 0
+total = len(data)
+
 for exercise in data:
+    progress += 1
+    print(f"{progress} / {total}")
     exercise_name = exercise["Title"]
     try:
-        page = wikipedia.page(exercise_name)
+        page = wiki.page(exercise_name)
         print("Relevant article: " + str(exercise["Title"]))
         valid_exercises[exercise_name] = page.summary
         # valid_exercises[exercise_name] = page.content
-    except wikipedia.PageError:
+    except mediawiki.PageError:
         print("No relevant article: " + str(exercise["Title"]))
-    except wikipedia.DisambiguationError:
-        suggestion = wikipedia.suggest(exercise_name)
-        if suggestion:
-            page = wikipedia.page(suggestion)
-            valid_exercises[exercise_name] = page.summary
-        else:
-            print("Ambiguous name: " + str(exercise["Title"]))
+    except mediawiki.DisambiguationError:
+        # suggestion = wikipedia.suggest(exercise_name)
+        # if suggestion:
+        #     page = wikipedia.page(suggestion)
+        #     valid_exercises[exercise_name] = page.summary
+        # else:
+        print("Ambiguous name: " + str(exercise["Title"]))
 
 json_object = json.dumps(valid_exercises, indent=4)
 
