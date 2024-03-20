@@ -21,7 +21,7 @@ def cos_sim(query_desc_vec, title_to_vec_list):
     """
     Returns a list of cosine similarity values between the 
     query description and the exercise descriptions corresponding 
-    to the order that each description appears in the given dictionary.
+    to the order that each description appears in the given list.
     """
     pass
 
