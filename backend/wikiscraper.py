@@ -20,7 +20,7 @@ for exercise in data:
     print(f"{progress} / {total}")
     exercise_name = exercise["Title"]
     try:
-        page = wiki.page(exercise_name)
+        page = wiki.page(exercise_name, auto_suggest=False)
         print("Relevant article: " + str(exercise["Title"]))
         valid_exercises[exercise_name] = page.summary
         # valid_exercises[exercise_name] = page.content

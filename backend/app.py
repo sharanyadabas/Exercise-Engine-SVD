@@ -50,7 +50,7 @@ def build_sim_matrix(n, index_to_title, dt_matrix, title_to_index, sim_method):
 
 
 # Assuming your JSON data is stored in a file named 'init.json'
-with open(json_file_path, "r") as file:
+with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
     exercise_df = pd.DataFrame(data["exercises"])
 
