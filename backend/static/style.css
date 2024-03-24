@@ -1,16 +1,13 @@
 body {
     background-color: #DDE6ED;
-
+    margin: 0;
 }
 
 .full-body-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    margin: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -18,8 +15,17 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+#answer-box {
+    margin-top: 20px;
+    width: 700px
+}
+
+.content {
+    flex: 1;
+}
+
 #title {
-    color: #526D82;
+    color: #27374D;
     opacity: 1;
 }
 
@@ -116,9 +122,15 @@ body {
     }
 }
 
-#answer-box {
-    width: 700px;
-    margin-top: 50px;
+.footer {
+    font-family: 'Open Sans', sans-serif;
+    height: 50px;
+    width: 100%;
+    background-color: #27374D;
+    color: #DDE6ED;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 15px;
 }
 
 .episode-title {
