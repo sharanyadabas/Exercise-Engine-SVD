@@ -83,8 +83,8 @@ body {
     border: 2px solid rgba(82, 109, 130, 1);
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
-    padding: 15px;
     padding-left: 24px;
+    padding-right: 30px;
 }
 
 #exercise-dropdown:focus {
@@ -99,6 +99,7 @@ body {
 .search-containers {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .dropdown {
