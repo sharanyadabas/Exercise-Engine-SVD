@@ -14,18 +14,19 @@
             </div>
             <div class="search-line">
                 <div class="search-containers">
-                    <select class='dropdown' id="exercise-dropdown" onchange="dropdownChange()">
-                        <option value="" disabled selected style="display: none;">Select an
-                            Exercise</option>
+                    <input list="exercise-dropdown" name="exercise-input" placeholder="Select an
+                    Exercise" class="dropdown" id="exercise-dropdown"/></label>
+                    <datalist id="datalist" onchange="dropdownChange()" >
+                        <option value="" disabled selected ></option>
                         <!-- Options will be added here by JavaScript -->
-                    </select>
-                    <div class="search-bar">
+                    </datalist>
+                    <!-- <div class="search-bar">
                         <div class="input-box" onclick="sendFocus()">
                             <input placeholder="Search for an exercise" id="filter-text-val">
                         </div>
                         <img id="search-icon" src="../static/images/searchbell.png" onclick="filterText()" />
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -40,11 +41,11 @@
             fetch("/get-titles")
                 .then(response => response.json())
                 .then(data => {
-                    const dropdown = document.getElementById("exercise-dropdown");
+                    const dropdown = document.getElementById("datalist");
                     data.titles.forEach(title => {
                         const option = document.createElement("option");
                         option.value = title;
-                        option.textContent = title;
+                        // option.textContent = title;
                         dropdown.appendChild(option);
                     });
                 });
