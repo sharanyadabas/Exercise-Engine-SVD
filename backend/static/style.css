@@ -42,7 +42,7 @@ body {
     align-items: center;
     margin-top: 10px;
     padding: 15px;
-    width: 550px;
+    width: 100%;
 }
 
 .input-box img {
@@ -76,6 +76,45 @@ body {
     display: flex;
     align-items: center;
     width: 700px;
+}
+
+#exercise-dropdown {
+    color: rgba(82, 109, 130, 0.6);
+    border: 2px solid rgba(82, 109, 130, 1);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    padding: 15px;
+    padding-left: 24px;
+}
+
+#exercise-dropdown:focus {
+    outline: none;
+    border: 2px solid rgba(82, 109, 130, 1);
+}
+
+#exercise-dropdown option {
+    color: black;
+}
+
+.search-containers {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown {
+    border-radius: 50px;
+    border: 2px solid #526D82;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 15px;
+    width: 550px;
+    background-color: inherit;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
 }
 
 .search-line img {
