@@ -14,19 +14,18 @@
             </div>
             <div class="search-line">
                 <div class="search-containers">
-                    <input list="exercise-dropdown" name="exercise-input" placeholder="Select an
-                    Exercise" class="dropdown" id="exercise-dropdown"/></label>
-                    <datalist id="datalist" onchange="dropdownChange()" >
+                    <input list="datalist" name="exercise-input" placeholder="Select an Exercise" id="exercise-dropdown" class="dropdown" onchange="dropdownChange()"/></label>
+                    <datalist id="datalist" >
                         <option value="" disabled selected ></option>
                         <!-- Options will be added here by JavaScript -->
                     </datalist>
-                    <!-- <div class="search-bar">
+                    <div class="search-bar" style="display: none;">
                         <div class="input-box" onclick="sendFocus()">
                             <input placeholder="Search for an exercise" id="filter-text-val">
                         </div>
                         <img id="search-icon" src="../static/images/searchbell.png" onclick="filterText()" />
                         </button>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,6 +53,7 @@
         // This function is called when the dropdown selection changes
         function dropdownChange() {
             const selectedTitle = document.getElementById("exercise-dropdown").value;
+            console.log(selectedTitle);
             if (selectedTitle) {
                 // Here you can call the same function you use to fetch and display the exercise info
                 // For example, if you're using the text input's filter function:
