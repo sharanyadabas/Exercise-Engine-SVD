@@ -57,11 +57,11 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     num_exercises = len(data["exercises"])
 
     title_to_index = {
-        title: i for i, title in enumerate([e["Title"] for e in data["exercises"]])
+        title: i for i, title in enumerate([e["Title"].lower() for e in data["exercises"]])
     }
 
     index_to_title = {
-        i: title for i, title in enumerate([e["Title"] for e in data["exercises"]])
+        i: title for i, title in enumerate([e["Title"].lower() for e in data["exercises"]])
     }
 
     # Build Document-Term matrix
@@ -86,7 +86,7 @@ CORS(app)
 # Sample search using json with pandas
 def json_search(query):
     # Get query index
-    query_idx = title_to_index[query]
+    query_idx = title_to_index[query.lower()]
     # Get list of cosine similarity values compared to query description
     cos_sim_list = sim_matrix[query_idx]
     # Add list as column to dataframe
