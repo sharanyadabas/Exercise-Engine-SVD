@@ -12,12 +12,6 @@ body {
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    font-family: 'Open Sans', sans-serif;
-}
-
-#answer-box {
-    margin-top: 20px;
-    width: 700px
 }
 
 .content {
@@ -33,27 +27,12 @@ body {
     display: flex;
     align-items: center;
     font-size: 48px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'trebuchet ms', sans-serif;
 }
 
 .google-colors h1 {
     margin-bottom: 0;
     margin-right: 3px;
-}
-
-.input-box {
-    border-radius: 50px;
-    border: 2px solid #526D82;
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    padding: 15px;
-    width: 550px;
-}
-
-.input-box img {
-    height: 20px;
-    width: 20px;
 }
 
 .top-text {
@@ -62,26 +41,38 @@ body {
     align-items: center;
 }
 
-.input-box input {
-    width: 100%;
-    margin-left: 10px;
-    font-size: 20px;
-    color: #526D82;
-    border: none;
-    outline: 0;
+.search-line {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown {
+    border-radius: 50px;
+    border: 3px solid #526D82;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 15px;
+    width: 580px;
     background-color: inherit;
 }
 
-::placeholder {
-    color: #526D82;
-    opacity: 0.6
+.dropdown:hover {
+    border: 3px solid #27374D;
 }
 
-.search-line {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    width: 700px;
+#filter-text-val {
+    font-family: 'trebuchet ms', sans-serif;
+    font-size: 15px;
+    color: #27374D;
+}
+
+::placeholder {
+    font-family: 'trebuchet ms', sans-serif;
+    font-size: 15px;
+    color: #526D82;
+    opacity: 0.6
 }
 
 .search-line img {
@@ -122,25 +113,54 @@ body {
     }
 }
 
-.footer {
-    font-family: 'Open Sans', sans-serif;
+#answer-box {
+    margin-top: 20px;
+    width: 800px
+}
+
+.answer-box {
+    display: flex;
+    align-items: center;
+}
+
+.episode-title {
+    color: #27374D;
+    font-family: 'Kanit', sans-serif;
+}
+
+.episode-desc {
+    color: #526D82;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.episode-rating {
+    color: #DDE6ED;
+    font-size: 25px;
+    margin-left: 50px;
+    font-family: 'trebuchet ms', sans-serif;
+}
+
+.circle-rating {
+    display: inline-block;
+    width: 50px;
     height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #526D82;
+    text-align: center;
+}
+
+#search-icon {
+    cursor: pointer;
+}
+
+.footer {
+    height: 40px;
     width: 100%;
     background-color: #27374D;
     color: #DDE6ED;
     font-size: 18px;
     text-align: center;
     padding-top: 15px;
-}
-
-.episode-title {
-    font-family: 'Kanit', sans-serif;
-}
-
-.episode-desc {
-    font-family: 'Montserrat', sans-serif;
-}
-
-#search-icon {
-    cursor: pointer;
+    font-family: 'trebuchet ms', sans-serif;
 }

@@ -105,6 +105,10 @@ def json_search(query):
 def home():
     return render_template("base.html", title="sample html")
 
+@app.route("/get-titles")
+def get_titles():
+    titles = [e["Title"] for e in data["exercises"]]
+    return {"titles": titles}
 
 @app.route("/episodes")
 def episodes_search():
@@ -114,3 +118,4 @@ def episodes_search():
 
 if "DB_NAME" not in os.environ:
     app.run(debug=True, host="0.0.0.0", port=5000)
+

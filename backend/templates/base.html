@@ -14,11 +14,13 @@
                     <h1 id="title">Exercise Engine</h1>
                 </div>
                 <div class="search-line">
-                    <div class="input-box" onclick="sendFocus()">
-                        <input placeholder="Search for an exercise" id="filter-text-val">
-                    </div>
+                    <input list="datalist" name="exercise-input" placeholder="Select an Exercise" id="filter-text-val"
+                        class="dropdown" onchange="dropdownChange()" /></label>
                     <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
-                    </button>
+                    <datalist id="datalist">
+                        <option value="" disabled selected></option>
+                        <!-- Options will be added here by JavaScript -->
+                    </datalist>
                 </div>
             </div>
             <div id="answer-box">
@@ -32,13 +34,47 @@
 
 
     <script>
+        // This function fetches the exercise titles and populates the dropdown
+        function fetchTitlesAndPopulateDropdown() {
+            fetch("/get-titles")
+                .then(response => response.json())
+                .then(data => {
+                    const dropdown = document.getElementById("datalist");
+                    data.titles.forEach(title => {
+                        const option = document.createElement("option");
+                        option.value = title;
+                        // option.textContent = title;
+                        dropdown.appendChild(option);
+                    });
+                });
+        }
+
+        // This function is called when the dropdown selection changes
+        function dropdownChange() {
+            const selectedTitle = document.getElementById("filter-text-val").value;
+            console.log(selectedTitle);
+            if (selectedTitle) {
+                // Here you can call the same function you use to fetch and display the exercise info
+                // For example, if you're using the text input's filter function:
+                document.getElementById("filter-text-val").value = selectedTitle; // Update the text input to reflect the dropdown selection
+            }
+        }
+
+        // Call the function to populate the dropdown when the page is loaded
+        document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
+
 
         function answerBoxTemplate(title, titleDesc, rating) {
-            return `<div class=''>
+            return `
+        <div class='answer-box'>
+            <div style='flex-grow: 1;'>
                 <h3 class='episode-title'>${title}</h3>
                 <p class='episode-desc'>${titleDesc}</p>
-                <p class='episode-rating'>Exercise Rating: ${rating}</p>
-            </div>`
+            </div>
+            <p class='episode-rating'>
+                <span class='circle-rating'>${rating}</span>
+            </p>
+        </div>`;
         }
 
         function sendFocus() {
