@@ -77,7 +77,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     )
 
     # Eliminate unused columns
-    filtered = exercise_df[["Title", "Desc", "Rating"]]
+    filtered = exercise_df[["Title", "Desc"]]
 
 app = Flask(__name__)
 CORS(app)
@@ -118,4 +118,3 @@ def episodes_search():
 
 if "DB_NAME" not in os.environ:
     app.run(debug=True, host="0.0.0.0", port=5000)
-

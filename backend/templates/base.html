@@ -43,7 +43,6 @@
                     data.titles.forEach(title => {
                         const option = document.createElement("option");
                         option.value = title;
-                        // option.textContent = title;
                         dropdown.appendChild(option);
                     });
                 });
@@ -69,7 +68,7 @@
         <div class='answer-box'>
             <div style='flex-grow: 1;'>
                 <h3 class='episode-title'>${title}</h3>
-                <p class='episode-desc'>${titleDesc}</p>
+                <p class='episode-desc'>${titleDesc.slice(0,200) + "..."}</p>
             </div>
             <p class='episode-rating'>
                 <span class='circle-rating'>${rating}</span>
@@ -89,7 +88,7 @@
                 .then((data) => data.slice(0, 10).forEach(row => {
 
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating)
+                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, 10)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 
