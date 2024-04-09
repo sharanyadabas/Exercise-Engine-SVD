@@ -17,16 +17,16 @@ json_file_path = os.path.join(current_directory, "init.json")
 with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
     datalist = data['exercises']
-    documents = [(x['Title'], x['Desc'])
+    documents = [(x['Title'], x['all-text'])
                  for x in datalist
-                 if len(x['Desc'].split()) > 50]
+                 if len(x['all-text'].split()) > 50]
 
 
 vectorizer = TfidfVectorizer(stop_words = 'english', max_df = .7, min_df = 75)
 td_matrix = vectorizer.fit_transform([x[1] for x in documents])
 
 
-docs_compressed, s, words_compressed = svds(td_matrix, k=10)
+docs_compressed, s, words_compressed = svds(td_matrix, k=15)
 words_compressed = words_compressed.transpose()
 
 
@@ -36,7 +36,7 @@ index_to_word = {i:t for t,i in word_to_index.items()}
 
 words_compressed_normed = normalize(words_compressed, axis = 1)
 
-def closest_words(word_in, words_representation_in, k = 20):
+def closest_words(word_in, words_representation_in, k = 10):
     if word_in not in word_to_index: return "Not in vocab."
     sims = words_representation_in.dot(words_representation_in[word_to_index[word_in],:])
     asort = np.argsort(-sims)[:k+1]
@@ -45,14 +45,14 @@ def closest_words(word_in, words_representation_in, k = 20):
 td_matrix_np = td_matrix.transpose().toarray()
 td_matrix_np = normalize(td_matrix_np)
 
-word = 'strength'
-print("Using SVD:")
-for w, sim in closest_words(word, words_compressed_normed):
-  try:
-    print("{}, {:.3f}".format(w, sim))
-  except:
-    print("word not found")
-print()
+# word = 'strength'
+# print("Using SVD:")
+# for w, sim in closest_words(word, words_compressed_normed):
+#   try:
+#     print("{}, {:.3f}".format(w, sim))
+#   except:
+#     print("word not found")
+# print()
 
 docs_compressed_normed = normalize(docs_compressed)
 
