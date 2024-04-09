@@ -1,0 +1,292 @@
+[
+  {
+    "Title": "Medicine ball rotational throw",
+    "Desc": "The medicine ball rotational throw is an explosive exercise targeting the abdominals, including the obliques, as well as the hips and upper back. It involves standing sideways to the wall and twisting the torso to hurl a medicine ball into the wall, then catching the ball on the ricochet. It can be performed for lower reps with a focus on power, or for higher reps with a focus on fat loss and conditioning.",
+    "Type": "Strength",
+    "BodyPart": "Abdominals",
+    "Equipment": "Medicine Ball",
+    "Level": "Intermediate",
+    "Rating": "0.0",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Dumbbell Walking Lunge",
+    "Desc": "The dumbbell walking lunge tests your ability to maintain balance while challenging the quads, glutes, and hamstrings as well as core muscles.",
+    "Type": "Strength",
+    "BodyPart": "Quadriceps",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "7.3",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Dumbbell squat",
+    "Desc": "The dumbbell squat is a classic lower-body exercise that targets the quadriceps, hamstrings, and glutes. While this variation is usually performed with relatively light weights for high reps, it can also be used as a substitute for squats or the trap-bar deadlift in any workout.",
+    "Type": "Strength",
+    "BodyPart": "Quadriceps",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "8.9",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Standing dumbbell shoulder press",
+    "Desc": "The standing dumbbell shoulder press is a classic deltoid-building exercise that is common in gyms around the world. Performing the move standing up as opposed to seated allows more weight to be used and taxes the core more than seated presses. The standing press is worthy of being the main movement in a muscle-building shoulder workout, but is also a great strength movement and accessory for the bench press.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "9.1",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Wall walk",
+    "Desc": "The wall walk is a challenging exercise that works the entire body. From a push-up position, the hands walk back as the feet walk up the wall, then the whole movement is reversed. This is not for beginners, who will need to progress to this exercise.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Body Only",
+    "Level": "Intermediate",
+    "Rating": "0.0",
+    "RatingDesc": ""
+  },
+  {
+    "Title": "Standing cable crunch",
+    "Desc": "The standing cable crunch is a popular core isolation exercise using a rope attachment. It primarily targets the rectus abdominis or \"six-pack\" muscles, but also strengthens the deep core muscles. It is most commonly performed early in an ab workout, usually in moderate to high reps, such as 8-12 reps per set or higher.",
+    "Type": "Strength",
+    "BodyPart": "Abdominals",
+    "Equipment": "Cable",
+    "Level": "Intermediate",
+    "Rating": "8.6",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Smith machine shoulder press",
+    "Desc": "The Smith machine shoulder press is a machine-based exercise targeting the deltoid muscles. The Smith machine mimics a barbell but provides more stability. This movement can be programmed in low reps for strength or higher reps for muscle and strength endurance. It is often performed for moderate to high reps, such as 8-12 reps per set or more, as part of a shoulder or upper-body focused workout.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Machine",
+    "Level": "Intermediate",
+    "Rating": "8.9",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Seated barbell shoulder press",
+    "Desc": "The seated barbell shoulder press is a classic exercise for building muscle and strength in the shoulders. The triceps also play a significant role in pressing the barbell overhead. Performing the movement seated reduces help from the lower body and decreases the risk of overextending the lumbar spine during the movement. This press variation can be the primary pressing movement on an upper-body or shoulder day, or an effective accessory movement later in a workout.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Barbell",
+    "Level": "Intermediate",
+    "Rating": "9.2",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Cable shrug",
+    "Desc": "The cable shrug is an exercise targeting the traps, as well as hitting the shoulders and upper back. Cables allow for lighter loading which is beneficial for higher-rep sets.",
+    "Type": "Strength",
+    "BodyPart": "Traps",
+    "Equipment": "Cable",
+    "Level": "Intermediate",
+    "Rating": "7.9",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Arnold press",
+    "Desc": "Named after the iconic bodybuilder and movie star, the Arnold press adds rotation to a classic shoulder press. It allows the hands to rotate naturally, while also hitting all three heads of the deltoids in one motion. It is usually performed for moderate to high reps, such as 8-12 reps or more, as part of the upper-body or shoulder-focused portion of a workout.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "8.9",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Arnold press",
+    "Desc": "Named after the iconic bodybuilder and movie star, the Arnold press adds rotation to a classic shoulder press. It allows the hands to rotate naturally, while also hitting all three heads of the deltoids in one motion. It is usually performed for moderate to high reps, such as 8-12 reps or more, as part of the upper-body or shoulder-focused portion of a workout.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "8.9",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Pull-up",
+    "Desc": "The pull-up is a multijoint bodyweight exercise that builds strength and muscle in the upper back, biceps, and core. It is often used as a measurement tool in military or tactical fitness tests, and is an excellent gauge of \"relative strength\" which is strength in relation to body weight.",
+    "Type": "Strength",
+    "BodyPart": "Lats",
+    "Equipment": "Body Only",
+    "Level": "Beginner",
+    "Rating": "8.9",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Leg Press",
+    "Desc": "The leg press is a machine exercise targeting the quadriceps. It\u2019s favorite among lifters who prefer the seated position to standing with a load on the spine.",
+    "Type": "Strength",
+    "BodyPart": "Quadriceps",
+    "Equipment": "Machine",
+    "Level": "Intermediate",
+    "Rating": "8.8",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Mountain climber",
+    "Desc": "The mountain climber is a popular bodyweight exercise targeting the muscles of the core, as well as the shoulders, hips, and cardiovascular system. It involves lifting one knee to the chest at a time from a straight-arm plank position. It can be performed for time or reps as part of a dynamic warm-up, for bodyweight cardio or conditioning, or as no-equipment dynamic core training.",
+    "Type": "Plyometrics",
+    "BodyPart": "Abdominals",
+    "Equipment": "Body Only",
+    "Level": "Intermediate",
+    "Rating": "8.8",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Barbell Curl",
+    "Desc": "The barbell curl is an arm exercise that is also one of the most recognizable movements in all of bodybuilding and fitness. It helps build sleeve-popping biceps and allows heavier loading than many other curl variations. It is usually performed in moderate to high reps, such as 8-12 reps per set, as part of the arm-focused portion of any workout.",
+    "Type": "Strength",
+    "BodyPart": "Biceps",
+    "Equipment": "Barbell",
+    "Level": "Intermediate",
+    "Rating": "9.0",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Concentration curl",
+    "Desc": "The concentration curl is a classic exercise for building the biceps one arm at a time. It can be performed bent over or kneeling, but is more often performed seated on a bench. It's great for emphasizing the biceps peak and is often used to finish a biceps workout. Like most curl variations, these are usually performed for moderate to high reps, such as 8-12 reps per set or more.",
+    "Type": "Strength",
+    "BodyPart": "Biceps",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "9.0",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Dumbbell preacher curl",
+    "Desc": "The dumbbell preacher curl is an exercise that focuses on building the biceps, particularly the biceps peak. All you need is a pair of dumbbells and a preacher bench. It's usually performed for moderate to high reps as part of an upper-body or arms-focused workout.",
+    "Type": "Strength",
+    "BodyPart": "Biceps",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "8.3",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Romanian Deadlift",
+    "Desc": "The barbell stiff-legged deadlift targets the hamstrings, glutes, lower and upper back, as well as the core. It is a popular accessory movement for the deadlift, but also a muscle-building hamstring movement.",
+    "Type": "Strength",
+    "BodyPart": "Hamstrings",
+    "Equipment": "Barbell",
+    "Level": "Intermediate",
+    "Rating": "8.1",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Dumbbell Bench Press",
+    "Desc": "The dumbbell bench press is a mainstay of workout enthusiasts worldwide. It\u2019s a classic move for building a bigger, stronger chest. As such, it\u2019s often placed first in mass-building chest workouts.",
+    "Type": "Strength",
+    "BodyPart": "Chest",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "9.2",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Good Morning",
+    "Desc": "The barbell good morning is an exercise that targets glute, hamstring, and lower back development. It is often trained as an accessory movement to the deadlift, but also has value on its own. It is sometimes performed for reps in traditional strength-focused rep ranges such as 5-8 reps per set, but due to the risk posed to the lower back, is rarely treated as a max-effort single-rep lift.",
+    "Type": "Powerlifting",
+    "BodyPart": "Hamstrings",
+    "Equipment": "Barbell",
+    "Level": "Intermediate",
+    "Rating": "8.5",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Dumbbell side bend",
+    "Desc": "The dumbbell side bend is a popular exercise for targeting the oblique muscles of the abdomen. It is usually performed for relatively high reps, at least 8-12 reps per set or more. It can be performed one side at a time or alternating sides.",
+    "Type": "Strength",
+    "BodyPart": "Abdominals",
+    "Equipment": "Dumbbell",
+    "Level": "Intermediate",
+    "Rating": "8.6",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Overhead cable curl",
+    "Desc": "Also known as a crucifix curl, the overhead cable curl is a biceps-focused exercise performed between two cable stacks, using a pair of D-handles. The arms and elbows are held at shoulder height throughout the movement, and both hands curl in toward the ears. This position is designed to eliminate shoulder involvement and momentum, while targeting the biceps peak. This movement is generally done for moderate to high reps, such as 8-12 reps per set or more, as part of arm-focused training.",
+    "Type": "Strength",
+    "BodyPart": "Biceps",
+    "Equipment": "Cable",
+    "Level": "Intermediate",
+    "Rating": "9.0",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Landmine twist",
+    "Desc": "The landmine twist is a rotational abdominal movement performed using an angled barbell anchored at floor level in a landmine device. It can also be performed by sticking a barbell in the corner of a room, preferably in a towel to protect the walls. It targets the deep muscles of the core, including both the obliques and the transversus abdominis. It can be done fast or slow, for time or reps, either in traditional muscle-focused rep ranges such as 8-12 reps per side or for higher rep ranges.",
+    "Type": "Strength",
+    "BodyPart": "Abdominals",
+    "Equipment": "Other",
+    "Level": "Intermediate",
+    "Rating": "9.5",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Kettlebell thruster",
+    "Desc": "The kettlebell thruster is a popular kettlebell movement that combines a kettlebell front squat with a kettlebell press, while holding the bell in a goblet or bottoms-up grip. It is preceded by a clean at the start of each set, and you can perform a clean between each rep if you choose. It can be trained in traditional strength or muscle-building rep ranges, in circuit or fat-loss training, or as part of a larger kettlebell combination or complex.",
+    "Type": "Strength",
+    "BodyPart": "Glutes",
+    "Equipment": "Kettlebells",
+    "Level": "Intermediate",
+    "Rating": "8.6",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Russian twist",
+    "Desc": "The Russian twist is an exercise targeting the abdominals and the obliques. Beginning from a position that resembles stopping midway through a sit-up, it involves twisting side to side. It can be performed with body weight alone or while holding a weight plate or other object. It is performed by alternating sides with each rep and can be done for time or for a specific number of reps as part of the ab-focused portion of any workout.",
+    "Type": "Strength",
+    "BodyPart": "Abdominals",
+    "Equipment": "Body Only",
+    "Level": "Intermediate",
+    "Rating": "8.4",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Glute bridge",
+    "Desc": "The glute bridge is a popular lower-body bodyweight exercise that primarily targets the glutes, but also activates the lower back and hamstrings. It can be performed with body weight alone, or with added resistance such as barbells, dumbbells, or bands. It can be performed for time or reps and works perfectly in a dynamic warm-up for lower-body training, but can also be performed for glute activation anytime.",
+    "Type": "Strength",
+    "BodyPart": "Glutes",
+    "Equipment": "Body Only",
+    "Level": "Intermediate",
+    "Rating": "8.8",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Diamond push-up",
+    "Desc": "The diamond push-up is an advanced variation of the push-up exercise performed with the hands in a diamond shape. It increases the challenge to the triceps, but also targets the chest and shoulders.",
+    "Type": "Strength",
+    "BodyPart": "Chest",
+    "Equipment": "Body Only",
+    "Level": "Intermediate",
+    "Rating": "0.0",
+    "RatingDesc": ""
+  },
+  {
+    "Title": "Barbell upright row",
+    "Desc": "The barbell upright row is a barbell exercise that builds stronger and bigger traps. Many lifters combine this move with either their back or shoulder workout since it involves both body parts.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Barbell",
+    "Level": "Intermediate",
+    "Rating": "8.3",
+    "RatingDesc": "Average"
+  },
+  {
+    "Title": "Barbell front raise",
+    "Desc": "The barbell front raise is an upper-body isolation exercise that targets the shoulders. It is usually performed for moderate to high reps, such as 8-12 reps or higher, as part of the shoulder-focused part of any workout.",
+    "Type": "Strength",
+    "BodyPart": "Shoulders",
+    "Equipment": "Barbell",
+    "Level": "Intermediate",
+    "Rating": "7.4",
+    "RatingDesc": "Average"
+  }
+]
