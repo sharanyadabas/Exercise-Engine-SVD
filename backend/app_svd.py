@@ -15,16 +15,18 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 json_file_path = os.path.join(current_directory, "init.json")
 
 with open(json_file_path, "r", encoding="utf-8") as file:
+    data = json.load(file)
+    datalist = data['exercises']
     documents = [(x['Title'], x['Desc'])
-                 for x in json.loads(file.readlines()[0])
+                 for x in datalist
                  if len(x['Desc'].split()) > 50]
 
 
 vectorizer = TfidfVectorizer(stop_words = 'english', max_df = .7, min_df = 75)
-td_matrix = vectorizer.fit_transform([x[2] for x in documents])
+td_matrix = vectorizer.fit_transform([x[1] for x in documents])
 
 
-docs_compressed, s, words_compressed = svds(td_matrix, k=40)
+docs_compressed, s, words_compressed = svds(td_matrix, k=10)
 words_compressed = words_compressed.transpose()
 
 
@@ -34,7 +36,7 @@ index_to_word = {i:t for t,i in word_to_index.items()}
 
 words_compressed_normed = normalize(words_compressed, axis = 1)
 
-def closest_words(word_in, words_representation_in, k = 10):
+def closest_words(word_in, words_representation_in, k = 20):
     if word_in not in word_to_index: return "Not in vocab."
     sims = words_representation_in.dot(words_representation_in[word_to_index[word_in],:])
     asort = np.argsort(-sims)[:k+1]
