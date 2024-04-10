@@ -6,6 +6,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
     rel="stylesheet">
 
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+</head>
+
 <body>
     <div class="full-body-container">
         <div class="content">
@@ -14,13 +20,8 @@
                     <h1 id="title">Exercise Engine</h1>
                 </div>
                 <div class="search-line">
-                    <input list="datalist" name="exercise-input" placeholder="Select an Exercise" id="filter-text-val"
-                        class="dropdown" onchange="dropdownChange()" /></label>
+                    <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
                     <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
-                    <datalist id="datalist">
-                        <option value="" disabled selected></option>
-                        <!-- Options will be added here by JavaScript -->
-                    </datalist>
                 </div>
             </div>
             <div id="answer-box">
@@ -34,16 +35,20 @@
 
 
     <script>
+        // Initialize Select2 on the filter-text-val element
+        $('#filter-text-val').select2({
+            placeholder: "Select an Exercise",
+        });
+
         // This function fetches the exercise titles and populates the dropdown
         function fetchTitlesAndPopulateDropdown() {
             fetch("/get-titles")
                 .then(response => response.json())
                 .then(data => {
-                    const dropdown = document.getElementById("datalist");
+                    const select = $('#filter-text-val');
+                    select.empty().append(new Option("", "", true, true)); // Empty option for placeholder
                     data.titles.forEach(title => {
-                        const option = document.createElement("option");
-                        option.value = title;
-                        dropdown.appendChild(option);
+                        select.append(new Option(title, title));
                     });
                 });
         }
@@ -62,13 +67,12 @@
         // Call the function to populate the dropdown when the page is loaded
         document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
 
-
         function answerBoxTemplate(title, titleDesc, rating) {
             return `
         <div class='answer-box'>
             <div style='flex-grow: 1;'>
                 <h3 class='episode-title'>${title}</h3>
-                <p class='episode-desc'>${titleDesc.slice(0,200) + "..."}</p>
+                <p class='episode-desc'>${titleDesc.slice(0, 200) + "..."}</p>
             </div>
             <p class='episode-rating'>
                 <span class='circle-rating'>${rating}</span>
