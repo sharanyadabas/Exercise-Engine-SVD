@@ -3,6 +3,7 @@ body {
     margin: 0;
 }
 
+/* Container */
 .full-body-container {
     position: absolute;
     margin: 0;
@@ -14,23 +15,21 @@ body {
     flex-direction: column;
 }
 
+/* Div for Title, Search Box, and Answer Box */
 .content {
     flex: 1;
 }
 
-#title {
-    color: #27374D;
-    opacity: 1;
-}
-
-.google-colors {
+/* Exercise Engine text */
+.name {
     display: flex;
     align-items: center;
     font-size: 48px;
     font-family: 'trebuchet ms', sans-serif;
 }
 
-.google-colors h1 {
+.name h1 {
+    color: #27374D;
     margin-bottom: 0;
     margin-right: 3px;
 }
@@ -42,39 +41,144 @@ body {
 }
 
 .search-line {
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     align-items: center;
 }
 
-.dropdown {
-    border-radius: 50px;
+/* Search bar */
+.dropdown+.select2-container--default .select2-selection--single {
     border: 3px solid #526D82;
+    font-family: 'trebuchet ms', sans-serif;
+    font-size: 18px;
     display: flex;
     align-items: center;
-    margin-top: 10px;
     padding: 15px;
-    width: 580px;
+    padding-left: 5px;
+    width: 610px;
+    height: 50px;
     background-color: inherit;
 }
 
-.dropdown:hover {
-    border: 3px solid #27374D;
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #27374D !important;
+}
+
+.select2-selection__placeholder {
+    color: #526D82 !important;
+}
+
+/* Select2 dropdown*/
+.select2-container--default .select2-results>.select2-results__options {
+    max-height: 300px;
+    min-height: 200px;
+    overflow-y: auto;
+    border: 2px solid #526D82;
+    border-top: none;
+}
+
+/* Each result */
+#select2-filter-text-val-results {
+    font-family: 'trebuchet ms', sans-serif;
+    background-color: #DDE6ED;
+    border: 1px solid #526D82;
+    height: 40px;
+    font-size: 18px;
+    color: #27374D;
+    border: 2px solid #526D82;
+}
+
+/* Higlighted (hover) result */
+#select2-filter-text-val-results .select2-results__option--highlighted {
+    font-family: 'trebuchet ms', sans-serif;
+    background-color: #526D82 !important;
+    color: #DDE6ED !important;
+}
+
+/* Selected option */
+#select2-filter-text-val-results .select2-results__option[aria-selected=true] {
+    font-family: 'trebuchet ms', sans-serif;
+    background-color: #27374D !important;
+    color: #DDE6ED !important;
+}
+
+/* Around the search field */
+.select2-search {
+    font-family: 'trebuchet ms', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    border: 2px solid #526D82;
+    border-top: none;
+    background-color: #DDE6ED;
+    color: #27374D !important;
+}
+
+/* Search field */
+.select2-search input {
+    font-family: 'trebuchet ms', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    background-color: #DDE6ED;
+    color: #27374D !important;
 }
 
 #filter-text-val {
-    font-family: 'trebuchet ms', sans-serif;
-    font-size: 15px;
-    color: #27374D;
+    width: 610px !important;
 }
 
-::placeholder {
-    font-family: 'trebuchet ms', sans-serif;
-    font-size: 15px;
-    color: #526D82;
-    opacity: 0.6
+/* Box around dropdown arrow*/
+.select2.select2-container .select2-selection .select2-selection__arrow {
+    background: #526D82;
+    height: 48px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Dropdown arrow*/
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    background-image: url(./images/arrow.webp);
+    background-color: transparent;
+    background-size: contain;
+    border: none !important;
+    height: 30px !important;
+    width: 30px !important;
+    margin: auto !important;
+    top: auto !important;
+    left: auto !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.select2-container--open .select2-selection__arrow b {
+    transform: rotate(180deg) !important;
+}
+
+/* Scrollbar */
+.select2-results__options::-webkit-scrollbar {
+    width: 20px;
+    background-clip: padding-box;
+}
+
+.select2-results__options::-webkit-scrollbar-track {
+    background-color: #DDE6ED;
+    height: 15px;
+    background-clip: padding-box;
+}
+
+.select2-results__options::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #526D82;
+    border: 5px solid #DDE6ED;
+    border-radius: 10px;
+    height: 80px;
+}
+
+.select2-results__options::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Dumbbell search icon*/
 .search-line img {
     height: 60px;
     width: 60px;
