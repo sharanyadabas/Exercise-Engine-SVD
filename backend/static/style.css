@@ -48,8 +48,6 @@ body {
 }
 
 .dropdown+.select2-container--default .select2-selection--single {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
     border: 3px solid #526D82;
     font-family: 'trebuchet ms', sans-serif;
     font-size: 18px;
@@ -57,6 +55,7 @@ body {
     display: flex;
     align-items: center;
     padding: 15px;
+    padding-left: 5px;
     width: 580px;
     height: 50px;
     background-color: inherit;
@@ -66,11 +65,19 @@ body {
     color: #526D82 !important;
 }
 
+.select2-container--default .select2-results>.select2-results__options {
+    max-height: 300px;
+    min-height: 200px;
+    overflow-y: auto;
+}
+
 /* Each result */
 #select2-filter-text-val-results {
     font-family: 'trebuchet ms', sans-serif;
     background-color: #DDE6ED;
     border: 1px solid #526D82;
+    height: 40px;
+    font-size: 18px;
     font: #27374D
 }
 
@@ -91,12 +98,18 @@ body {
 /* Around the search field */
 .select2-search {
     font-family: 'trebuchet ms', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid #526D82;
     background-color: #DDE6ED;
 }
 
 /* Search field */
 .select2-search input {
     font-family: 'trebuchet ms', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    border: 1px solid #526D82;
     background-color: #DDE6ED;
 }
 
@@ -104,9 +117,9 @@ body {
     width: 580px !important;
 }
 
+/* Box around dropdown arrow*/
 .select2.select2-container .select2-selection .select2-selection__arrow {
     background: #526D82;
-    border-radius: 5px;
     height: 48px;
     width: 50px;
     display: flex;
@@ -114,6 +127,7 @@ body {
     justify-content: center;
 }
 
+/* Dropdown arrow*/
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
     background-image: url(./images/arrow.webp);
     background-color: transparent;
@@ -124,8 +138,14 @@ body {
     margin: auto !important;
     top: auto !important;
     left: auto !important;
+    transition: transform 0.3s ease-in-out;
 }
 
+.select2-container--open .select2-selection__arrow b {
+    transform: rotate(180deg) !important;
+}
+
+/* Dumbbell search icon*/
 .search-line img {
     height: 60px;
     width: 60px;
