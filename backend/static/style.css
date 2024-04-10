@@ -41,7 +41,7 @@ body {
 }
 
 .search-line {
-    margin-top: 20px;
+    margin-top: 15px;
     display: flex;
     align-items: center;
 }
@@ -55,7 +55,7 @@ body {
     align-items: center;
     padding: 15px;
     padding-left: 5px;
-    width: 580px;
+    width: 610px;
     height: 50px;
     background-color: inherit;
 }
@@ -123,7 +123,7 @@ body {
 }
 
 #filter-text-val {
-    width: 580px !important;
+    width: 610px !important;
 }
 
 /* Box around dropdown arrow*/
