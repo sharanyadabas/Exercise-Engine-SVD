@@ -16,14 +16,14 @@ def closest_projects(documents, project_index_in, project_repr_in, no_rating, k 
     # Excludes all the ones without ratings
     asort = asort[np.in1d(asort, no_rating, invert=True)][:k+1]
     # Returns in nice dictionary format
-    return [{"Title" : documents[i][0], "Desc" : documents[i][1], "Rating" : documents[i][2]} for i in asort[1:]]
+    return [{"Title" : documents[i][0], "Desc" : documents[i][1], "Rating" : documents[i][2], "Sim" : sims[i]} for i in asort[1:]]
 
 # Performs SVD upon the term document matrix, and then finds the top 10 most similar
 # documents to the document the given index and returns a dictionary with their Titles,
 # Descriptions, and ratings
 def svd_search(documents, index, td_matrix, no_rating):
     # Gets U
-    docs_compressed, _, _ = svds(td_matrix, k=15)
+    docs_compressed, _, _ = svds(td_matrix, k=40)
     # Normalizes
     docs_compressed_normed = normalize(docs_compressed)
     # Sends to function to find top k
