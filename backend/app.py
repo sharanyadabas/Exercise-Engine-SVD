@@ -4,8 +4,6 @@ import os
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
-import pandas as pd
-import numpy as np
 from svd import svd_search
 
 # ROOT_PATH for linking with all your files.
