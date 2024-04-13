@@ -6,44 +6,26 @@ import json
 from sklearn.preprocessing import normalize
 from scipy.sparse.linalg import svds
 
-os.environ["ROOT_PATH"] = os.path.abspath(os.path.join("..", os.curdir))
 
-# Get the directory of the current script
-current_directory = os.path.dirname(os.path.abspath(__file__))
-
-# Specify the path to the JSON file relative to the current script
-json_file_path = os.path.join(current_directory, "init.json")
-
-with open(json_file_path, "r", encoding="utf-8") as file:
-    data = json.load(file)
-    datalist = data['exercises']
-    documents = [(x['Title'], x['all-text'])
-                 for x in datalist
-                 if len(x['all-text'].split()) > 50]
-
-count = 0
-for exercise in documents:
-    if exercise[0].upper() == exercise[0]:
-        count += 1
-print(count)
-
-vectorizer = TfidfVectorizer(stop_words = 'english', max_df = .7, min_df = 75)
-td_matrix = vectorizer.fit_transform([x[1] for x in documents])
-
-docs_compressed, s, words_compressed = svds(td_matrix, k=15)
-
-docs_compressed_normed = normalize(docs_compressed)
-
-def closest_projects(project_index_in, project_repr_in, k = 10):
+# Finds the k closest exercises to the given exercise excluding ones without ratings
+def closest_projects(documents, count, project_index_in, project_repr_in, k = 10):
+    # Performs dot product between project and U to get similarity array
     sims = project_repr_in.dot(project_repr_in[project_index_in,:])
+    # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
+    # Excludes all the ones without ratings
     asort = asort[asort >= count][:k+1]
-    return [(documents[i][0],sims[i]) for i in asort[1:]]
+    # Returns in nice dictionary format
+    return [{"Title" : documents[i][0], "Desc" : documents[i][1], "Rating" : documents[i][2]} for i in asort[1:]]
 
-for i in range(10):
-    print("INPUT PROJECT: "+documents[i][0])
-    print("CLOSEST PROJECTS:")
-    print("Using SVD:")
-    for title, score in closest_projects(i, docs_compressed_normed):
-        print("{}:{:.3f}".format(title, score))
-    print()
+# Performs SVD upon the term document matrix, and then finds the top 10 most similar
+# documents to the document the given index and returns a dictionary with their Titles,
+# Descriptions, and ratings
+def svd_search(documents, count, index, td_matrix):
+    # Gets U
+    docs_compressed, _, _ = svds(td_matrix, k=15)
+    # Normalizes
+    docs_compressed_normed = normalize(docs_compressed)
+    # Sends to function to find top k
+    top_10 = closest_projects(documents, count, index, docs_compressed_normed, 10)
+    return top_10

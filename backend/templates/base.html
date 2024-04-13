@@ -85,10 +85,9 @@
             console.log(document.getElementById("filter-text-val").value)
             fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
-                .then((data) => data.slice(0, 10).forEach(row => {
-
+                .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, 10)
+                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 
