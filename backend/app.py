@@ -25,7 +25,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     datalist = data['exercises']
     documents = [(x['Title'].upper(), x['all-text'], x.get('Rating'))
                  for x in datalist
-                 if len(x['all-text'].split()) > 50]
+                 if len(x['all-text'].split()) > 35]
     
     # Get exercises with no rating or rating of 0.0 to exclude
     no_rating = []
