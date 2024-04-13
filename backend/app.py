@@ -23,17 +23,16 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     # Load necessary data from json file
     data = json.load(file)
     datalist = data['exercises']
-    documents = [(x['Title'], x['all-text'], x.get('Rating'))
+    documents = [(x['Title'].upper(), x['all-text'], x.get('Rating'))
                  for x in datalist
-                 if len(x['all-text'].split()) > 50 and (x.get('Rating') is None or x.get('Rating') != "0.0")]
-                                                        # This is used to get rid of 0 rated exercises, could remove
-
-    # Find index of first exercise with rating
-    count = 0
-    for exercise in documents:
-        if exercise[0].upper() == exercise[0]:
-            count += 1
+                 if len(x['all-text'].split()) > 50]
     
+    # Get exercises with no rating or rating of 0.0 to exclude
+    no_rating = []
+    for i, e in enumerate(documents):
+        if e[2] is None or e[2] == "0.0":
+            no_rating.append(i)
+
     # Make term-document matrix
     vectorizer = TfidfVectorizer(stop_words = 'english', max_df = .7, min_df = 75)
     td_matrix = vectorizer.fit_transform([x[1] for x in documents])
@@ -55,7 +54,7 @@ def home():
 @app.route("/get-titles")
 def get_titles():
     # Gets the title request, finds the index and returns the svd result
-    titles = [e["Title"].upper() for e in data["exercises"]]
+    titles = [e[0] for e in documents]
     return {"titles": titles}
 
 @app.route("/episodes")
@@ -64,7 +63,7 @@ def episodes_search():
     # in a dictionary with Title, Desc, and Rating keys
     title = request.args.get("title")
     index = title_to_index[title]
-    return svd_search(documents, count, index, td_matrix)
+    return svd_search(documents, index, td_matrix, no_rating)
 
 
 if "DB_NAME" not in os.environ:
