@@ -36,6 +36,17 @@
 
 
     <script>
+        window.onload = function pageLoad() {
+            fetch("/get-recent")
+                .then((response) => response.json())
+                .then((data) => data.forEach(row => {
+                    let tempDiv = document.createElement("div")
+                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim)
+                    document.getElementById("answer-box").appendChild(tempDiv)
+                    document.getElementById("filter-text-val").value = row.Title
+                }));
+        }
+
         // Initialize Select2 on the filter-text-val element
         $('#filter-text-val').select2({
             placeholder: "Select an Exercise",

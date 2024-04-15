@@ -37,6 +37,8 @@
 
     <script>
         function redirect() {
+            fetch("/create-recent?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString());
+            console.log(document.getElementById("filter-text-val").value);
             window.location.href = '/results';
         }
 
