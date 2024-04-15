@@ -8,7 +8,7 @@ driver = webdriver.Chrome()
 wait = WebDriverWait(driver, 10)  # Setting up WebDriverWait
 
 # Load JSON data
-with open("../practice.json", "r", encoding="utf-8") as file:
+with open("./init.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
 # Filter for exercises that have ratings
@@ -31,7 +31,7 @@ for exercise in rated_exercises:
         exercise["YouTubeLink"] = None  # Append None if no link found
 
 # Save updated data back to JSON file
-with open("../updated_init.json", "w", encoding="utf-8") as file:
+with open("./updated_init.json", "w", encoding="utf-8") as file:
     json.dump(data, file, ensure_ascii=False, indent=1)
 
 driver.quit()  # Make sure to close the driver
