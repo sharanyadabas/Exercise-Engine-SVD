@@ -21,7 +21,7 @@ def closest_projects(documents, project_index_in, project_repr_in, no_rating, k=
             "Title": documents[i][0],
             "Desc": documents[i][1],
             "Rating": documents[i][2],
-            "Sim": sims[i],
+            "Sim": "{0:.4f}".format(sims[i]),
             "YT_link": documents[i][3],
         }
         for i in asort[1:]
