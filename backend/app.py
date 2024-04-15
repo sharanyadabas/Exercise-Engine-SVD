@@ -40,7 +40,6 @@ with open(json_file_path, "r", encoding="utf-8") as file:
         doc[0]: i for i, doc in enumerate(documents)
     }
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -65,6 +64,7 @@ def create_recent():
 @app.route("/get-recent")
 def get_recent():
     # Renders the results
+    global recent_search
     return recent_search
 
 @app.route("/get-titles")
@@ -75,7 +75,7 @@ def get_titles():
     return {"titles": titles}
 
 @app.route("/svd_search")
-def episodes_search():
+def search():
     # Gets the title request, finds the index and returns the svd result of top 10
     # in a dictionary with Title, Desc, and Rating keys
     global recent_search
