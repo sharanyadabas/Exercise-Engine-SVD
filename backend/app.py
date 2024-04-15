@@ -52,7 +52,7 @@ def home():
 @app.route("/results")
 def results():
     # Renders the results
-    return render_template("base.html", title="results html")
+    return render_template("results.html", title="results html")
 
 @app.route('/create-recent')
 def create_recent():
@@ -74,7 +74,7 @@ def get_titles():
     # titles = [e[0] for e in documents]
     return {"titles": titles}
 
-@app.route("/episodes")
+@app.route("/svd_search")
 def episodes_search():
     # Gets the title request, finds the index and returns the svd result of top 10
     # in a dictionary with Title, Desc, and Rating keys
