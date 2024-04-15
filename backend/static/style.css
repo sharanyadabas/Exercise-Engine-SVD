@@ -253,6 +253,23 @@ body {
     margin-top: 0;
 }
 
+#more-button {
+    color: #526D82;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: inherit;
+    padding: 0;
+}
+
+.episode-sim {
+    color: #526D82;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .episode-title {
     color: #27374D;
     font-size: 20px;

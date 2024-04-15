@@ -41,6 +41,19 @@
             placeholder: "Select an Exercise",
         });
 
+        function showMore(button) {
+            var descDiv = button.previousElementSibling;  // This assumes the div is always directly before the button
+            if (descDiv.style.height === '60px') {
+                descDiv.style.height = 'auto';  // Set to auto to expand to full content
+                descDiv.style.overflow = 'visible';
+                button.textContent = '. . .';  // Change button text to indicate action
+            } else {
+                descDiv.style.height = '60px';  // Reset height
+                descDiv.style.overflow = 'hidden';
+                button.textContent = '. . .';  // Reset button text
+            }
+        }
+
         // This function fetches the exercise titles and populates the dropdown
         function fetchTitlesAndPopulateDropdown() {
             fetch("/get-titles")
@@ -78,12 +91,13 @@
                         <img src="../static/images/yt_logo.png" alt="Watch on YouTube">
                     </a>
                 </div>
-                <p class='episode-desc'>${titleDesc.slice(0, 200) + "..."}</p>
+                <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
+                <button id="more-button" onclick="showMore(this)">. . .</button>
                 <p class='episode-sim'>Similarity: ${sim}</p>
-            </div>
-            <p class='episode-rating'>
-                <span class='circle-rating'>${rating}</span>
-            </p>    
+        </div>
+        <p class='episode-rating'>
+            <span class='circle-rating'>${rating}</span>
+        </p>
         </div>`;
         }
 
