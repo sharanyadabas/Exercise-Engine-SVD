@@ -68,11 +68,16 @@
         // Call the function to populate the dropdown when the page is loaded
         document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
 
-        function answerBoxTemplate(title, titleDesc, rating, sim) {
+        function answerBoxTemplate(title, titleDesc, rating, sim, yt_link) {
             return `
         <div class='answer-box'>
-            <div style='flex-grow: 1;'>
-                <h3 class='episode-title'>${title}</h3>
+            <div class = "answer-container">
+                <div class="episode-container">
+                    <h3 class='episode-title'>${title}</h3>
+                    <a href=${yt_link} class="yt-button" target="_blank">
+                        <img src="../static/images/yt_logo.png" alt="Watch on YouTube">
+                    </a>
+                </div>
                 <p class='episode-desc'>${titleDesc.slice(0, 200) + "..."}</p>
                 <p class='episode-sim'>Similarity: ${sim}</p>
             </div>
@@ -93,7 +98,7 @@
                 .then((response) => response.json())
                 .then((data) => data.forEach(row => {
                     let tempDiv = document.createElement("div")
-                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim)
+                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
 

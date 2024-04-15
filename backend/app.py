@@ -20,11 +20,13 @@ json_file_path = os.path.join(current_directory, "init.json")
 with open(json_file_path, "r", encoding="utf-8") as file:
     # Load necessary data from json file
     data = json.load(file)
-    datalist = data['exercises']
-    documents = [(x['Title'].upper(), x['all-text'], x.get('Rating'))
-                 for x in datalist
-                 if len(x['all-text'].split()) > 35]
-    
+    datalist = data["exercises"]
+    documents = [
+        (x["Title"].upper(), x["all-text"], x.get("Rating"), x.get("YouTubeLink"))
+        for x in datalist
+        if len(x["all-text"].split()) > 35
+    ]
+
     # Get exercises with no rating or rating of 0.0 to exclude
     no_rating = []
     for i, e in enumerate(documents):
@@ -32,29 +34,32 @@ with open(json_file_path, "r", encoding="utf-8") as file:
             no_rating.append(i)
 
     # Make term-document matrix
-    vectorizer = TfidfVectorizer(stop_words = 'english', max_df = .7, min_df = 75)
+    vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7, min_df=75)
     td_matrix = vectorizer.fit_transform([x[1] for x in documents])
 
     # Make title to index dictionary
-    title_to_index = {
-        doc[0]: i for i, doc in enumerate(documents)
-    }
+    title_to_index = {doc[0]: i for i, doc in enumerate(documents)}
 
 
 app = Flask(__name__)
 CORS(app)
+
 
 @app.route("/")
 def home():
     # Renders the homepage
     return render_template("base.html", title="sample html")
 
+
 @app.route("/get-titles")
 def get_titles():
     # Gets the title request, finds the index and returns the svd result
-    titles = [e[0] for e in documents[230:]] # Experimental, excludes webscraped queries
+    titles = [
+        e[0] for e in documents[230:]
+    ]  # Experimental, excludes webscraped queries
     # titles = [e[0] for e in documents]
     return {"titles": titles}
+
 
 @app.route("/episodes")
 def episodes_search():

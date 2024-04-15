@@ -219,7 +219,7 @@ body {
 
 #answer-box {
     margin-top: 20px;
-    width: 800px
+    width: 800px;
 }
 
 .answer-box {
@@ -227,15 +227,38 @@ body {
     align-items: center;
 }
 
-.episode-title {
-    color: #27374D;
-    font-family: 'Kanit', sans-serif;
+.answer-container {
+    flex-grow: 1;
+}
+
+.episode-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.yt-button {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.yt-button img {
+    width: 40px;
+    height: auto;
 }
 
 .episode-desc {
     color: #526D82;
     font-family: 'Montserrat', sans-serif;
+    margin-top: 0;
 }
+
+.episode-title {
+    color: #27374D;
+    font-size: 20px;
+    font-family: 'Kanit', sans-serif;
+}
+
 
 .episode-rating {
     color: #DDE6ED;
