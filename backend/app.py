@@ -47,7 +47,14 @@ CORS(app)
 @app.route("/")
 def home():
     # Renders the homepage
-    return render_template("base.html", title="sample html")
+    return render_template("homepage.html", title="home html")
+
+@app.route("/results")
+def results():
+    # Renders the results
+    title = request.args.get("title")
+    index = title_to_index[title]
+    return render_template("base.html", title="results html")
 
 @app.route("/get-titles")
 def get_titles():
