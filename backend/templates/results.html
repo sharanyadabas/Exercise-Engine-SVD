@@ -7,33 +7,63 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
         rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../static/images/dumbbell.png">
+
+    <!-- Select2 Library (dropdown)-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-    <link rel="icon" type="image/x-icon" href="../static/images/dumbbell.png">
+
+    <!-- RateYo Library (stars) -->
+    <link rel="stylesheet" href="jquery.rateyo.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 </head>
 
 <body>
     <div class="full-body-container">
-        <div class="content">
-            <div class="top-text">
-                <div class="name">
-                    <h1 id="title">Exercise Engine</h1>
+        <div class="complete-container">
+            <div class="vertical-bar">
+                <div class="top-buffer"></div>
+                <div class="filter-button">
+                    <input type="checkbox" id="muscle-group" />
+                    <span>muscle-group</span>
                 </div>
-                <div class="search-line">
-                    <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
-                    <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
+                <div class="filter-button">
+                    <input type="checkbox" id="equipment" />
+                    <span>equipment</span>
+                </div>
+                <div class="filter-button">
+                    <input type="checkbox" id="difficulty" />
+                    <span>difficulty</span>
+                </div>
+                <div class="bottom-buffer"></div>
+            </div>
+
+            <div class="content">
+                <div class="top-text">
+                    <div class="name">
+                        <h1 id="title">Exercise Engine</h1>
+                    </div>
+                    <div class="search-line">
+                        <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
+                        <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
+                    </div>
+                </div>
+                <div id="answer-box">
                 </div>
             </div>
-            <div id="answer-box">
+
+            <div class="vertical-bar">
+                <div class="top-buffer"></div>
+                <!-- Filters within the vertical bar -->
+                <div class="bottom-buffer"></div>
             </div>
         </div>
         <div class="footer">
             Sharanya Dabas | Matthew McAuley | RJ Powers | Alex Kushnirsky | Eman Abdu
         </div>
-
     </div>
-
 
     <script>
         window.onload = function pageLoad() {
@@ -45,7 +75,6 @@
                     document.getElementById("answer-box").appendChild(tempDiv)
                 }));
         }
-
         // Initialize Select2 on the filter-text-val element
         $('#filter-text-val').select2({
             placeholder: "Select an Exercise",
@@ -62,6 +91,22 @@
                 descDiv.style.overflow = 'hidden';
                 button.textContent = '. . .';  // Reset button text
             }
+        }
+
+        function initializeRateYo() {
+            $(".rateYo").each(function () {
+                $(this).rateYo({
+                    rating: $(this).attr("data-rating"),  // Use data attribute for dynamic ratings
+                    numStars: 5,
+                    precision: 1,
+                    starWidth: "24px",
+                    readOnly: true,
+                    normalFill: "#9DB2BF",
+                    ratedFill: "#27374D",
+                    spacing: "5px"
+                }).on("rateyo.change", function (e, data) {
+                });
+            });
         }
 
         // This function fetches the exercise titles and populates the dropdown
@@ -92,24 +137,30 @@
         document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
 
         function answerBoxTemplate(title, titleDesc, rating, sim, yt_link) {
+            const scaled_rating = rating / 2;
             return `
-        <div class='answer-box'>
-            <div class = "answer-container">
-                <div class="episode-container">
-                    <h3 class='episode-title'>${title}</h3>
-                    <a href=${yt_link} class="yt-button" target="_blank">
-                        <img src="../static/images/yt_logo.png" alt="Watch on YouTube">
-                    </a>
-                </div>
-                <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
-                <button id="more-button" onclick="showMore(this)">. . .</button>
-                <p class='episode-sim'>Similarity: ${sim}</p>
-        </div>
-        <p class='episode-rating'>
-            <span class='circle-rating'>${rating}</span>
-        </p>
-        </div>`;
+                <div class='answer-container'>
+                    <div class='answer-box'>
+                        <div class="episode-container">
+                            <h3 class='episode-title'>${title}</h3>
+                            <a href=${yt_link} class="yt-button" target="_blank">
+                                <img src="../static/images/yt_logo.png" alt="Watch on YouTube">
+                            </a>
+                        </div>
+                        <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
+                        <button id="more-button" onclick="showMore(this)">. . .</button>
+                        <p class='episode-sim'>Similarity: ${sim}</p>
+                    </div>
+                    <div class="stars-container" style="display: inline-block; vertical-align: top;">
+                        <div class="rateYo" data-rating="${scaled_rating}"></div>
+                    </div>
+                </div>`;
+
         }
+
+        $(document).ready(function () {
+            initializeRateYo();  // Initialize rateYo on document ready
+        });
 
         function sendFocus() {
             document.getElementById('filter-text-val').focus()
@@ -118,15 +169,16 @@
         function filterText() {
             document.getElementById("answer-box").innerHTML = ""
             console.log(document.getElementById("filter-text-val").value)
-            fetch("/svd_search?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+            fetch("/episodes?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
                 .then((response) => response.json())
-                .then((data) => data.forEach(row => {
-                    let tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
-                    document.getElementById("answer-box").appendChild(tempDiv)
-                }));
-
+                .then((data) => {
+                    data.forEach(row => {
+                        let tempDiv = document.createElement("div")
+                        tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
+                        document.getElementById("answer-box").appendChild(tempDiv)
+                    });
+                    initializeRateYo();
+                });
         }
-
     </script>
 </body>

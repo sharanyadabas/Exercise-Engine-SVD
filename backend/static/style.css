@@ -3,6 +3,14 @@ body {
     margin: 0;
 }
 
+.complete-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    gap: 50px;
+}
+
 /* Container */
 .full-body-container {
     position: absolute;
@@ -15,9 +23,24 @@ body {
     flex-direction: column;
 }
 
+.vertical-bar {
+    flex: 0 0 150px;
+    /* Flexbox settings: don't grow, don't shrink, initial width is 200px */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    /* Allows scrolling within the vertical bar if content exceeds the height */
+    background-color: #526D82;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+}
+
 /* Div for Title, Search Box, and Answer Box */
 .content {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Exercise Engine text */
@@ -186,7 +209,7 @@ body {
     cursor: pointer;
     appearance: none;
     background-color: inherit;
-    padding-left: 30px;
+    padding-left: 40px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -219,16 +242,27 @@ body {
 
 #answer-box {
     margin-top: 20px;
-    width: 800px;
+    width: 900px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .answer-box {
-    display: flex;
-    align-items: center;
+    flex-grow: 1;
+    margin-right: 40px;
+    /* Allows the answer box to take up the remaining space */
 }
 
 .answer-container {
-    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    /* Align items at the start to ensure they align at the top */
+    justify-content: space-between;
+    /* This ensures the elements are spaced out properly */
+    padding-left: 50px;
+    padding-right: 50px;
+
 }
 
 .episode-container {
@@ -307,4 +341,67 @@ body {
     text-align: center;
     padding-top: 15px;
     font-family: 'trebuchet ms', sans-serif;
+}
+
+.top-buffer {
+    width: 150px;
+    height: 280px;
+    background: linear-gradient(to bottom, #DDE6ED 15%, #526D82);
+    /* Start and end colors */
+}
+
+.bottom-buffer {
+    width: 150px;
+    height: 280px;
+    margin-top: auto;
+    background: linear-gradient(to bottom, #526D82, #27374D);
+}
+
+.filter-button {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'trebuchet ms', sans-serif;
+    color: #DDE6ED;
+    font-size: 16px;
+    align-items: center;
+}
+
+.filter-button span {
+    margin-top: 10px;
+}
+
+input[type="checkbox"] {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    -webkit-appearance: none;
+    background: #DDE6ED;
+    outline: none;
+    border-radius: 15px;
+    box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.2);
+    transition: 0.7s;
+}
+
+input:checked[type="checkbox"] {
+    background: #27374D;
+}
+
+input[type="checkbox"]:before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: .5s;
+}
+
+input:checked[type="checkbox"]:before {
+    left: 30px;
 }
