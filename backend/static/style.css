@@ -186,7 +186,7 @@ body {
     cursor: pointer;
     appearance: none;
     background-color: inherit;
-    padding-left: 30px;
+    padding-left: 40px;
     transition: all 0.3s ease-in-out;
 }
 
@@ -219,17 +219,24 @@ body {
 
 #answer-box {
     margin-top: 20px;
-    width: 800px;
+    width: 900px;
 }
 
 .answer-box {
-    display: flex;
-    align-items: center;
+    flex-grow: 1;
+    margin-right: 40px;
+    padding-left: 100px;
+    /* Allows the answer box to take up the remaining space */
 }
 
 .answer-container {
-    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    /* Align items at the start to ensure they align at the top */
+    justify-content: space-between;
+    /* This ensures the elements are spaced out properly */
 }
+
 
 .episode-container {
     display: flex;
@@ -307,4 +314,5 @@ body {
     text-align: center;
     padding-top: 15px;
     font-family: 'trebuchet ms', sans-serif;
+    box-shadow: 2px 0 5px #27374D;
 }
