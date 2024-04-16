@@ -66,7 +66,7 @@ body {
     align-items: center;
     padding: 15px;
     padding-left: 5px;
-    width: 610px;
+    width: 820px;
     height: 50px;
     background-color: inherit;
 }
@@ -134,7 +134,7 @@ body {
 }
 
 #filter-text-val {
-    width: 610px !important;
+    width: 820px !important;
 }
 
 /* Box around dropdown arrow*/
