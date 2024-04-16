@@ -48,7 +48,7 @@ CORS(app)
 @app.route("/")
 def home():
     # Renders the homepage
-    return render_template("base.html", title="sample html")
+    return render_template("results.html", title="sample html")
 
 
 @app.route("/get-titles")
