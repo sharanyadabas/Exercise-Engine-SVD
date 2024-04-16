@@ -357,6 +357,10 @@ body {
     background: linear-gradient(to bottom, #526D82, #27374D);
 }
 
+#bar_2 {
+    background: inherit;
+}
+
 .filter-button {
     width: 150px;
     display: flex;
