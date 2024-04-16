@@ -75,6 +75,7 @@
                         document.getElementById("answer-box").appendChild(tempDiv)
                     })
                     initializeRateYo();
+                    setProgressBars();
                 });
         }
         // Initialize Select2 on the filter-text-val element
@@ -151,13 +152,26 @@
                         </div>
                         <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
                         <button id="more-button" onclick="showMore(this)">. . .</button>
-                        <p class='episode-sim'>Similarity: ${sim}</p>
+                        <p class='episode-sim'>Similarity:</p>
+                        <div class="meter cadetblue">
+                            <span data-progress="${sim * 100}" style="width:0;"></span>
+                        </div>
                     </div>
                     <div class="stars-container" style="display: inline-block; vertical-align: top;">
                         <div class="rateYo" data-rating="${scaled_rating}"></div>
                     </div>
                 </div>`;
 
+        }
+
+        function setProgressBars() {
+            const bars = document.querySelectorAll('.meter > span');
+            bars.forEach((bar) => {
+                const getWidth = parseFloat(bar.dataset.progress);;
+                for( i = 0; i < getWidth; i++) {
+                bar.style.width = i + '%';
+            }
+            });
         }
 
         $(document).ready(function () {
@@ -180,6 +194,7 @@
                         document.getElementById("answer-box").appendChild(tempDiv)
                     });
                     initializeRateYo();
+                    setProgressBars();
                 });
         }
     </script>
