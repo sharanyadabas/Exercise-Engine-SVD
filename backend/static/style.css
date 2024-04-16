@@ -421,7 +421,7 @@ input:checked[type="checkbox"]:before {
 }
 
 .meter {
-    background: #ccc;
+    background: #DDE6ED;
     -webkit-border-radius: 25px;
     -moz-border-radius: 25px;
     border-radius: 25px;
@@ -435,10 +435,12 @@ input:checked[type="checkbox"]:before {
     padding-bottom: 5px;
     display:flex;
     align-items: center;
+    border: .5px solid black;
     
     > span {
       display: block;
-      height: 250%;
+      height: 240%;
+      margin-bottom: 3px;
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
       border-top-left-radius: 20px;
@@ -454,7 +456,7 @@ input:checked[type="checkbox"]:before {
 
 .cadetblue {
     >span {
-      background-color: cadetblue;
-      background-image: linear-gradient(to bottom, aqua, dodgerblue);
+      background-color: #DDE6ED;
+      background-image: linear-gradient(to bottom, #526D82, #9DB2BF);
     }
   }
