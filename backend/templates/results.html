@@ -68,11 +68,14 @@
         window.onload = function pageLoad() {
             fetch("/get-recent")
                 .then((response) => response.json())
-                .then((data) => data.forEach(row => {
-                    let tempDiv = document.createElement("div");
-                    tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
-                    document.getElementById("answer-box").appendChild(tempDiv)
-                }));
+                .then((data) => {
+                    data.forEach(row => {
+                        let tempDiv = document.createElement("div");
+                        tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
+                        document.getElementById("answer-box").appendChild(tempDiv)
+                    })
+                    initializeRateYo();
+                });
         }
         // Initialize Select2 on the filter-text-val element
         $('#filter-text-val').select2({
