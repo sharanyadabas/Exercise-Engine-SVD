@@ -346,7 +346,7 @@ body {
 .top-buffer {
     width: 150px;
     height: 280px;
-    background: linear-gradient(to bottom, #DDE6ED 15%, #526D82);
+    background: inherit;
     /* Start and end colors */
 }
 
@@ -355,6 +355,10 @@ body {
     height: 280px;
     margin-top: auto;
     background: linear-gradient(to bottom, #526D82, #27374D);
+}
+
+#bar_2 {
+    background: inherit;
 }
 
 .filter-button {
