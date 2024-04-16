@@ -1,0 +1,281 @@
+body {
+    background-color: #DDE6ED;
+    margin: 0;
+}
+
+.background {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    opacity: 20%;
+}
+
+/* Container */
+.full-body-container {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Div for Title, Search Box, and Answer Box */
+.content {
+    flex: 1;
+    display: grid;
+    place-items: center;
+}
+
+/* Exercise Engine text */
+.name {
+    display: flex;
+    align-items: center;
+    font-size: 65px;
+    font-family: 'trebuchet ms', sans-serif;
+}
+
+.name h1 {
+    color: #27374D;
+    margin-bottom: 30px;
+    margin-right: 3px;
+}
+
+.top-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-line {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Search bar */
+.dropdown+.select2-container--default .select2-selection--single {
+    border: 3px solid #526D82;
+    font-family: 'trebuchet ms', sans-serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    padding-left: 5px;
+    width: 610px;
+    height: 50px;
+    background-color: inherit;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #27374D !important;
+}
+
+.select2-selection__placeholder {
+    color: #526D82 !important;
+}
+
+/* Select2 dropdown*/
+.select2-container--default .select2-results>.select2-results__options {
+    max-height: 300px;
+    min-height: 200px;
+    overflow-y: auto;
+    border: 2px solid #526D82;
+    border-top: none;
+}
+
+/* Each result */
+#select2-filter-text-val-results {
+    font-family: 'trebuchet ms', sans-serif;
+    background-color: #DDE6ED;
+    border: 1px solid #526D82;
+    height: 40px;
+    font-size: 18px;
+    color: #27374D;
+    border: 2px solid #526D82;
+}
+
+/* Higlighted (hover) result */
+#select2-filter-text-val-results .select2-results__option--highlighted {
+    font-family: 'trebuchet ms', sans-serif;
+    background-color: #526D82 !important;
+    color: #DDE6ED !important;
+}
+
+/* Selected option */
+#select2-filter-text-val-results .select2-results__option[aria-selected=true] {
+    font-family: 'trebuchet ms', sans-serif;
+    background-color: #27374D !important;
+    color: #DDE6ED !important;
+}
+
+/* Around the search field */
+.select2-search {
+    font-family: 'trebuchet ms', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    border: 2px solid #526D82;
+    border-top: none;
+    background-color: #DDE6ED;
+    color: #27374D !important;
+}
+
+/* Search field */
+.select2-search input {
+    font-family: 'trebuchet ms', sans-serif;
+    height: 40px;
+    font-size: 18px;
+    background-color: #DDE6ED;
+    color: #27374D !important;
+}
+
+#filter-text-val {
+    width: 610px !important;
+}
+
+/* Box around dropdown arrow*/
+.select2.select2-container .select2-selection .select2-selection__arrow {
+    background: #526D82;
+    height: 48px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dropdown arrow*/
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    background-image: url(./images/arrow.webp);
+    background-color: transparent;
+    background-size: contain;
+    border: none !important;
+    height: 30px !important;
+    width: 30px !important;
+    margin: auto !important;
+    top: auto !important;
+    left: auto !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.select2-container--open .select2-selection__arrow b {
+    transform: rotate(180deg) !important;
+}
+
+/* Scrollbar */
+.select2-results__options::-webkit-scrollbar {
+    width: 20px;
+    background-clip: padding-box;
+}
+
+.select2-results__options::-webkit-scrollbar-track {
+    background-color: #DDE6ED;
+    height: 15px;
+    background-clip: padding-box;
+}
+
+.select2-results__options::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: #526D82;
+    border: 5px solid #DDE6ED;
+    border-radius: 10px;
+    height: 80px;
+}
+
+.select2-results__options::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Dumbbell search icon*/
+.search-line img {
+    height: 60px;
+    width: 60px;
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    padding-left: 30px;
+    transition: all 0.3s ease-in-out;
+}
+
+.search-line img:hover {
+    transform: scale(1.1);
+    animation: tilt-shaking 0.25s infinite;
+}
+
+@keyframes tilt-shaking {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+#answer-box {
+    margin-top: 20px;
+    width: 800px
+}
+
+.answer-box {
+    display: flex;
+    align-items: center;
+}
+
+.episode-title {
+    color: #27374D;
+    font-family: 'Kanit', sans-serif;
+}
+
+.episode-desc {
+    color: #526D82;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.episode-rating {
+    color: #DDE6ED;
+    font-size: 25px;
+    margin-left: 50px;
+    font-family: 'trebuchet ms', sans-serif;
+}
+
+.circle-rating {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    background-color: #526D82;
+    text-align: center;
+}
+
+#search-icon {
+    cursor: pointer;
+}
+
+.footer {
+    height: 40px;
+    width: 100%;
+    background-color: #27374D;
+    color: #DDE6ED;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 15px;
+    font-family: 'trebuchet ms', sans-serif;
+}

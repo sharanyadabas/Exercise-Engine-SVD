@@ -38,8 +38,9 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     td_matrix = vectorizer.fit_transform([x[1] for x in documents])
 
     # Make title to index dictionary
-    title_to_index = {doc[0]: i for i, doc in enumerate(documents)}
-
+    title_to_index = {
+        doc[0]: i for i, doc in enumerate(documents)
+    }
 
 app = Flask(__name__)
 CORS(app)
@@ -48,7 +49,26 @@ CORS(app)
 @app.route("/")
 def home():
     # Renders the homepage
-    return render_template("base.html", title="sample html")
+    return render_template("homepage.html", title="home html")
+
+@app.route("/results")
+def results():
+    # Renders the results
+    return render_template("results.html", title="results html")
+
+@app.route('/create-recent')
+def create_recent():
+    global recent_search
+    title = request.args.get("title")
+    index = title_to_index[title]
+    recent_search = svd_search(documents, index, td_matrix, no_rating)
+    return {}
+
+@app.route("/get-recent")
+def get_recent():
+    # Renders the results
+    global recent_search
+    return recent_search
 
 
 @app.route("/get-titles")
@@ -60,14 +80,15 @@ def get_titles():
     # titles = [e[0] for e in documents]
     return {"titles": titles}
 
-
-@app.route("/episodes")
-def episodes_search():
+@app.route("/svd_search")
+def search():
     # Gets the title request, finds the index and returns the svd result of top 10
     # in a dictionary with Title, Desc, and Rating keys
+    global recent_search
     title = request.args.get("title")
     index = title_to_index[title]
-    return svd_search(documents, index, td_matrix, no_rating)
+    recent_search = svd_search(documents, index, td_matrix, no_rating)
+    return recent_search
 
 
 if "DB_NAME" not in os.environ:
