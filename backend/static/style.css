@@ -346,8 +346,8 @@ body {
 .top-buffer {
     width: 150px;
     height: 280px;
-    background: linear-gradient(to bottom, #DDE6ED 10%, #526D82);
-    /* Start and end colors */
+    background: inherit
+        /* Start and end colors */
 }
 
 .bottom-buffer {
