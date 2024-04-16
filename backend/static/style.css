@@ -346,7 +346,7 @@ body {
 .top-buffer {
     width: 150px;
     height: 280px;
-    background: linear-gradient(to bottom, #DDE6ED 15%, #526D82);
+    background: linear-gradient(to bottom, #DDE6ED 10%, #526D82);
     /* Start and end colors */
 }
 
@@ -384,7 +384,7 @@ input[type="checkbox"] {
     background: #DDE6ED;
     outline: none;
     border-radius: 15px;
-    box-shadow: inset 0 0 4px rgba(255, 0, 0, 0.2);
+    box-shadow: inset 0 0 5px #27374D;
     transition: 0.7s;
 }
 
@@ -402,7 +402,7 @@ input[type="checkbox"]:before {
     left: 0;
     background: #ffffff;
     transform: scale(1.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px #27374D;
     transition: .5s;
 }
 
