@@ -38,9 +38,12 @@
 
     <script>
         function redirect() {
-            fetch("/create-recent?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString());
+            fetch("/create-recent?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+            .then(response => response.json())
+            .then(data => {
+                window.location.href = '/results/';
+            });
             console.log(document.getElementById("filter-text-val").value);
-            window.location.href = '/results';
         }
 
         // Initialize Select2 on the filter-text-val element
