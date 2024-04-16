@@ -45,13 +45,14 @@ with open(json_file_path, "r", encoding="utf-8") as file:
 app = Flask(__name__)
 CORS(app)
 
+recent_search = []
 
 @app.route("/")
 def home():
     # Renders the homepage
     return render_template("homepage.html", title="home html")
 
-@app.route("/results")
+@app.route("/results/")
 def results():
     # Renders the results
     return render_template("results.html", title="results html")
@@ -67,7 +68,6 @@ def create_recent():
 @app.route("/get-recent")
 def get_recent():
     # Renders the results
-    global recent_search
     return recent_search
 
 
