@@ -21,25 +21,27 @@
 </head>
 
 <body>
-    <div class="full-body-container">
-        <div class="filter-bar">
+    <div class="complete-container">
+        <div class="vertical-bar">
             <!-- Filters within the vertical bar -->
         </div>
-        <div class="content">
-            <div class="top-text">
-                <div class="name">
-                    <h1 id="title">Exercise Engine</h1>
+        <div class="full-body-container">
+            <div class="content">
+                <div class="top-text">
+                    <div class="name">
+                        <h1 id="title">Exercise Engine</h1>
+                    </div>
+                    <div class="search-line">
+                        <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
+                        <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
+                    </div>
                 </div>
-                <div class="search-line">
-                    <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
-                    <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
+                <div id="answer-box">
                 </div>
             </div>
-            <div id="answer-box">
+            <div class="footer">
+                Sharanya Dabas | Matthew McAuley | RJ Powers | Alex Kushnirsky | Eman Abdu
             </div>
-        </div>
-        <div class="footer">
-            Sharanya Dabas | Matthew McAuley | RJ Powers | Alex Kushnirsky | Eman Abdu
         </div>
     </div>
 
@@ -149,8 +151,21 @@
                         document.getElementById("answer-box").appendChild(tempDiv)
                     });
                     initializeRateYo();
+                    $(".complete-container").height($(".full-body-container").height());
                 });
         }
 
+        function resizeElementHeight(element) {
+            var height = 0;
+            var body = window.document.body;
+            if (window.innerHeight) {
+                height = window.innerHeight;
+            } else if (body.parentElement.clientHeight) {
+                height = body.parentElement.clientHeight;
+            } else if (body && body.clientHeight) {
+                height = body.clientHeight;
+            }
+            element.style.height = ((height - element.offsetTop) + "px");
+        }
     </script>
 </body>

@@ -3,6 +3,13 @@ body {
     margin: 0;
 }
 
+.complete-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    align-items: stretch
+}
+
 /* Container */
 .full-body-container {
     position: absolute;
@@ -13,6 +20,18 @@ body {
     justify-content: start;
     align-items: center;
     flex-direction: column;
+}
+
+.vertical-bar {
+    flex: 0 0 200px;
+    /* Flexbox settings: don't grow, don't shrink, initial width is 200px */
+    display: flex;
+    flex-direction: column;
+    background-color: #27374D;
+    box-shadow: 2px 0 5px #27374D;
+    width: 100px;
+    overflow-y: auto;
+    /* Allows scrolling within the vertical bar if content exceeds the height */
 }
 
 /* Div for Title, Search Box, and Answer Box */
@@ -314,5 +333,5 @@ body {
     text-align: center;
     padding-top: 15px;
     font-family: 'trebuchet ms', sans-serif;
-    box-shadow: 2px 0 5px #27374D;
+    box-shadow: 2px 0 5px #DDE6ED;
 }
