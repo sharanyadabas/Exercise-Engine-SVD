@@ -21,11 +21,12 @@
 </head>
 
 <body>
-    <div class="complete-container">
-        <div class="vertical-bar">
-            <!-- Filters within the vertical bar -->
-        </div>
-        <div class="full-body-container">
+    <div class="full-body-container">
+        <div class="complete-container">
+            <div class="vertical-bar">
+                <!-- Filters within the vertical bar -->
+            </div>
+
             <div class="content">
                 <div class="top-text">
                     <div class="name">
@@ -39,9 +40,13 @@
                 <div id="answer-box">
                 </div>
             </div>
-            <div class="footer">
-                Sharanya Dabas | Matthew McAuley | RJ Powers | Alex Kushnirsky | Eman Abdu
+
+            <div class="vertical-bar">
+                <!-- Filters within the vertical bar -->
             </div>
+        </div>
+        <div class="footer">
+            Sharanya Dabas | Matthew McAuley | RJ Powers | Alex Kushnirsky | Eman Abdu
         </div>
     </div>
 
@@ -52,6 +57,14 @@
         $('#filter-text-val').select2({
             placeholder: "Select an Exercise",
         });
+
+        function adjustVerticalBarWidth() {
+            const contentPosition = document.querySelector('.content').getBoundingClientRect().left;
+            document.querySelector('.vertical-bar').style.width = `${contentPosition}px`;
+        }
+
+        window.addEventListener('load', adjustVerticalBarWidth);
+        window.addEventListener('resize', adjustVerticalBarWidth);
 
         function showMore(button) {
             var descDiv = button.previousElementSibling;  // This assumes the div is always directly before the button
@@ -113,26 +126,28 @@
         function answerBoxTemplate(title, titleDesc, rating, sim, yt_link) {
             const scaled_rating = rating / 2;
             return `
-    <div class='answer-container'>
-        <div class='answer-box'>
-            <div class="episode-container">
-                <h3 class='episode-title'>${title}</h3>
-                <a href=${yt_link} class="yt-button" target="_blank">
-                    <img src="../static/images/yt_logo.png" alt="Watch on YouTube">
-                </a>
-            </div>
-            <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
-            <button id="more-button" onclick="showMore(this)">. . .</button>
-            <p class='episode-sim'>Similarity: ${sim}</p>
-        </div>
-        <div class="stars-container" style="display: inline-block; vertical-align: top;">
-            <div class="rateYo" data-rating="${scaled_rating}"></div>
-        </div>
-    </div>`;
+                <div class='answer-container'>
+                    <div class='answer-box'>
+                        <div class="episode-container">
+                            <h3 class='episode-title'>${title}</h3>
+                            <a href=${yt_link} class="yt-button" target="_blank">
+                                <img src="../static/images/yt_logo.png" alt="Watch on YouTube">
+                            </a>
+                        </div>
+                        <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
+                        <button id="more-button" onclick="showMore(this)">. . .</button>
+                        <p class='episode-sim'>Similarity: ${sim}</p>
+                    </div>
+                    <div class="stars-container" style="display: inline-block; vertical-align: top;">
+                        <div class="rateYo" data-rating="${scaled_rating}"></div>
+                    </div>
+                </div>`;
+
         }
 
         $(document).ready(function () {
             initializeRateYo();  // Initialize rateYo on document ready
+
         });
 
         function sendFocus() {
@@ -151,7 +166,6 @@
                         document.getElementById("answer-box").appendChild(tempDiv)
                     });
                     initializeRateYo();
-                    $(".complete-container").height($(".full-body-container").height());
                 });
         }
 

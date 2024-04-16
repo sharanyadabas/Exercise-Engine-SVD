@@ -7,7 +7,8 @@ body {
     display: flex;
     width: 100%;
     min-height: 100vh;
-    align-items: stretch
+    justify-content: center;
+    gap: 50px;
 }
 
 /* Container */
@@ -23,20 +24,21 @@ body {
 }
 
 .vertical-bar {
-    flex: 0 0 200px;
+    flex: 0 0 150px;
     /* Flexbox settings: don't grow, don't shrink, initial width is 200px */
     display: flex;
     flex-direction: column;
     background-color: #27374D;
-    box-shadow: 2px 0 5px #27374D;
-    width: 100px;
+    width: 70px;
     overflow-y: auto;
     /* Allows scrolling within the vertical bar if content exceeds the height */
 }
 
 /* Div for Title, Search Box, and Answer Box */
 .content {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Exercise Engine text */
@@ -239,12 +241,14 @@ body {
 #answer-box {
     margin-top: 20px;
     width: 900px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .answer-box {
     flex-grow: 1;
     margin-right: 40px;
-    padding-left: 100px;
     /* Allows the answer box to take up the remaining space */
 }
 
@@ -254,6 +258,9 @@ body {
     /* Align items at the start to ensure they align at the top */
     justify-content: space-between;
     /* This ensures the elements are spaced out properly */
+    padding-left: 50px;
+    padding-right: 50px;
+
 }
 
 
