@@ -9,12 +9,12 @@
         rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../static/images/dumbbell.png">
 
-    <!-- Select2 Library-->
+    <!-- Select2 Library (dropdown)-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-    <!---->
+    <!-- RateYo Library (stars) -->
     <link rel="stylesheet" href="jquery.rateyo.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
@@ -24,7 +24,20 @@
     <div class="full-body-container">
         <div class="complete-container">
             <div class="vertical-bar">
-                <!-- Filters within the vertical bar -->
+                <div class="top-buffer"></div>
+                <div class="filter-button">
+                    <input type="checkbox" id="muscle-group" />
+                    <span>muscle-group</span>
+                </div>
+                <div class="filter-button">
+                    <input type="checkbox" id="equipment" />
+                    <span>equipment</span>
+                </div>
+                <div class="filter-button">
+                    <input type="checkbox" id="difficulty" />
+                    <span>difficulty</span>
+                </div>
+                <div class="bottom-buffer"></div>
             </div>
 
             <div class="content">
@@ -42,7 +55,9 @@
             </div>
 
             <div class="vertical-bar">
+                <div class="top-buffer"></div>
                 <!-- Filters within the vertical bar -->
+                <div class="bottom-buffer"></div>
             </div>
         </div>
         <div class="footer">
@@ -50,21 +65,11 @@
         </div>
     </div>
 
-
-
     <script>
         // Initialize Select2 on the filter-text-val element
         $('#filter-text-val').select2({
             placeholder: "Select an Exercise",
         });
-
-        function adjustVerticalBarWidth() {
-            const contentPosition = document.querySelector('.content').getBoundingClientRect().left;
-            document.querySelector('.vertical-bar').style.width = `${contentPosition}px`;
-        }
-
-        window.addEventListener('load', adjustVerticalBarWidth);
-        window.addEventListener('resize', adjustVerticalBarWidth);
 
         function showMore(button) {
             var descDiv = button.previousElementSibling;  // This assumes the div is always directly before the button
@@ -91,7 +96,6 @@
                     ratedFill: "#27374D",
                     spacing: "5px"
                 }).on("rateyo.change", function (e, data) {
-                    console.log("Rating changed to " + data.rating);
                 });
             });
         }
@@ -147,7 +151,6 @@
 
         $(document).ready(function () {
             initializeRateYo();  // Initialize rateYo on document ready
-
         });
 
         function sendFocus() {
@@ -167,19 +170,6 @@
                     });
                     initializeRateYo();
                 });
-        }
-
-        function resizeElementHeight(element) {
-            var height = 0;
-            var body = window.document.body;
-            if (window.innerHeight) {
-                height = window.innerHeight;
-            } else if (body.parentElement.clientHeight) {
-                height = body.parentElement.clientHeight;
-            } else if (body && body.clientHeight) {
-                height = body.clientHeight;
-            }
-            element.style.height = ((height - element.offsetTop) + "px");
         }
     </script>
 </body>
