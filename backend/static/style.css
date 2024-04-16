@@ -433,10 +433,12 @@ input:checked[type="checkbox"]:before {
     padding: 8px;
     position: relative;
     padding-bottom: 5px;
+    display:flex;
+    align-items: center;
     
     > span {
       display: block;
-      height: 150%;
+      height: 250%;
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
       border-top-left-radius: 20px;
