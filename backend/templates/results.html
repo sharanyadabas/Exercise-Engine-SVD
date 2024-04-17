@@ -140,7 +140,7 @@
         document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
 
         function answerBoxTemplate(title, titleDesc, rating, sim, yt_link) {
-            const embedUrl = `https://www.youtube.com/embed/${yt_link}`;
+            const embedUrl = yt_link;
             const scaled_rating = rating / 2;
             return `
             <div class='answer-container'>
