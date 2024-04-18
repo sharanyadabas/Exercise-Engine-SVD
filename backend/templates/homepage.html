@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <img class="background" src="../static/images/gym.jpg" alt="Gym Picture"/>
+    <img class="background" src="../static/images/gym.jpg" alt="Gym Picture" />
     <div class="full-body-container">
         <div class="content">
             <div class="top-text">
@@ -39,10 +39,10 @@
     <script>
         function redirect() {
             fetch("/create-recent?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
-            .then(response => response.json())
-            .then(data => {
-                window.location.href = '/results/';
-            });
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = '/results/';
+                });
             console.log(document.getElementById("filter-text-val").value);
         }
 
@@ -74,6 +74,12 @@
                 document.getElementById("filter-text-val").value = selectedTitle; // Update the text input to reflect the dropdown selection
             }
         }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                redirect()
+            }
+        });
 
         // Call the function to populate the dropdown when the page is loaded
         document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
