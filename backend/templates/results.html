@@ -69,6 +69,8 @@
     </div>
 
     <script>
+        let is_ad_hoc = false;
+
         window.onload = function pageLoad() {
             fetch("/get-recent")
                 .then((response) => response.json())
@@ -105,9 +107,11 @@
                 if (this.checked) {
                     $select2Container.hide();
                     $adhocInput.show();
+                    is_ad_hoc = true;
                 } else {
                     $select2Container.show();
                     $adhocInput.hide();
+                    is_ad_hoc = false;
                 }
             });
         });
@@ -226,13 +230,11 @@
         }
 
         function filterText() {
-            const search_method = document.getElementById("search-method");
-            const is_checked = search_method.getAttribute("checked");
             document.getElementById("answer-box").innerHTML = "";
             console.log(document.getElementById("filter-text-val").value);
 
             const response = 
-            is_checked 
+            !(is_ad_hoc)
             ? fetch(
                 "/svd_search?" +
                 new URLSearchParams({
@@ -245,6 +247,7 @@
                     title: document.getElementById("ad-hoc").value,
                 }).toString()
             )
+            console.log(is_ad_hoc)
 
             response
                 .then((response) => response.json())

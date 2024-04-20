@@ -32,8 +32,8 @@ def closest_projects(documents, project_index_in, project_repr_in, no_rating, k=
 # documents to the document the given index and returns a dictionary with their Titles,
 # Descriptions, and ratings
 def svd_search(documents, index, td_matrix, no_rating):
-    # Gets U
-    docs_compressed, _, _ = svds(td_matrix, k=40)
+    # Gets svd
+    docs_compressed, s, words_compressed = svds(td_matrix, k=40)
     # Normalizes
     docs_compressed_normed = normalize(docs_compressed)
     # Sends to function to find top k
