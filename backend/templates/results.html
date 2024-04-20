@@ -1,13 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <head>
     <title>Exercise Engine</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Montserrat&family=Open+Sans:wght@500&display=swap"
-        rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="../static/images/dumbbell.png">
+        rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="../static/images/dumbbell.png" />
 
     <!-- Select2 Library (dropdown)-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
 
     <!-- RateYo Library (stars) -->
     <link rel="stylesheet" href="jquery.rateyo.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 </head>
 
@@ -25,6 +25,10 @@
         <div class="complete-container">
             <div class="vertical-bar">
                 <div class="top-buffer"></div>
+                <div class="filter-button">
+                    <input type="checkbox" id="search-method" />
+                    <span>Search Method</span>
+                </div>
                 <!-- <div class="filter-button">
                     <input type="checkbox" id="muscle-group" />
                     <span>muscle-group</span>
@@ -47,11 +51,11 @@
                     </div>
                     <div class="search-line">
                         <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
+                        <input id="ad-hoc" class="dropdown" type="text" placeholder="Ad-Hoc Retrieval" />
                         <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
                     </div>
                 </div>
-                <div id="answer-box">
-                </div>
+                <div id="answer-box"></div>
             </div>
 
             <div class="vertical-bar" id="bar_2">
@@ -69,57 +73,87 @@
             fetch("/get-recent")
                 .then((response) => response.json())
                 .then((data) => {
-                    data.forEach(row => {
+                    data.forEach((row) => {
                         let tempDiv = document.createElement("div");
-                        tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
-                        document.getElementById("answer-box").appendChild(tempDiv)
-                    })
+                        tempDiv.innerHTML = answerBoxTemplate(
+                            row.Title,
+                            row.Desc,
+                            row.Rating,
+                            row.Sim,
+                            row.YT_link
+                        );
+                        document.getElementById("answer-box").appendChild(tempDiv);
+                    });
                     initializeRateYo();
                     setProgressBars();
                 });
-        }
-        // Initialize Select2 on the filter-text-val element
-        $('#filter-text-val').select2({
-            placeholder: "Select an Exercise",
+        };
+
+        $(document).ready(function () {
+            // Initialize Select2 on the filter-text-val element
+            $("#filter-text-val").select2({
+                placeholder: "Select an Exercise",
+            });
+
+            // Initially hide adhoc input
+            $('#ad-hoc').hide();
+
+            // Checkbox toggle for the visibility of the Select2 container
+            $("#search-method").change(function () {
+                var $select2Container = $("#filter-text-val").next(".select2-container");
+                var $adhocInput = $('#ad-hoc')
+                if (this.checked) {
+                    $select2Container.hide();
+                    $adhocInput.show();
+                } else {
+                    $select2Container.show();
+                    $adhocInput.hide();
+                }
+            });
         });
 
         function showMore(button) {
-            var descDiv = button.previousElementSibling;  // This assumes the div is always directly before the button
-            if (descDiv.style.height === '60px') {
-                descDiv.style.height = 'auto';  // Set to auto to expand to full content
-                descDiv.style.overflow = 'visible';
-                button.textContent = '. . .';  // Change button text to indicate action
+            var descDiv = button.previousElementSibling; // This assumes the div is always directly before the button
+            if (descDiv.style.height === "60px") {
+                descDiv.style.height = "auto"; // Set to auto to expand to full content
+                descDiv.style.overflow = "visible";
+                button.textContent = ". . ."; // Change button text to indicate action
             } else {
-                descDiv.style.height = '60px';  // Reset height
-                descDiv.style.overflow = 'hidden';
-                button.textContent = '. . .';  // Reset button text
+                descDiv.style.height = "60px"; // Reset height
+                descDiv.style.overflow = "hidden";
+                button.textContent = ". . ."; // Reset button text
             }
         }
 
+        function switchSearch() {
+            const search_method = document.getElementById("search-method");
+            const is_checked = search_method.getAttribute("checked");
+        }
         function initializeRateYo() {
             $(".rateYo").each(function () {
-                $(this).rateYo({
-                    rating: $(this).attr("data-rating"),  // Use data attribute for dynamic ratings
-                    numStars: 5,
-                    precision: 1,
-                    starWidth: "30px",
-                    readOnly: true,
-                    normalFill: "#9DB2BF",
-                    ratedFill: "#27374D",
-                    spacing: "5px"
-                }).on("rateyo.change", function (e, data) {
-                });
+                $(this)
+                    .rateYo({
+                        rating: $(this).attr("data-rating"), // Use data attribute for dynamic ratings
+                        numStars: 5,
+                        precision: 1,
+                        starWidth: "30px",
+                        readOnly: true,
+                        normalFill: "#9DB2BF",
+                        ratedFill: "#27374D",
+                        spacing: "5px",
+                    })
+                    .on("rateyo.change", function (e, data) { });
             });
         }
 
         // This function fetches the exercise titles and populates the dropdown
         function fetchTitlesAndPopulateDropdown() {
             fetch("/get-titles")
-                .then(response => response.json())
-                .then(data => {
-                    const select = $('#filter-text-val');
+                .then((response) => response.json())
+                .then((data) => {
+                    const select = $("#filter-text-val");
                     select.empty().append(new Option("", "", true, true)); // Empty option for placeholder
-                    data.titles.forEach(title => {
+                    data.titles.forEach((title) => {
                         select.append(new Option(title, title));
                     });
                 });
@@ -137,7 +171,10 @@
         }
 
         // Call the function to populate the dropdown when the page is loaded
-        document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
+        document.addEventListener(
+            "DOMContentLoaded",
+            fetchTitlesAndPopulateDropdown
+        );
 
         function answerBoxTemplate(title, titleDesc, rating, sim, yt_link) {
             const embedUrl = yt_link;
@@ -151,10 +188,10 @@
                         <div class="rateYo" data-rating="${scaled_rating}"></div>
                         </div>
                         <iframe class="video-container"
-                            width="560" height="315" 
-                            src="${embedUrl}" frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; 
-                            encrypted-media; gyroscope; picture-in-picture" 
+                            width="560" height="315"
+                            src="${embedUrl}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write;
+                            encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -162,40 +199,52 @@
                     <button id="more-button" onclick="showMore(this)">. . .</button>
                     <p class='episode-sim'>Similarity:</p>
                     <div class="meter cadetblue">
-                        <span data-progress="${sim * 100}" style="width:0;"></span>
+                        <span data-progress="${sim * 100
+                }" style="width:0;"></span>
                     </div>
                 </div>
             </div>`;
         }
 
         function setProgressBars() {
-            const bars = document.querySelectorAll('.meter > span');
+            const bars = document.querySelectorAll(".meter > span");
             bars.forEach((bar) => {
-                const getWidth = parseFloat(bar.dataset.progress);;
+                const getWidth = parseFloat(bar.dataset.progress);
                 for (i = 0; i < getWidth; i++) {
-                    bar.style.width = i + '%';
+                    bar.style.width = i + "%";
                 }
             });
         }
 
         $(document).ready(function () {
-            initializeRateYo();  // Initialize rateYo on document ready
+            initializeRateYo(); // Initialize rateYo on document ready
         });
 
         function sendFocus() {
-            document.getElementById('filter-text-val').focus()
+            document.getElementById("filter-text-val").focus();
         }
 
         function filterText() {
-            document.getElementById("answer-box").innerHTML = ""
-            console.log(document.getElementById("filter-text-val").value)
-            fetch("/svd_search?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+            document.getElementById("answer-box").innerHTML = "";
+            console.log(document.getElementById("filter-text-val").value);
+            fetch(
+                "/svd_search?" +
+                new URLSearchParams({
+                    title: document.getElementById("filter-text-val").value,
+                }).toString()
+            )
                 .then((response) => response.json())
                 .then((data) => {
-                    data.forEach(row => {
-                        let tempDiv = document.createElement("div")
-                        tempDiv.innerHTML = answerBoxTemplate(row.Title, row.Desc, row.Rating, row.Sim, row.YT_link)
-                        document.getElementById("answer-box").appendChild(tempDiv)
+                    data.forEach((row) => {
+                        let tempDiv = document.createElement("div");
+                        tempDiv.innerHTML = answerBoxTemplate(
+                            row.Title,
+                            row.Desc,
+                            row.Rating,
+                            row.Sim,
+                            row.YT_link
+                        );
+                        document.getElementById("answer-box").appendChild(tempDiv);
                     });
                     initializeRateYo();
                     setProgressBars();
