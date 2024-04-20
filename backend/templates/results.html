@@ -239,18 +239,17 @@
             const response =
                 !(is_ad_hoc)
                     ? fetch(
-                        "/svd_search?" +
+                        "/normal_search?" +
                         new URLSearchParams({
                             title: document.getElementById("filter-text-val").value,
                         }).toString()
                     )
                     : fetch(
-                        "/ad_hoc_search?" +
+                        "/AH_search?" +
                         new URLSearchParams({
                             title: document.getElementById("ad-hoc").value,
                         }).toString()
                     )
-            console.log(is_ad_hoc)
 
             response
                 .then((response) => response.json())

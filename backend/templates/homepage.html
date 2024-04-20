@@ -37,13 +37,15 @@
 
 
     <script>
+        let is_ad_hoc = false;
+
         function redirect() {
-            fetch("/create-recent?" + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+            const route = is_ad_hoc ? "/create-recent-AH?" : '/create-recent-normal?';
+            fetch(route + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
             .then(response => response.json())
             .then(data => {
                 window.location.href = '/results/';
             });
-            console.log(document.getElementById("filter-text-val").value);
         }
 
         // Initialize Select2 on the filter-text-val element
