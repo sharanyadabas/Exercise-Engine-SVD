@@ -119,7 +119,7 @@
                     </div>
                     <div class="search-line">
                         <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
-                        <input id="ad-hoc" class="dropdown" type="text" placeholder="Type here" />
+                        <input id="ad-hoc" class="dropdown" type="text" placeholder="Enter some exercise features" />
                         <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
                     </div>
                 </div>
@@ -324,18 +324,17 @@
             const response =
                 !(is_ad_hoc)
                     ? fetch(
-                        "/svd_search?" +
+                        "/normal_search?" +
                         new URLSearchParams({
                             title: document.getElementById("filter-text-val").value,
                         }).toString()
                     )
                     : fetch(
-                        "/ad_hoc_search?" +
+                        "/AH_search?" +
                         new URLSearchParams({
                             title: document.getElementById("ad-hoc").value,
                         }).toString()
                     )
-            console.log(is_ad_hoc)
 
             response
                 .then((response) => response.json())

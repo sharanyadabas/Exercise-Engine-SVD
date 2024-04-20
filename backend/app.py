@@ -3,7 +3,6 @@ import json
 import os
 from flask import Flask, render_template, request
 from flask_cors import CORS
-from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 from sklearn.preprocessing import normalize
 from scipy.sparse.linalg import svds
 import numpy as np
@@ -43,11 +42,12 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     title_to_index = {
         doc[0]: i for i, doc in enumerate(documents)
     }
+    # Make word to index dictionary
     word_to_index = vectorizer.vocabulary_
-    index_to_word = {i:t for t,i in word_to_index.items()}
 
     # Gets svd
     docs_compressed, s, words_compressed = svds(td_matrix, k=40)
+
     # Normalizes
     docs_compressed_normed = normalize(docs_compressed)
     words_compressed = words_compressed.transpose()
@@ -56,14 +56,25 @@ with open(json_file_path, "r", encoding="utf-8") as file:
 app = Flask(__name__)
 CORS(app)
 
+# Global variable for holding the most recent search, used for homepage.
 recent_search = []
 
-def closest_projects_to_word(query, k = 5):
+def closest_docs_from_words(query, k = 5):
+    """
+    Given a query of words, finds the 5 closest documents using SVD
+    word + doc matrices
+    """
+
+    # Transforms query into tfidf vector of words in vocab
     query_tfidf = vectorizer.transform([query]).toarray()
     query_vec = normalize(np.dot(query_tfidf, words_compressed)).squeeze()
+    # Performs dot product between vector and U to get similarity array
     sims = docs_compressed_normed.dot(query_vec)
+    # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
+    # Excludes all the ones without ratings
     asort = asort[np.in1d(asort, no_rating, invert=True)][: k + 1]
+    # Returns in nice dictionary format
     return [
         {
             "Title": documents[i][0],
@@ -75,9 +86,14 @@ def closest_projects_to_word(query, k = 5):
         for i in asort[1:]
     ]
 
-def closest_projects(documents, project_index_in, project_repr_in, no_rating, k=10):
-    # Performs dot product between project and U to get similarity array
-    sims = project_repr_in.dot(project_repr_in[project_index_in, :])
+def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating, k=5):
+    """
+    Given a document index, finds the 5 closest documents using SVD
+    doc matrix
+    """
+
+    # Performs dot product between document and U to get similarity array
+    sims = doc_repr_in.dot(doc_repr_in[doc_index, :])
     # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
     # Excludes all the ones without ratings
@@ -104,17 +120,32 @@ def results():
     # Renders the results
     return render_template("results.html", title="results html")
 
-@app.route('/create-recent')
-def create_recent():
+@app.route('/create-recent-normal')
+def create_recent_normal():
+    """
+    Route for performing normal doc-doc search and storing results
+    in global var recent_search. Needed for switch from homepage to results.
+    """
     global recent_search
     title = request.args.get("title")
     index = title_to_index[title]
-    recent_search = closest_projects(documents, index, docs_compressed_normed, no_rating, 10)
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
+    return {}
+
+@app.route('/create-recent-AH')
+def create_recent_AH():
+    """
+    Route for performing ad-hoc words-doc search and storing results
+    in global var recent_search. Needed for switch from homepage to results.
+    """
+    global recent_search
+    title = request.args.get("title")
+    recent_search = closest_docs_from_words(title)
     return {}
 
 @app.route("/get-recent")
 def get_recent():
-    # Renders the results
+    # Returns the most recent results
     return recent_search
 
 
@@ -127,23 +158,31 @@ def get_titles():
     # titles = [e[0] for e in documents]
     return {"titles": titles}
 
-@app.route("/svd_search")
-def search():
-    # Gets the title request, finds the index and returns the svd result of top 10
-    # in a dictionary with Title, Desc, and Rating keys
+@app.route("/normal_search")
+def normal_search():
+    """
+    Route for performing normal doc-doc search and storing results
+    in global var recent_search. Gets the title request, finds the index and 
+    returns the svd result of top 5 in a dictionary with Title, Desc, Rating, 
+    Sim, and YT_link keys.
+    """
     global recent_search
     title = request.args.get("title")
     index = title_to_index[title]
-    recent_search = closest_projects(documents, index, docs_compressed_normed, no_rating, 10)
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
     return recent_search
 
-@app.route("/ad_hoc_search")
+@app.route("/AH_search")
 def AH_search():
-    # Gets the title request, finds the index and returns the svd result of top 10
-    # in a dictionary with Title, Desc, and Rating keys
+    """
+    Route for performing ad-hoc words-doc search and storing results
+    in global var recent_search. Gets the title request and returns the 
+    svd result of top 5 in a dictionary with Title, Desc, Rating, 
+    Sim, and YT_link keys.
+    """
     global recent_search
     title = request.args.get("title")
-    recent_search = closest_projects_to_word(title)
+    recent_search = closest_docs_from_words(title)
     return recent_search
 
 
