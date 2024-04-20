@@ -129,6 +129,7 @@
             const search_method = document.getElementById("search-method");
             const is_checked = search_method.getAttribute("checked");
         }
+
         function initializeRateYo() {
             $(".rateYo").each(function () {
                 $(this)
@@ -225,14 +226,27 @@
         }
 
         function filterText() {
+            const search_method = document.getElementById("search-method");
+            const is_checked = search_method.getAttribute("checked");
             document.getElementById("answer-box").innerHTML = "";
             console.log(document.getElementById("filter-text-val").value);
-            fetch(
+
+            const response = 
+            is_checked 
+            ? fetch(
                 "/svd_search?" +
                 new URLSearchParams({
                     title: document.getElementById("filter-text-val").value,
                 }).toString()
             )
+            : fetch(
+                "/ad_hoc_search?" +
+                new URLSearchParams({
+                    title: document.getElementById("ad-hoc").value,
+                }).toString()
+            )
+
+            response
                 .then((response) => response.json())
                 .then((data) => {
                     data.forEach((row) => {

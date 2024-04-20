@@ -90,6 +90,16 @@ def search():
     recent_search = svd_search(documents, index, td_matrix, no_rating)
     return recent_search
 
+@app.route("/ad_hoc_search")
+def AH_search():
+    # Gets the title request, finds the index and returns the svd result of top 10
+    # in a dictionary with Title, Desc, and Rating keys
+    global recent_search
+    title = request.args.get("title")
+    index = title_to_index[title]
+    
+    return recent_search
+
 
 if "DB_NAME" not in os.environ:
     app.run(debug=True, host="0.0.0.0", port=5001)
