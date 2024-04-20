@@ -24,10 +24,13 @@
     <div class="full-body-container">
         <div class="complete-container">
             <div class="vertical-bar">
-                <div class="top-buffer"></div>
-                <div class="filter-button">
-                    <input type="checkbox" id="search-method" />
-                    <span>Search Method</span>
+                <div class="top-buffer">
+                    <div class="toggle-container">
+                        <input id="search-method" class="skills-toggle" type="checkbox">
+                        <label for="search-method">
+                            <div class="toggle-switch" data-checked="Freeform" data-unchecked="Exercises"></div>
+                        </label>
+                    </div>
                 </div>
                 <!-- <div class="filter-button">
                     <input type="checkbox" id="muscle-group" />
@@ -233,20 +236,20 @@
             document.getElementById("answer-box").innerHTML = "";
             console.log(document.getElementById("filter-text-val").value);
 
-            const response = 
-            !(is_ad_hoc)
-            ? fetch(
-                "/svd_search?" +
-                new URLSearchParams({
-                    title: document.getElementById("filter-text-val").value,
-                }).toString()
-            )
-            : fetch(
-                "/ad_hoc_search?" +
-                new URLSearchParams({
-                    title: document.getElementById("ad-hoc").value,
-                }).toString()
-            )
+            const response =
+                !(is_ad_hoc)
+                    ? fetch(
+                        "/svd_search?" +
+                        new URLSearchParams({
+                            title: document.getElementById("filter-text-val").value,
+                        }).toString()
+                    )
+                    : fetch(
+                        "/ad_hoc_search?" +
+                        new URLSearchParams({
+                            title: document.getElementById("ad-hoc").value,
+                        }).toString()
+                    )
             console.log(is_ad_hoc)
 
             response
