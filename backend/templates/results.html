@@ -25,6 +25,7 @@
         <div class="complete-container">
             <div class="vertical-bar">
                 <div class="top-buffer">
+                    <div id="filter-title">Filters</div>
                     <div class="toggle-container">
                         <input id="search-method" class="skills-toggle" type="checkbox">
                         <label for="search-method">
@@ -32,18 +33,82 @@
                         </label>
                     </div>
                 </div>
-                <!-- <div class="filter-button">
-                    <input type="checkbox" id="muscle-group" />
-                    <span>muscle-group</span>
+                <div class="filter-button">
+                    <div class="filter-header">Muscle groups
+                        <button id="toggle-muscle-groups" class="rotated"
+                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                    </div>
+                    <div class="muscle-groups" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="abdominals" />Abdominals
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="biceps" />Biceps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="chest" />Chest
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="quadriceps" />Quadriceps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="shoulders" />Shoulders
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
                 </div>
                 <div class="filter-button">
-                    <input type="checkbox" id="equipment" />
-                    <span>equipment</span>
+                    <div class="filter-header">Equipment
+                        <button id="toggle-equipment" class="rotated"
+                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                    </div>
+                    <div class="equipment" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="barbell" />Barbell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="bodyweight" />Bodyweight
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="cable" />Cable
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="dumbbell" />Dumbbell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="other" />Other
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
                 </div>
                 <div class="filter-button">
-                    <input type="checkbox" id="difficulty" />
-                    <span>difficulty</span>
-                </div> -->
+                    <div class="filter-header">Difficulty
+                        <button id="toggle-difficulty" class="rotated"
+                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                    </div>
+                    <div class="difficulty" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="beginner" />Beginner
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="intermediate" />Intermediate
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="expert" />Expert
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
                 <div class="bottom-buffer"></div>
             </div>
 
@@ -54,7 +119,7 @@
                     </div>
                     <div class="search-line">
                         <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
-                        <input id="ad-hoc" class="dropdown" type="text" placeholder="Ad-Hoc Retrieval" />
+                        <input id="ad-hoc" class="dropdown" type="text" placeholder="Type here" />
                         <img id="search-icon" src="../static/images/dumbbell.png" onclick="filterText()" />
                     </div>
                 </div>
@@ -117,6 +182,26 @@
                     is_ad_hoc = false;
                 }
             });
+        });
+
+        function toggleFilter(button) {
+            if (button.style.display === "none") {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        }
+
+        document.getElementById('toggle-muscle-groups').addEventListener('click', function () {
+            this.classList.toggle('rotated');
+        });
+
+        document.getElementById('toggle-equipment').addEventListener('click', function () {
+            this.classList.toggle('rotated');
+        });
+
+        document.getElementById('toggle-difficulty').addEventListener('click', function () {
+            this.classList.toggle('rotated');
         });
 
         function showMore(button) {
