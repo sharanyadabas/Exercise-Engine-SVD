@@ -32,7 +32,6 @@ body {
     /* Allows scrolling within the vertical bar if content exceeds the height */
     background-color: #526D82;
     align-items: center;
-    gap: 30px;
 }
 
 /* Div for Title, Search Box, and Answer Box */
@@ -274,7 +273,6 @@ input[type=text] {
 
 .answer-box {
     flex-grow: 1;
-    margin-right: 40px;
     /* Allows the answer box to take up the remaining space */
 }
 
@@ -455,6 +453,7 @@ input[type=text] {
     font-family: 'trebuchet ms', sans-serif;
     color: #DDE6ED;
     align-items: center;
+    margin-bottom: 30px;
 }
 
 #filter-title {
@@ -480,7 +479,7 @@ input[type=text] {
 
 .rotated {
     transform: rotate(180deg);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.1s ease-in-out;
 }
 
 .filter-checkbox {
@@ -584,7 +583,7 @@ input[type=text] {
 
 .toggle-switch {
     position: relative;
-    background: #9DB2BF;
+    background: #DDE6ED;
     border-radius: 5px;
     box-shadow: 0 0 0px #DDE6ED;
     transition: all 1s ease-in-out;
@@ -604,7 +603,7 @@ input[type=text] {
 
 .toggle-switch:before {
     content: attr(data-checked);
-    color: #DDE6ED;
+    color: #526D82;
     left: 50%;
     font-family: 'Montserrat', sans-serif;
 }
@@ -614,10 +613,10 @@ input[type=text] {
     left: 2px;
     border-radius: 5px;
     z-index: 1;
-    background: #DDE6ED;
+    background: #27374D;
     transform: translate3d(0, 0, 0);
     transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
-    color: #526D82;
+    color: #DDE6ED;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -640,7 +639,7 @@ input[type=text] {
     padding-bottom: 5px;
     display: flex;
     align-items: center;
-    border: .5px solid black;
+    border: 1px solid #27374D;
 
     >span {
         display: block;
