@@ -203,9 +203,8 @@
                 <div id="answer-box"></div>
             </div>
 
+            <!-- Invisible div for balancing -->
             <div class="vertical-bar" id="bar_2">
-                <!-- <div class="top-buffer"></div>
-                <div class="bottom-buffer"></div> -->
             </div>
         </div>
         <div class="footer">
@@ -237,15 +236,12 @@
         };
 
         $(document).ready(function () {
-            // Initialize Select2 on the filter-text-val element
             $("#filter-text-val").select2({
                 placeholder: "Select an Exercise",
             });
 
-            // Initially hide adhoc input
             $('#ad-hoc').hide();
 
-            // Checkbox toggle for the visibility of the Select2 container
             $("#search-method").change(function () {
                 var $select2Container = $("#filter-text-val").next(".select2-container");
                 var $adhocInput = $('#ad-hoc')
@@ -282,15 +278,15 @@
         });
 
         function showMore(button) {
-            var descDiv = button.previousElementSibling; // This assumes the div is always directly before the button
+            var descDiv = button.previousElementSibling;
             if (descDiv.style.height === "60px") {
-                descDiv.style.height = "auto"; // Set to auto to expand to full content
+                descDiv.style.height = "auto";
                 descDiv.style.overflow = "visible";
-                button.textContent = ". . ."; // Change button text to indicate action
+                button.textContent = ". . .";
             } else {
-                descDiv.style.height = "60px"; // Reset height
+                descDiv.style.height = "60px";
                 descDiv.style.overflow = "hidden";
-                button.textContent = ". . ."; // Reset button text
+                button.textContent = ". . .";
             }
         }
 
@@ -303,7 +299,7 @@
             $(".rateYo").each(function () {
                 $(this)
                     .rateYo({
-                        rating: $(this).attr("data-rating"), // Use data attribute for dynamic ratings
+                        rating: $(this).attr("data-rating"),
                         numStars: 5,
                         precision: 1,
                         starWidth: "30px",
@@ -322,7 +318,7 @@
                 .then((response) => response.json())
                 .then((data) => {
                     const select = $("#filter-text-val");
-                    select.empty().append(new Option("", "", true, true)); // Empty option for placeholder
+                    select.empty().append(new Option("", "", true, true));
                     data.titles.forEach((title) => {
                         select.append(new Option(title, title));
                     });
@@ -334,9 +330,7 @@
             const selectedTitle = document.getElementById("filter-text-val").value;
             console.log(selectedTitle);
             if (selectedTitle) {
-                // Here you can call the same function you use to fetch and display the exercise info
-                // For example, if you're using the text input's filter function:
-                document.getElementById("filter-text-val").value = selectedTitle; // Update the text input to reflect the dropdown selection
+                document.getElementById("filter-text-val").value = selectedTitle;
             }
         }
 
@@ -397,7 +391,7 @@
         }
 
         $(document).ready(function () {
-            initializeRateYo(); // Initialize rateYo on document ready
+            initializeRateYo();
         });
 
         function sendFocus() {
@@ -473,6 +467,7 @@
                     setProgressBars();
                 });
         }
+
         document.addEventListener('DOMContentLoaded', function () {
             const allCheckboxes = document.querySelectorAll('.filter-checkbox input[type="checkbox"]');
             allCheckboxes.forEach(function (checkbox) {
@@ -480,6 +475,28 @@
                     filterText();
                 });
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            function setupCheckboxGroup(checkboxesSelector, headerSelector) {
+                var checkboxes = document.querySelectorAll(checkboxesSelector);
+                var filterHeader = document.querySelector(headerSelector);
+
+                function updateHeaderStyle() {
+                    var anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+                    filterHeader.style.textDecoration = anyChecked ? 'underline' : 'none';
+                }
+
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', updateHeaderStyle);
+                });
+
+                updateHeaderStyle();
+            }
+
+            setupCheckboxGroup('.muscle-groups .filter-checkbox input[type="checkbox"]', '.filter-header:has(#toggle-muscle-groups)');
+            setupCheckboxGroup('.equipment .filter-checkbox input[type="checkbox"]', '.filter-header:has(#toggle-equipment)');
+            setupCheckboxGroup('.difficulty .filter-checkbox input[type="checkbox"]', '.filter-header:has(#toggle-difficulty)');
         });
 
     </script>
