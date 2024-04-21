@@ -23,7 +23,15 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
     datalist = data["exercises"]
     documents = [
-        (x["Title"].upper(), x["all-text"], x.get("Rating"), x.get("YouTubeLink"))
+        (
+            x["Title"].upper(),
+            x["all-text"],
+            x.get("Rating"),
+            x.get("YouTubeLink"),
+            x.get("BodyPart"),
+            x.get("Equipment"),
+            x.get("Level"),
+        )
         for x in datalist
         if len(x["all-text"].split()) > 35
     ]
@@ -31,7 +39,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     # Get exercises with no rating or rating of 0.0 to exclude
     no_rating = []
     for i, e in enumerate(documents):
-        if e[2] is None or e[2] == "0.0":
+        if e[2] is None:
             no_rating.append(i)
 
     # Make term-document matrix
@@ -39,9 +47,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     td_matrix = vectorizer.fit_transform([x[1] for x in documents])
 
     # Make title to index dictionary
-    title_to_index = {
-        doc[0]: i for i, doc in enumerate(documents)
-    }
+    title_to_index = {doc[0]: i for i, doc in enumerate(documents)}
     # Make word to index dictionary
     word_to_index = vectorizer.vocabulary_
 
@@ -51,7 +57,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     # Normalizes
     docs_compressed_normed = normalize(docs_compressed)
     words_compressed = words_compressed.transpose()
-    words_compressed_normed = normalize(words_compressed, axis = 1)                               
+    words_compressed_normed = normalize(words_compressed, axis=1)
 
 app = Flask(__name__)
 CORS(app)
@@ -59,7 +65,8 @@ CORS(app)
 # Global variable for holding the most recent search, used for homepage.
 recent_search = []
 
-def closest_docs_from_words(query, k = 5):
+
+def closest_docs_from_words(query, k=5):
     """
     Given a query of words, finds the 5 closest documents using SVD
     word + doc matrices
@@ -82,9 +89,13 @@ def closest_docs_from_words(query, k = 5):
             "Rating": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
             "YT_link": documents[i][3],
+            "Muscles": documents[i][4],
+            "Equipment": documents[i][5],
+            "Difficulty": documents[i][6],
         }
         for i in asort[1:]
     ]
+
 
 def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating, k=5):
     """
@@ -106,21 +117,27 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating, k=5):
             "Rating": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
             "YT_link": documents[i][3],
+            "Muscles": documents[i][4],
+            "Equipment": documents[i][5],
+            "Difficulty": documents[i][6],
         }
         for i in asort[1:]
     ]
+
 
 @app.route("/")
 def home():
     # Renders the homepage
     return render_template("homepage.html", title="home html")
 
+
 @app.route("/results/")
 def results():
     # Renders the results
     return render_template("results.html", title="results html")
 
-@app.route('/create-recent-normal')
+
+@app.route("/create-recent-normal")
 def create_recent_normal():
     """
     Route for performing normal doc-doc search and storing results
@@ -129,10 +146,13 @@ def create_recent_normal():
     global recent_search
     title = request.args.get("title")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
+    recent_search = closest_docs_from_docs(
+        documents, index, docs_compressed_normed, no_rating
+    )
     return {}
 
-@app.route('/create-recent-AH')
+
+@app.route("/create-recent-AH")
 def create_recent_AH():
     """
     Route for performing ad-hoc words-doc search and storing results
@@ -142,6 +162,7 @@ def create_recent_AH():
     title = request.args.get("title")
     recent_search = closest_docs_from_words(title)
     return {}
+
 
 @app.route("/get-recent")
 def get_recent():
@@ -158,26 +179,30 @@ def get_titles():
     # titles = [e[0] for e in documents]
     return {"titles": titles}
 
+
 @app.route("/normal_search")
 def normal_search():
     """
     Route for performing normal doc-doc search and storing results
-    in global var recent_search. Gets the title request, finds the index and 
-    returns the svd result of top 5 in a dictionary with Title, Desc, Rating, 
+    in global var recent_search. Gets the title request, finds the index and
+    returns the svd result of top 5 in a dictionary with Title, Desc, Rating,
     Sim, and YT_link keys.
     """
     global recent_search
     title = request.args.get("title")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
+    recent_search = closest_docs_from_docs(
+        documents, index, docs_compressed_normed, no_rating
+    )
     return recent_search
+
 
 @app.route("/AH_search")
 def AH_search():
     """
     Route for performing ad-hoc words-doc search and storing results
-    in global var recent_search. Gets the title request and returns the 
-    svd result of top 5 in a dictionary with Title, Desc, Rating, 
+    in global var recent_search. Gets the title request and returns the
+    svd result of top 5 in a dictionary with Title, Desc, Rating,
     Sim, and YT_link keys.
     """
     global recent_search

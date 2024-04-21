@@ -44,7 +44,19 @@
                             <span class="checkmark"></span>
                         </label>
                         <label class="filter-checkbox">
+                            <input type="checkbox" id="abductors" />Abductors
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="adductors" />Adductors
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
                             <input type="checkbox" id="biceps" />Biceps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="calves" />Calves
                             <span class="checkmark"></span>
                         </label>
                         <label class="filter-checkbox">
@@ -52,13 +64,46 @@
                             <span class="checkmark"></span>
                         </label>
                         <label class="filter-checkbox">
-                            <input type="checkbox" id="quadriceps" />Quadriceps
+                            <input type="checkbox" id="forearms" />Forearms
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="glutes" />Glutes
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="Hamstrings" />Hamstrings
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="Lats" />Lats
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="Lower Back" />Lower Back
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="Middle Back" />Middle Back
                             <span class="checkmark"></span>
                         </label>
                         <label class="filter-checkbox">
                             <input type="checkbox" id="shoulders" />Shoulders
                             <span class="checkmark"></span>
                         </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="traps" />Traps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="triceps" />Triceps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="quadriceps" />Quadriceps
+                            <span class="checkmark"></span>
+                        </label>
+
                     </div>
                 </div>
                 <div class="filter-button">
@@ -67,6 +112,10 @@
                             onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
                     </div>
                     <div class="equipment" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="bands" />Bands
+                            <span class="checkmark"></span>
+                        </label>
                         <label class="filter-checkbox">
                             <input type="checkbox" id="barbell" />Barbell
                             <span class="checkmark"></span>
@@ -81,6 +130,34 @@
                         </label>
                         <label class="filter-checkbox">
                             <input type="checkbox" id="dumbbell" />Dumbbell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="ez-curlbar" />E-Z Curl Bar
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="exercise-ball" />Exercise Ball
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="foam-roll" />Foam Roll
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="kettlebell" />Kettlebell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="machine" />Machine
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="medicine-ball" />Medicine Ball
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="none" />None
                             <span class="checkmark"></span>
                         </label>
                         <label class="filter-checkbox">
@@ -269,7 +346,7 @@
             fetchTitlesAndPopulateDropdown
         );
 
-        function answerBoxTemplate(title, titleDesc, rating, sim, yt_link) {
+        function answerBoxTemplate(title, titleDesc, rating, sim, yt_link, muscles, equipment, difficulty) {
             const embedUrl = yt_link;
             const scaled_rating = rating / 2;
             return `
@@ -277,23 +354,33 @@
                 <div class='answer-box'>
                     <div class="episode-container">
                         <div class='heading-container'>
-                        <h3 class='episode-title'>${title}</h3>
-                        <div class="rateYo" data-rating="${scaled_rating}"></div>
+                            <h3 class='episode-title'>${title}</h3>
+                            <div class="rateYo" data-rating="${scaled_rating}"></div>
+                            <div class="difficulty-info">${difficulty}</div>
                         </div>
                         <iframe class="video-container"
                             width="560" height="315"
                             src="${embedUrl}" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write;
-                            encrypted-media; gyroscope; picture-in-picture"
                             allowfullscreen>
                         </iframe>
                     </div>
                     <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
                     <button id="more-button" onclick="showMore(this)">. . .</button>
-                    <p class='episode-sim'>Similarity:</p>
-                    <div class="meter cadetblue">
-                        <span data-progress="${sim * 100
-                }" style="width:0;"></span>
+                    <div class = "exercise-info">
+                        <div class = "similarity-info">
+                            <p class='episode-sim'>Similarity Score:</p>
+                            <div class="meter cadetblue">
+                                <span data-progress="${sim * 100}" style="width:0;"></span>
+                            </div>
+                        </div>
+                        <div class = "similarity-info">
+                            <p class='episode-sim'>Muscle Group:</p>
+                            <span class = "muscle-info">${muscles}</span>
+                        </div>
+                        <div class = "similarity-info">
+                            <p class='episode-sim'>Equipment:</p>
+                            <span class = "equipment-info">${equipment}</span>
+                        </div>
                     </div>
                 </div>
             </div>`;
@@ -346,7 +433,10 @@
                             row.Desc,
                             row.Rating,
                             row.Sim,
-                            row.YT_link
+                            row.YT_link,
+                            row.Muscles,
+                            row.Equipment,
+                            row.Difficulty
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
