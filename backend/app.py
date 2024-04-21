@@ -23,15 +23,9 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
     datalist = data["exercises"]
     documents = [
-        (
-            x["Title"].upper(),
-            x["all-text"],
-            x.get("Rating"),
-            x.get("YouTubeLink"),
-            x.get("BodyPart"),
-            x.get("Equipment"),
-            x.get("Level"),
-        )
+        (x["Title"].upper(), x["all-text"], x.get("Rating"), x.get("YouTubeLink"),
+          x.get("BodyPart"), x.get('Equipment'),
+          x.get("Level"))
         for x in datalist
         if len(x["all-text"].split()) > 35
     ]
@@ -117,9 +111,9 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating, k=5):
             "Rating": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
             "YT_link": documents[i][3],
-            "Muscles": documents[i][4],
-            "Equipment": documents[i][5],
-            "Difficulty": documents[i][6],
+            "Muscles": documents[i][4], 
+            "Equipment": documents[i][5], 
+            "Difficulty":  documents[i][6],
         }
         for i in asort[1:]
     ]
@@ -146,9 +140,7 @@ def create_recent_normal():
     global recent_search
     title = request.args.get("title")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(
-        documents, index, docs_compressed_normed, no_rating
-    )
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
     return {}
 
 
@@ -168,7 +160,6 @@ def create_recent_AH():
 def get_recent():
     # Returns the most recent results
     return recent_search
-
 
 @app.route("/get-titles")
 def get_titles():
@@ -190,10 +181,24 @@ def normal_search():
     """
     global recent_search
     title = request.args.get("title")
+    muscle_groups = request.args.get("muscleFilter")
+    equipments = request.args.get("equipmentFilter")
+    difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(
-        documents, index, docs_compressed_normed, no_rating
-    )
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 250)
+    if len(muscle_groups) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Muscles"].lower() in muscle_groups
+    ]
+    if len(equipments) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Equipment"].lower() in equipments
+    ]
+    if len(difficulties) >= 1:
+        recent_search = [search for search in recent_search
+                         if search["Difficulty"].lower() in difficulties]
+    if len(recent_search) > 5:
+        return recent_search[:5]
     return recent_search
 
 
