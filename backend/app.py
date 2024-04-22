@@ -57,14 +57,18 @@ with open(json_file_path, "r", encoding="utf-8") as file:
           x.get("BodyPart"), x.get('Equipment'),
           x.get("Level"))
         for x in datalist
-        if len(x["all-text"].split()) > 35
+        if len(x["all-text"].split()) > 50
     ]
 
     # Get exercises with no rating or rating of 0.0 to exclude
     no_rating = []
+    none = []
     for i, e in enumerate(documents):
+        if e[2] is None:
+            none.append(i)
         if e[2] is None or e[2] == "0.0":
             no_rating.append(i)
+    none_length = len(none)
 
     # Make term-document matrix
     vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7, min_df=75)
@@ -312,7 +316,7 @@ def get_recent_title():
 def get_titles():
     # Gets the title request, finds the index and returns the svd result
     titles = [
-        e[0] for e in documents[230:]
+        e[0] for e in documents[none_length:]
     ]  # Experimental, excludes webscraped queries
     # titles = [e[0] for e in documents]
     return {"titles": titles}
