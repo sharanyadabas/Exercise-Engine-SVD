@@ -245,7 +245,7 @@ def create_recent_normal():
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
+    recent_search = combined_similarity(documents, index, docs_compressed_normed, no_rating, title)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups
@@ -326,24 +326,18 @@ def normal_search():
     returns the svd result of top 5 in a dictionary with Title, Desc, Rating,
     Sim, and YT_link keys.
     """
-
-    title = request.args.get("title")
-    index = title_to_index[title]
-    recent_search = combined_similarity(documents, index, docs_compressed_normed, no_rating, title)
-    return recent_search[:5]
-
-    """
     global recent_search
     global recent_title
     global was_AH
     was_AH = False
     title = request.args.get("title")
     recent_title = title
+    index = title_to_index[title]
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 1500)
+    recent_search = combined_similarity(documents, index, docs_compressed_normed, no_rating, title)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups
@@ -358,7 +352,6 @@ def normal_search():
     if len(recent_search) > 5:
         return recent_search[:5]
     return recent_search
-    """
     
 
 @app.route("/AH_search")
