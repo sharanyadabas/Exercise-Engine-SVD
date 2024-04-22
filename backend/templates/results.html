@@ -214,7 +214,6 @@
 
     <script>
         let is_ad_hoc = false;
-        let title_to_send = "";
 
         window.onload = function pageLoad() {
             fetch("/get-recent")
@@ -238,8 +237,24 @@
                     setProgressBars();
                 });
 
-            fetch("/get-recent-title").then((response => response.json()))
-            .then((data) => title_to_send = data.title);
+            fetch("/get-recent-info").then((response => response.json()))
+            .then((data) => {
+                var $select2Container = $("#filter-text-val").next(".select2-container");
+                var $adhocInput = $('#ad-hoc')
+                if (data.was_AH) {
+                    $select2Container.hide();
+                    $adhocInput.show();
+                    is_ad_hoc = true;
+                    document.getElementById("ad-hoc").value = data.title;
+                    document.getElementById("search-method").checked = true;
+                }
+                else {
+                    $select2Container.show();
+                    $adhocInput.hide();
+                    is_ad_hoc = false;
+                    $('#filter-text-val').val(data.title).change();
+                }
+            });
         };
 
         $(document).ready(function () {
@@ -432,20 +447,12 @@
                 }
             });
 
-            let title;
-            if (document.getElementById("filter-text-val").value === "") {
-                title = title_to_send;
-            }
-            else {
-                title = document.getElementById("filter-text-val").value;
-            }
-
             const response =
                 !(is_ad_hoc)
                     ? fetch(
                         "/normal_search?" +
                         new URLSearchParams({
-                            title: title,
+                            title: document.getElementById("filter-text-val").value,
                             muscleFilter: selectedMuscleGroups,
                             equipmentFilter: selectedEquipments,
                             difficultyFilter: levels,

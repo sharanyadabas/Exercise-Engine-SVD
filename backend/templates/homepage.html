@@ -238,10 +238,13 @@
                     levels.push(checkbox.id);
                 }
             });
+            const title = (is_ad_hoc) 
+            ? document.getElementById("ad-hoc").value 
+            : document.getElementById("filter-text-val").value
 
             const route = is_ad_hoc ? "/create-recent-AH?" : '/create-recent-normal?';
             fetch(route + new URLSearchParams({
-                            title: document.getElementById("filter-text-val").value,
+                            title: title,
                             muscleFilter: selectedMuscleGroups,
                             equipmentFilter: selectedEquipments,
                             difficultyFilter: levels,

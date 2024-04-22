@@ -59,6 +59,7 @@ CORS(app)
 # Global variable for holding the most recent search, used for homepage.
 recent_search = []
 recent_title = ""
+was_AH = False
 
 
 def closest_docs_from_words(query, k=5):
@@ -142,6 +143,8 @@ def create_recent_normal():
     """
     global recent_search
     global recent_title
+    global was_AH
+    was_AH = False
     title = request.args.get("title")
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
@@ -173,6 +176,8 @@ def create_recent_AH():
     """
     global recent_search
     global recent_title
+    global was_AH
+    was_AH = True
     title = request.args.get("title")
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
@@ -200,10 +205,13 @@ def get_recent():
     # Returns the most recent results
     return recent_search
 
-@app.route("/get-recent-title")
+@app.route("/get-recent-info")
 def get_recent_title():
     # Returns the most recent results
-    return json.dumps({"title" : recent_title})
+    return json.dumps({
+        "title" : recent_title,
+        "was_AH" : was_AH
+                       })
 
 @app.route("/get-titles")
 def get_titles():
@@ -224,7 +232,11 @@ def normal_search():
     Sim, and YT_link keys.
     """
     global recent_search
+    global recent_title
+    global was_AH
+    was_AH = False
     title = request.args.get("title")
+    recent_title = title
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
@@ -255,7 +267,11 @@ def AH_search():
     Sim, and YT_link keys.
     """
     global recent_search
+    global was_AH
+    global recent_title
+    was_AH = True
     title = request.args.get("title")
+    recent_title = title
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
