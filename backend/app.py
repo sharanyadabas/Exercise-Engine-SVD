@@ -58,6 +58,7 @@ CORS(app)
 
 # Global variable for holding the most recent search, used for homepage.
 recent_search = []
+recent_title = ""
 
 
 def closest_docs_from_words(query, k=5):
@@ -140,6 +141,7 @@ def create_recent_normal():
     in global var recent_search. Needed for switch from homepage to results.
     """
     global recent_search
+    global recent_title
     title = request.args.get("title")
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
@@ -159,6 +161,7 @@ def create_recent_normal():
                          if search["Difficulty"].lower() in difficulties]
     if len(recent_search) > 5:
         recent_search = recent_search[:5]
+    recent_title = title
     return {}
 
 
@@ -169,11 +172,12 @@ def create_recent_AH():
     in global var recent_search. Needed for switch from homepage to results.
     """
     global recent_search
+    global recent_title
     title = request.args.get("title")
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
-    recent_search = closest_docs_from_words(title, 250)
+    recent_search = closest_docs_from_words(title, 1500)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups
@@ -187,6 +191,7 @@ def create_recent_AH():
                          if search["Difficulty"].lower() in difficulties]
     if len(recent_search) > 5:
         recent_search = recent_search[:5]
+    recent_title = title
     return {}
 
 
@@ -194,6 +199,11 @@ def create_recent_AH():
 def get_recent():
     # Returns the most recent results
     return recent_search
+
+@app.route("/get-recent-title")
+def get_recent_title():
+    # Returns the most recent results
+    return json.dumps({"title" : recent_title})
 
 @app.route("/get-titles")
 def get_titles():
@@ -219,7 +229,7 @@ def normal_search():
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 250)
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 1500)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups

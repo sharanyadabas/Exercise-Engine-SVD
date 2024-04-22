@@ -214,6 +214,7 @@
 
     <script>
         let is_ad_hoc = false;
+        let title_to_send = "";
 
         window.onload = function pageLoad() {
             fetch("/get-recent")
@@ -236,6 +237,9 @@
                     initializeRateYo();
                     setProgressBars();
                 });
+
+            fetch("/get-recent-title").then((response => response.json()))
+            .then((data) => title_to_send = data.title);
         };
 
         $(document).ready(function () {
@@ -428,12 +432,20 @@
                 }
             });
 
+            let title;
+            if (document.getElementById("filter-text-val").value === "") {
+                title = title_to_send;
+            }
+            else {
+                title = document.getElementById("filter-text-val").value;
+            }
+
             const response =
                 !(is_ad_hoc)
                     ? fetch(
                         "/normal_search?" +
                         new URLSearchParams({
-                            title: document.getElementById("filter-text-val").value,
+                            title: title,
                             muscleFilter: selectedMuscleGroups,
                             equipmentFilter: selectedEquipments,
                             difficultyFilter: levels,
