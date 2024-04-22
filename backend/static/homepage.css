@@ -12,6 +12,14 @@ body {
     opacity: 20%;
 }
 
+.complete-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    gap: 80px;
+}
+
 /* Container */
 .full-body-container {
     position: absolute;
@@ -24,11 +32,23 @@ body {
     flex-direction: column;
 }
 
+.vertical-bar {
+    flex: 0 0 180px;
+    /* Flexbox settings: don't grow, don't shrink, initial width is 200px */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    /* Allows scrolling within the vertical bar if content exceeds the height */
+    background-color: #526D82;
+    align-items: center;
+}
+
 /* Div for Title, Search Box, and Answer Box */
 .content {
-    flex: 1;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Exercise Engine text */
@@ -57,7 +77,25 @@ body {
     align-items: center;
 }
 
+#ad-hoc::placeholder {
+    color: #526D82 !important;
+}
+
+#ad-hoc {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    height: 44px;
+    width: 589px !important;
+    border-radius: 4px;
+}
+
+input[type=text] {
+    color: #27374D !important;
+}
+
 /* Search bar */
+.dropdown,
 .dropdown+.select2-container--default .select2-selection--single {
     border: 3px solid #526D82;
     font-family: 'trebuchet ms', sans-serif;
@@ -270,7 +308,7 @@ body {
 }
 
 .footer {
-    height: 40px;
+    height: 7vh;
     width: 100%;
     background-color: #27374D;
     color: #DDE6ED;
@@ -278,4 +316,205 @@ body {
     text-align: center;
     padding-top: 15px;
     font-family: 'trebuchet ms', sans-serif;
+}
+
+.top-buffer {
+    width: 180px;
+    height: 300px;
+    background: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 35px;
+    text-align: center;
+}
+
+.bottom-buffer {
+    width: 100%;
+    height: 280px;
+    margin-top: auto;
+    background: linear-gradient(to bottom, #526D82, #27374D);
+}
+
+#bar_2 {
+    background: inherit;
+}
+
+.filter-button {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'trebuchet ms', sans-serif;
+    color: #DDE6ED;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#filter-title {
+    font-family: 'trebuchet ms', sans-serif;
+    color: #DDE6ED;
+    font-size: 36px;
+}
+
+.filter-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.filter-header button {
+    background-image: url(./images/arrow.webp);
+    background-color: transparent;
+    background-size: contain;
+    border: none !important;
+    height: 20px !important;
+    width: 20px !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    transition: transform 0.1s ease-in-out;
+}
+
+.filter-checkbox {
+    width: 100px;
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.filter-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #DDE6ED;
+}
+
+/* On mouse-over, add a grey background color */
+.filter-checkbox:hover input~.checkmark {
+    background-color: #9DB2BF;
+}
+
+/* When the checkbox is checked, add a blue background */
+.filter-checkbox input:checked~.checkmark {
+    background-color: #DDE6ED;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.filter-checkbox input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.filter-checkbox .checkmark:after {
+    left: 6px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #526D82;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.toggle-container {
+    width: 180px !important;
+    text-align: center;
+    padding-bottom: 55px;
+    display: flex;
+    justify-content: center;
+}
+
+.toggle-container,
+.toggle-switch {
+    cursor: pointer;
+    /*change the width and height here, the rest will follow! */
+    width: 160px;
+    height: 45px;
+    font-size: 14px;
+}
+
+.toggle-container input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-container input[type="checkbox"]:checked~label .toggle-switch:before {
+    content: attr(data-unchecked);
+    left: 0;
+}
+
+.toggle-container input[type="checkbox"]:checked~label .toggle-switch:after {
+    content: attr(data-checked);
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+
+.toggle-switch {
+    position: relative;
+    background: #DDE6ED;
+    border-radius: 5px;
+    box-shadow: 0 0 0px #DDE6ED;
+    transition: all 1s ease-in-out;
+}
+
+.toggle-switch:before,
+.toggle-switch:after {
+    position: absolute;
+    height: calc(100% - 4px);
+    width: calc(50% - 2px);
+    top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.toggle-switch:before {
+    content: attr(data-checked);
+    color: #526D82;
+    left: 50%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.toggle-switch:after {
+    content: attr(data-unchecked);
+    left: 2px;
+    border-radius: 5px;
+    z-index: 1;
+    background: #27374D;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+    color: #DDE6ED;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.toggle-switch:hover:after {
+    box-shadow: 0 0 7.5px #DDE6ED;
 }

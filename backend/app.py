@@ -33,7 +33,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     # Get exercises with no rating or rating of 0.0 to exclude
     no_rating = []
     for i, e in enumerate(documents):
-        if e[2] is None:
+        if e[2] is None or e[2] == "0.0":
             no_rating.append(i)
 
     # Make term-document matrix
@@ -73,7 +73,8 @@ def closest_docs_from_words(query, k=5):
     sims = docs_compressed_normed.dot(query_vec)
     # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
-    # Excludes all the ones without ratings
+    # Excludes all the ones without ratings and itself
+    asort = asort[1:]
     asort = asort[np.in1d(asort, no_rating, invert=True)][: k + 1]
     # Returns in nice dictionary format
     return [
@@ -87,7 +88,7 @@ def closest_docs_from_words(query, k=5):
             "Equipment": documents[i][5],
             "Difficulty": documents[i][6],
         }
-        for i in asort[1:]
+        for i in asort
     ]
 
 
@@ -101,7 +102,8 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating, k=5):
     sims = doc_repr_in.dot(doc_repr_in[doc_index, :])
     # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
-    # Excludes all the ones without ratings
+    # Excludes all the ones without ratings and itself
+    asort = asort[1:]
     asort = asort[np.in1d(asort, no_rating, invert=True)][: k + 1]
     # Returns in nice dictionary format
     return [
@@ -115,7 +117,7 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating, k=5):
             "Equipment": documents[i][5], 
             "Difficulty":  documents[i][6],
         }
-        for i in asort[1:]
+        for i in asort
     ]
 
 
@@ -139,8 +141,24 @@ def create_recent_normal():
     """
     global recent_search
     title = request.args.get("title")
+    muscle_groups = request.args.get("muscleFilter")
+    equipments = request.args.get("equipmentFilter")
+    difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 250)
+    if len(muscle_groups) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Muscles"].lower() in muscle_groups
+    ]
+    if len(equipments) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Equipment"].lower() in equipments
+    ]
+    if len(difficulties) >= 1:
+        recent_search = [search for search in recent_search
+                         if search["Difficulty"].lower() in difficulties]
+    if len(recent_search) > 5:
+        recent_search = recent_search[:5]
     return {}
 
 
@@ -152,7 +170,23 @@ def create_recent_AH():
     """
     global recent_search
     title = request.args.get("title")
-    recent_search = closest_docs_from_words(title)
+    muscle_groups = request.args.get("muscleFilter")
+    equipments = request.args.get("equipmentFilter")
+    difficulties = request.args.get("difficultyFilter")
+    recent_search = closest_docs_from_words(title, 250)
+    if len(muscle_groups) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Muscles"].lower() in muscle_groups
+    ]
+    if len(equipments) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Equipment"].lower() in equipments
+    ]
+    if len(difficulties) >= 1:
+        recent_search = [search for search in recent_search
+                         if search["Difficulty"].lower() in difficulties]
+    if len(recent_search) > 5:
+        recent_search = recent_search[:5]
     return {}
 
 
@@ -212,7 +246,23 @@ def AH_search():
     """
     global recent_search
     title = request.args.get("title")
-    recent_search = closest_docs_from_words(title)
+    muscle_groups = request.args.get("muscleFilter")
+    equipments = request.args.get("equipmentFilter")
+    difficulties = request.args.get("difficultyFilter")
+    recent_search = closest_docs_from_words(title, 250)
+    if len(muscle_groups) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Muscles"].lower() in muscle_groups
+    ]
+    if len(equipments) >= 1:
+        recent_search = [search for search in recent_search
+        if search["Equipment"].lower() in equipments
+    ]
+    if len(difficulties) >= 1:
+        recent_search = [search for search in recent_search
+                         if search["Difficulty"].lower() in difficulties]
+    if len(recent_search) > 5:
+        return recent_search[:5]
     return recent_search
 
 

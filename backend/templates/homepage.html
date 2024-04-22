@@ -16,17 +16,190 @@
 <body>
     <img class="background" src="../static/images/gym.jpg" alt="Gym Picture"/>
     <div class="full-body-container">
-        <div class="content">
-            <div class="top-text">
-                <div class="name">
-                    <h1 id="title">Exercise Engine</h1>
+        <div class="complete-container">
+            <div class="vertical-bar">
+                <div class="top-buffer">
+                    <div id="filter-title">Filters</div>
+                    <div class="toggle-container">
+                        <input id="search-method" class="skills-toggle" type="checkbox">
+                        <label for="search-method">
+                            <div class="toggle-switch" data-checked="Freeform" data-unchecked="Exercises"></div>
+                        </label>
+                    </div>
                 </div>
-                <div class="search-line">
-                    <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
-                    <img id="search-icon" src="../static/images/dumbbell.png" onclick="redirect()" />
+                <div class="filter-button">
+                    <div class="filter-header">Muscle groups
+                        <button id="toggle-muscle-groups" class="rotated"
+                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                    </div>
+                    <div class="muscle-groups" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="abdominals" />Abdominals
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="abductors" />Abductors
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="adductors" />Adductors
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="biceps" />Biceps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="calves" />Calves
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="chest" />Chest
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="forearms" />Forearms
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="glutes" />Glutes
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="hamstrings" />Hamstrings
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="lats" />Lats
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="lower back" />Lower Back
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="middle back" />Middle Back
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="shoulders" />Shoulders
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="traps" />Traps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="triceps" />Triceps
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="quadriceps" />Quadriceps
+                            <span class="checkmark"></span>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="filter-button">
+                    <div class="filter-header">Equipment
+                        <button id="toggle-equipment" class="rotated"
+                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                    </div>
+                    <div class="equipment" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="bands" />Bands
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="barbell" />Barbell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="bodyweight" />Bodyweight
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="cable" />Cable
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="dumbbell" />Dumbbell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="e-z curl bar" />E-Z Curl Bar
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="exercise ball" />Exercise Ball
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="foam roll" />Foam Roll
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="kettlebells" />Kettlebell
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="machine" />Machine
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="medicine ball" />Medicine Ball
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="none" />None
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="other" class="equipment-checkbox" />Other
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-button">
+                    <div class="filter-header">Difficulty
+                        <button id="toggle-difficulty" class="rotated"
+                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                    </div>
+                    <div class="difficulty" style="display: none;">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="beginner" class="difficulty-checkbox" />Beginner
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="intermediate" class="difficulty-checkbox" />Intermediate
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="expert" class="difficulty-checkbox" />Expert
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="bottom-buffer"></div>
+            </div>
+
+            <div class="content">
+                <div class="top-text">
+                    <div class="name">
+                        <h1 id="title">Exercise Engine</h1>
+                    </div>
+                    <div class="search-line">
+                        <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
+                        <input id="ad-hoc" class="dropdown" type="text" placeholder="Enter some exercise features" />
+                        <img id="search-icon" src="../static/images/dumbbell.png" onclick="redirect()" />
+                    </div>
+                </div>
+                <div id="answer-box">
                 </div>
             </div>
-            <div id="answer-box">
+
+            <!-- Invisible div for balancing -->
+            <div class="vertical-bar" id="bar_2">
             </div>
         </div>
         <div class="footer">
@@ -40,8 +213,39 @@
         let is_ad_hoc = false;
 
         function redirect() {
+            document.getElementById("answer-box").innerHTML = "";
+            console.log(document.getElementById("filter-text-val").value);
+            const selectedMuscleGroups = [];
+            const muscleGroupCheckboxes = document.querySelectorAll('.muscle-groups input[type="checkbox"]');
+            muscleGroupCheckboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    selectedMuscleGroups.push(checkbox.id);
+                }
+            });
+
+            const selectedEquipments = [];
+            const equipmentCheckboxes = document.querySelectorAll('.equipment input[type="checkbox"]');
+            equipmentCheckboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    selectedEquipments.push(checkbox.id);
+                }
+            });
+
+            const levels = [];
+            const levelCheckboxes = document.querySelectorAll('.difficulty input[type="checkbox"]');
+            levelCheckboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    levels.push(checkbox.id);
+                }
+            });
+
             const route = is_ad_hoc ? "/create-recent-AH?" : '/create-recent-normal?';
-            fetch(route + new URLSearchParams({ title: document.getElementById("filter-text-val").value }).toString())
+            fetch(route + new URLSearchParams({
+                            title: document.getElementById("filter-text-val").value,
+                            muscleFilter: selectedMuscleGroups,
+                            equipmentFilter: selectedEquipments,
+                            difficultyFilter: levels,
+                        }).toString())
             .then(response => response.json())
             .then(data => {
                 window.location.href = '/results/';
@@ -52,6 +256,53 @@
         $('#filter-text-val').select2({
             placeholder: "Select an Exercise",
         });
+
+        $(document).ready(function () {
+            $("#filter-text-val").select2({
+                placeholder: "Select an Exercise",
+            });
+
+            $('#ad-hoc').hide();
+
+            $("#search-method").change(function () {
+                var $select2Container = $("#filter-text-val").next(".select2-container");
+                var $adhocInput = $('#ad-hoc')
+                if (this.checked) {
+                    $select2Container.hide();
+                    $adhocInput.show();
+                    is_ad_hoc = true;
+                } else {
+                    $select2Container.show();
+                    $adhocInput.hide();
+                    is_ad_hoc = false;
+                }
+            });
+        });
+
+        function toggleFilter(button) {
+            if (button.style.display === "none") {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        }
+
+        document.getElementById('toggle-muscle-groups').addEventListener('click', function () {
+            this.classList.toggle('rotated');
+        });
+
+        document.getElementById('toggle-equipment').addEventListener('click', function () {
+            this.classList.toggle('rotated');
+        });
+
+        document.getElementById('toggle-difficulty').addEventListener('click', function () {
+            this.classList.toggle('rotated');
+        });
+
+        function switchSearch() {
+            const search_method = document.getElementById("search-method");
+            const is_checked = search_method.getAttribute("checked");
+        }
 
         // This function fetches the exercise titles and populates the dropdown
         function fetchTitlesAndPopulateDropdown() {
@@ -83,5 +334,36 @@
         function sendFocus() {
             document.getElementById('filter-text-val').focus()
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const allCheckboxes = document.querySelectorAll('.filter-checkbox input[type="checkbox"]');
+            allCheckboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    filterText();
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            function setupCheckboxGroup(checkboxesSelector, headerSelector) {
+                var checkboxes = document.querySelectorAll(checkboxesSelector);
+                var filterHeader = document.querySelector(headerSelector);
+
+                function updateHeaderStyle() {
+                    var anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+                    filterHeader.style.textDecoration = anyChecked ? 'underline' : 'none';
+                }
+
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', updateHeaderStyle);
+                });
+
+                updateHeaderStyle();
+            }
+
+            setupCheckboxGroup('.muscle-groups .filter-checkbox input[type="checkbox"]', '.filter-header:has(#toggle-muscle-groups)');
+            setupCheckboxGroup('.equipment .filter-checkbox input[type="checkbox"]', '.filter-header:has(#toggle-equipment)');
+            setupCheckboxGroup('.difficulty .filter-checkbox input[type="checkbox"]', '.filter-header:has(#toggle-difficulty)');
+        });
     </script>
 </body>

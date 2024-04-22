@@ -217,7 +217,7 @@
 
         window.onload = function pageLoad() {
             fetch("/get-recent")
-                .then((response) => response.json())
+            .then((response) => response.json())
                 .then((data) => {
                     data.forEach((row) => {
                         let tempDiv = document.createElement("div");
@@ -226,7 +226,10 @@
                             row.Desc,
                             row.Rating,
                             row.Sim,
-                            row.YT_link
+                            row.YT_link,
+                            row.Muscles,
+                            row.Equipment,
+                            row.Difficulty
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
