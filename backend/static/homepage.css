@@ -51,6 +51,31 @@ body {
     justify-content: center;
 }
 
+.filter-container {
+    width: 950px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-left: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.filter-button {
+    display: flex;
+    flex-direction: column;
+    font-family: 'trebuchet ms', sans-serif;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    color: #526D82;
+    border: 2px solid #526D82;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex: 1;
+}
+
+
 /* Exercise Engine text */
 .name {
     display: flex;
@@ -62,7 +87,6 @@ body {
 .name h1 {
     color: #27374D;
     margin-bottom: 30px;
-    margin-right: 3px;
 }
 
 .top-text {
@@ -86,7 +110,7 @@ body {
     padding-bottom: 0;
     padding-right: 0;
     height: 44px;
-    width: 589px !important;
+    width: 829px !important;
     border-radius: 4px;
 }
 
@@ -102,11 +126,16 @@ input[type=text] {
     font-size: 18px;
     display: flex;
     align-items: center;
-    padding: 15px;
-    padding-left: 5px;
-    width: 820px;
+    padding-left: 15px;
+    width: 850px;
     height: 50px;
-    background-color: inherit;
+    background: inherit;
+    backdrop-filter: blur(10px);
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -172,13 +201,13 @@ input[type=text] {
 }
 
 #filter-text-val {
-    width: 820px !important;
+    width: 850px !important;
 }
 
 /* Box around dropdown arrow*/
 .select2.select2-container .select2-selection .select2-selection__arrow {
     background: #526D82;
-    height: 48px;
+    height: 46px;
     width: 50px;
     display: flex;
     align-items: center;
@@ -201,6 +230,11 @@ input[type=text] {
 
 .select2-container--open .select2-selection__arrow b {
     transform: rotate(180deg) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 0px !important;
+    right: 0px !important;
 }
 
 /* Scrollbar */
@@ -308,7 +342,7 @@ input[type=text] {
 }
 
 .footer {
-    height: 7vh;
+    height: 40px;
     width: 100%;
     background-color: #27374D;
     color: #DDE6ED;
@@ -340,30 +374,48 @@ input[type=text] {
     background: inherit;
 }
 
-.filter-button {
-    width: 180px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    font-family: 'trebuchet ms', sans-serif;
-    color: #DDE6ED;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
 #filter-title {
     font-family: 'trebuchet ms', sans-serif;
     color: #DDE6ED;
     font-size: 36px;
 }
 
+.muscle-groups,
+.difficulty,
+.equipment {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+#muscle-filter {
+    flex: 2;
+}
+
+.first-muscle,
+.second-muscle {
+    flex: 1;
+}
+
+.muscle-groups {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.first-muscle,
+.second-muscle {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .filter-header {
     font-size: 20px;
-    margin-bottom: 20px;
 }
 
 .filter-header button {
-    background-image: url(./images/arrow.webp);
+    background-image: url(./images/arrowDark.webp);
     background-color: transparent;
     background-size: contain;
     border: none !important;
@@ -406,7 +458,8 @@ input[type=text] {
     left: 0;
     height: 20px;
     width: 20px;
-    background-color: #DDE6ED;
+    border: 1px solid #526D82;
+    background: inherit;
 }
 
 /* On mouse-over, add a grey background color */
@@ -416,7 +469,8 @@ input[type=text] {
 
 /* When the checkbox is checked, add a blue background */
 .filter-checkbox input:checked~.checkmark {
-    background-color: #DDE6ED;
+    background: inherit;
+    ;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -447,7 +501,7 @@ input[type=text] {
 .toggle-container {
     width: 180px !important;
     text-align: center;
-    padding-bottom: 55px;
+    padding-right: 30px;
     display: flex;
     justify-content: center;
 }
@@ -459,6 +513,7 @@ input[type=text] {
     width: 160px;
     height: 45px;
     font-size: 14px;
+    margin-bottom: 3px;
 }
 
 .toggle-container input[type="checkbox"] {
@@ -478,10 +533,12 @@ input[type=text] {
 
 .toggle-switch {
     position: relative;
-    background: #DDE6ED;
+    background: inherit;
+    backdrop-filter: blur(10px);
     border-radius: 5px;
-    box-shadow: 0 0 0px #DDE6ED;
+    box-shadow: 0 0 0px #526D82;
     transition: all 1s ease-in-out;
+    border: 2px solid #526D82;
 }
 
 .toggle-switch:before,
@@ -508,7 +565,7 @@ input[type=text] {
     left: 2px;
     border-radius: 5px;
     z-index: 1;
-    background: #27374D;
+    background: #526D82;
     transform: translate3d(0, 0, 0);
     transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
     color: #DDE6ED;
@@ -516,5 +573,5 @@ input[type=text] {
 }
 
 .toggle-switch:hover:after {
-    box-shadow: 0 0 7.5px #DDE6ED;
+    box-shadow: 0 0 7.5px #526D82;
 }
