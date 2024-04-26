@@ -150,7 +150,7 @@ def create_recent_normal():
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 250)
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 1500)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups
@@ -275,7 +275,7 @@ def AH_search():
     muscle_groups = request.args.get("muscleFilter")
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
-    recent_search = closest_docs_from_words(title, 250)
+    recent_search = closest_docs_from_words(title, 1500)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups
