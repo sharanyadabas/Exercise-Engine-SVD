@@ -17,37 +17,6 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 # Specify the path to the JSON file relative to the current script
 json_file_path = os.path.join(current_directory, "init.json")
 
-
-# Computes cosine similarity between two exercise descriptions
-def get_sim(desc1, desc2, dt_matrix, title_to_index):
-
-    vec1 = dt_matrix[title_to_index[desc1]]
-    vec2 = dt_matrix[title_to_index[desc2]]
-
-    dot_product = np.dot(vec1, vec2)
-
-    vec1_norm = np.linalg.norm(vec1)
-    vec2_norm = np.linalg.norm(vec2)
-
-    cosine_sim = dot_product / (vec1_norm * vec2_norm)
-
-    return cosine_sim
-
-
-# Builds a similarity matrix for exercise descriptions.
-def build_sim_matrix(n, index_to_title, dt_matrix, title_to_index, sim_method):
-    res = np.zeros((n, n))
-
-    for i in range(n):
-        for j in range(n):
-                cosine_sim = sim_method(
-                    index_to_title[i], index_to_title[j], dt_matrix, title_to_index
-                )
-
-                res[i, j] = cosine_sim
-
-    return res
-
 with open(json_file_path, "r", encoding="utf-8") as file:
     # Load necessary data from json file
     data = json.load(file)
@@ -86,15 +55,6 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     words_compressed = words_compressed.transpose()
     words_compressed_normed = normalize(words_compressed, axis=1)
 
-    # Get number of documents
-    num_exercises = len(documents)
-
-    # Build similarity matrix
-    sim_matrix = build_sim_matrix(
-        num_exercises, index_to_title, dt_matrix, title_to_index, get_sim
-    )
-
-
 app = Flask(__name__)
 CORS(app)
 
@@ -102,28 +62,6 @@ CORS(app)
 recent_search = []
 recent_title = ""
 was_AH = False
-
-def cos_sim(query):
-    # Get query index
-    query_idx = title_to_index[query]
-    # Get list of cosine similarity values compared to query description
-    sims = sim_matrix[query_idx]
-    asort = np.argsort(-sims)
-    asort = asort[1:]
-    asort = asort[np.in1d(asort, no_rating, invert=True)]
-    return [
-        {
-            "Title": documents[i][0],
-            "Desc": documents[i][1],
-            "Rating": documents[i][2],
-            "Sim": "{0:.4f}".format(sims[i]),
-            "YT_link": documents[i][3],
-            "Muscles": documents[i][4],
-            "Equipment": documents[i][5],
-            "Difficulty": documents[i][6],
-        }
-        for i in asort
-    ]
 
 def closest_docs_from_words(query):
     """
@@ -177,38 +115,6 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating):
             "Desc": documents[i][1],
             "Rating": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
-            "YT_link": documents[i][3],
-            "Muscles": documents[i][4], 
-            "Equipment": documents[i][5], 
-            "Difficulty":  documents[i][6],
-        }
-        for i in asort
-    ]
-
-def combined_similarity(documents, doc_index, doc_repr_in, no_rating, query):
-    # Performs dot product between document and U to get similarity array
-    svd_sims = doc_repr_in.dot(doc_repr_in[doc_index, :])
-    # Get query index
-    query_idx = title_to_index[query]
-    # Get list of cosine similarity values compared to query description
-    cos_sims = sim_matrix[query_idx]
-
-    cos_sort = np.argsort(-cos_sims)
-    self = cos_sort[0]
-
-    combined_sims = (svd_sims + cos_sims) / 2
-
-    asort = np.argsort(-combined_sims)
-    # Excludes all the ones without ratings and itself
-    asort = asort[np.in1d(asort, no_rating, invert=True)]
-    asort = asort[asort != self]
-    # Returns in nice dictionary format
-    return [
-        {
-            "Title": documents[i][0],
-            "Desc": documents[i][1],
-            "Rating": documents[i][2],
-            "Sim": "{0:.4f}".format(combined_sims[i]),
             "YT_link": documents[i][3],
             "Muscles": documents[i][4], 
             "Equipment": documents[i][5], 
@@ -327,12 +233,6 @@ def normal_search():
     Sim, and YT_link keys.
     """
 
-    title = request.args.get("title")
-    index = title_to_index[title]
-    recent_search = combined_similarity(documents, index, docs_compressed_normed, no_rating, title)
-    return recent_search[:5]
-
-    """
     global recent_search
     global recent_title
     global was_AH
@@ -343,7 +243,7 @@ def normal_search():
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating, 1500)
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed, no_rating)
     if len(muscle_groups) >= 1:
         recent_search = [search for search in recent_search
         if search["Muscles"].lower() in muscle_groups
@@ -358,7 +258,6 @@ def normal_search():
     if len(recent_search) > 5:
         return recent_search[:5]
     return recent_search
-    """
     
 
 @app.route("/AH_search")
