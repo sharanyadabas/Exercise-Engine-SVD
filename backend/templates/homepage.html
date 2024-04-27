@@ -336,6 +336,12 @@
             }
         }
 
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                redirect()
+            }
+        });
+
         // Call the function to populate the dropdown when the page is loaded
         document.addEventListener("DOMContentLoaded", fetchTitlesAndPopulateDropdown);
 

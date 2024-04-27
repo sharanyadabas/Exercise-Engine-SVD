@@ -144,6 +144,10 @@ def create_recent_normal():
     global recent_search
     global recent_title
     global was_AH
+    global muscle_groups
+    global equipments
+    global difficulties
+
     was_AH = False
     title = request.args.get("title")
     muscle_groups = request.args.get("muscleFilter")
@@ -177,6 +181,9 @@ def create_recent_AH():
     global recent_search
     global recent_title
     global was_AH
+    global muscle_groups
+    global equipments
+    global difficulties
     was_AH = True
     title = request.args.get("title")
     muscle_groups = request.args.get("muscleFilter")
@@ -210,7 +217,10 @@ def get_recent_title():
     # Returns the most recent results
     return json.dumps({
         "title" : recent_title,
-        "was_AH" : was_AH
+        "was_AH" : was_AH,
+        "muscle_groups": muscle_groups,
+        "equipments": equipments,
+        "difficulties": difficulties
                        })
 
 @app.route("/get-titles")

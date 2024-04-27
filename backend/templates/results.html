@@ -250,7 +250,25 @@
                         $adhocInput.hide();
                         is_ad_hoc = false;
                         $('#filter-text-val').val(data.title).change();
-                    }
+                    };
+
+                    document.querySelectorAll('.muscle-groups .filter-checkbox input[type="checkbox"]').forEach((checkbox) => {
+                        if ((data.muscle_groups).includes(checkbox.id)) {
+                            checkbox.checked = true;
+                        }
+                    });
+
+                    document.querySelectorAll('.equipment .filter-checkbox input[type="checkbox"]').forEach((checkbox) => {
+                        if ((data.equipments).includes(checkbox.id)) {
+                            checkbox.checked = true;
+                        }
+                    });
+
+                    document.querySelectorAll('.difficulty .filter-checkbox input[type="checkbox"]').forEach((checkbox) => {
+                        if ((data.difficulties).includes(checkbox.id)) {
+                            checkbox.checked = true;
+                        }
+                    });
                 });
         };
 
@@ -353,6 +371,12 @@
                 document.getElementById("filter-text-val").value = selectedTitle;
             }
         }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                filterText()
+            }
+        });
 
         // Call the function to populate the dropdown when the page is loaded
         document.addEventListener(
