@@ -35,8 +35,7 @@
                 </div>
                 <div class="filter-button">
                     <div class="filter-header">Muscle groups
-                        <button id="toggle-muscle-groups" class="rotated"
-                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                        <button id="toggle-muscle-groups" onclick="toggleFilter(this)"></button>
                     </div>
                     <div class="muscle-groups" style="display: none;">
                         <label class="filter-checkbox">
@@ -108,8 +107,7 @@
                 </div>
                 <div class="filter-button">
                     <div class="filter-header">Equipment
-                        <button id="toggle-equipment" class="rotated"
-                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                        <button id="toggle-equipment" onclick="toggleFilter(this)"></button>
                     </div>
                     <div class="equipment" style="display: none;">
                         <label class="filter-checkbox">
@@ -168,8 +166,7 @@
                 </div>
                 <div class="filter-button">
                     <div class="filter-header">Difficulty
-                        <button id="toggle-difficulty" class="rotated"
-                            onclick="toggleFilter(this.parentElement.nextElementSibling)"></button>
+                        <button id="toggle-difficulty" onclick="toggleFilter(this)"></button>
                     </div>
                     <div class="difficulty" style="display: none;">
                         <label class="filter-checkbox">
@@ -217,7 +214,7 @@
 
         window.onload = function pageLoad() {
             fetch("/get-recent")
-            .then((response) => response.json())
+                .then((response) => response.json())
                 .then((data) => {
                     data.forEach((row) => {
                         let tempDiv = document.createElement("div");
@@ -238,23 +235,41 @@
                 });
 
             fetch("/get-recent-info").then((response => response.json()))
-            .then((data) => {
-                var $select2Container = $("#filter-text-val").next(".select2-container");
-                var $adhocInput = $('#ad-hoc')
-                if (data.was_AH) {
-                    $select2Container.hide();
-                    $adhocInput.show();
-                    is_ad_hoc = true;
-                    document.getElementById("ad-hoc").value = data.title;
-                    document.getElementById("search-method").checked = true;
-                }
-                else {
-                    $select2Container.show();
-                    $adhocInput.hide();
-                    is_ad_hoc = false;
-                    $('#filter-text-val').val(data.title).change();
-                }
-            });
+                .then((data) => {
+                    var $select2Container = $("#filter-text-val").next(".select2-container");
+                    var $adhocInput = $('#ad-hoc')
+                    if (data.was_AH) {
+                        $select2Container.hide();
+                        $adhocInput.show();
+                        is_ad_hoc = true;
+                        document.getElementById("ad-hoc").value = data.title;
+                        document.getElementById("search-method").checked = true;
+                    }
+                    else {
+                        $select2Container.show();
+                        $adhocInput.hide();
+                        is_ad_hoc = false;
+                        $('#filter-text-val').val(data.title).change();
+                    };
+
+                    document.querySelectorAll('.muscle-groups .filter-checkbox input[type="checkbox"]').forEach((checkbox) => {
+                        if ((data.muscle_groups).includes(checkbox.id)) {
+                            checkbox.checked = true;
+                        }
+                    });
+
+                    document.querySelectorAll('.equipment .filter-checkbox input[type="checkbox"]').forEach((checkbox) => {
+                        if ((data.equipments).includes(checkbox.id)) {
+                            checkbox.checked = true;
+                        }
+                    });
+
+                    document.querySelectorAll('.difficulty .filter-checkbox input[type="checkbox"]').forEach((checkbox) => {
+                        if ((data.difficulties).includes(checkbox.id)) {
+                            checkbox.checked = true;
+                        }
+                    });
+                });
         };
 
         $(document).ready(function () {
@@ -280,10 +295,11 @@
         });
 
         function toggleFilter(button) {
-            if (button.style.display === "none") {
-                button.style.display = "block";
+            const filterDiv = button.parentElement.nextElementSibling
+            if (filterDiv.style.display === "none") {
+                filterDiv.style.display = "block";
             } else {
-                button.style.display = "none";
+                filterDiv.style.display = "none";
             }
         }
 
@@ -355,6 +371,12 @@
                 document.getElementById("filter-text-val").value = selectedTitle;
             }
         }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                filterText()
+            }
+        });
 
         // Call the function to populate the dropdown when the page is loaded
         document.addEventListener(

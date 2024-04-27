@@ -477,7 +477,6 @@ input[type=text] {
     width: 180px;
     display: flex;
     flex-direction: column;
-    text-align: center;
     font-family: 'trebuchet ms', sans-serif;
     color: #DDE6ED;
     align-items: center;
