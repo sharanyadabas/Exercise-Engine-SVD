@@ -232,8 +232,8 @@ def get_titles():
     # Gets the title request, finds the index and returns the svd result
     titles = [
         e[0] for e in documents[214:]
-    ]  # Experimental, excludes webscraped queries
-    # titles = [e[0] for e in documents]
+    ]
+    titles.sort()
     return {"titles": titles}
 
 
