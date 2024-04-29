@@ -7293,7 +7293,7 @@
     },
     {
       "Title": "Pushups",
-      "all-text": "The push-up is a popular bodyweight exercise that is commonly used in military and tactical physical fitness tests. It’s a classic movement to build upper-body muscle and strength, emphasizing the chest, triceps, and shoulders, but also working the upper back and core.",
+      "all-text": "The press-up or the push-up exercise is a very popular exercise used in upper extremity training. It is a closed kinetic chain exercise that requires no tools and uses the body weight for resistance[1]. It has many variations, so it can be adjusted according to the fitness level. They work the triceps, pectoral muscles, and shoulders. Using proper form, they can also strengthen the lower back and core by engaging (pulling in) the abdominal muscles. Push-ups are a fast and effective exercise for building strength.",
       "Type": "Strength",
       "BodyPart": "Chest",
       "Equipment": "Bodyweight",
@@ -8283,7 +8283,7 @@
     },
     {
       "Title": "Barbell stiff-legged deadlift",
-      "all-text": "The barbell stiff-legged deadlift targets the hamstrings, glutes, lower and upper back, as well as the core. It is a popular accessory movement for the deadlift, but also a muscle-building hamstring movement.",
+      "all-text": "The stiff-leg deadlift (or straight-leg deadlift) is a variation of the traditional deadlift, where you have almost entirely shifted the work to your posterior chain. This exercise requires good mobility to be performed without rounding your back excessively, and an alternative is to raise the bar up on blocks, plates, or a rack in order to decrease the range of motion slightly.",
       "Type": "Strength",
       "BodyPart": "Hamstrings",
       "Equipment": "Barbell",
@@ -8294,7 +8294,7 @@
     },
     {
       "Title": "Romanian Deadlift",
-      "all-text": "The barbell stiff-legged deadlift targets the hamstrings, glutes, lower and upper back, as well as the core. It is a popular accessory movement for the deadlift, but also a muscle-building hamstring movement.",
+      "all-text": "The Romanian deadlift, also known as the RDL, is a variation of the conventional deadlift and an exercise used primarily to target the muscles of the hamstrings and glutes. The RDL has long been thought of as the “leg” deadlift variation, despite all hip hinge movements primarily targeting the hamstrings.",
       "Type": "Strength",
       "BodyPart": "Hamstrings",
       "Equipment": "Barbell",
@@ -8302,17 +8302,6 @@
       "Rating": "8.1",
       "RatingDesc": "Average",
       "YouTubeLink": "https://www.youtube.com/embed/e1pFg9Rz55k"
-    },
-    {
-      "Title": "Stiff-Legged Deadlift",
-      "all-text": "The barbell stiff-legged deadlift targets the hamstrings, glutes, lower and upper back, as well as the core. It is a popular accessory movement for the deadlift, but also a muscle-building hamstring movement.",
-      "Type": "Strength",
-      "BodyPart": "Hamstrings",
-      "Equipment": "Barbell",
-      "Level": "Beginner",
-      "Rating": "0.0",
-      "RatingDesc": "Average",
-      "YouTubeLink": "https://www.youtube.com/embed/NzMDStjQadQ"
     },
     {
       "Title": "Kettlebell pass-through lunge",
@@ -8368,17 +8357,6 @@
       "Rating": "7.4",
       "RatingDesc": "Average",
       "YouTubeLink": "https://www.youtube.com/embed/sxtfgmzhXvE"
-    },
-    {
-      "Title": "Romanian Deadlift With Dumbbells",
-      "all-text": "The dumbbell stiff-legged deadlift targets the hamstrings, glutes, low and upper back, as well as the core. The purpose of the stiff-legged, as opposed to Romanian deadlift with slightly bent knees, is to engage the hamstrings and low back to an even greater degree.",
-      "Type": "Strength",
-      "BodyPart": "Hamstrings",
-      "Equipment": "Dumbbell",
-      "Level": "Beginner",
-      "Rating": "9.4",
-      "RatingDesc": "Average",
-      "YouTubeLink": "https://www.youtube.com/embed/hQgFixeXdZo"
     },
     {
       "Title": "Stiff-Legged Dumbbell Deadlift",
