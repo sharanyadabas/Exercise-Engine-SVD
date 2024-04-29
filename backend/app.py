@@ -31,7 +31,10 @@ with open(json_file_path, "r", encoding="utf-8") as file:
 
     # Get exercises with no rating or rating of 0.0 to exclude
     no_rating = []
+    counter = 0
     for i, e in enumerate(documents):
+        if e[2] is None:
+            counter += 1
         if e[2] is None or e[2] == "0.0":
             no_rating.append(i)
 
@@ -228,7 +231,7 @@ def get_recent_title():
 def get_titles():
     # Gets the title request, finds the index and returns the svd result
     titles = [
-        e[0] for e in documents[230:]
+        e[0] for e in documents[214:]
     ]  # Experimental, excludes webscraped queries
     # titles = [e[0] for e in documents]
     return {"titles": titles}
