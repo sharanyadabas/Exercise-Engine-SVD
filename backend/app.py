@@ -56,7 +56,6 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     # Make word to index dictionary
     word_to_index = vectorizer.vocabulary_
     index_to_word = {i:t for t,i in word_to_index.items()}
-    print(f"# of words in vocab: {len(word_to_index)}")
 
     # Gets svd
     docs_compressed, s, words_compressed = svds(td_matrix, k=40)
@@ -65,13 +64,6 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     docs_compressed_normed = normalize(docs_compressed)
     words_compressed = words_compressed.transpose()
     words_compressed_normed = normalize(words_compressed, axis=1)
-
-    for i in range(40):
-        print("Top words in dimension", i)
-        dimension_col = words_compressed[:,i].squeeze()
-        asort = np.argsort(-dimension_col)
-        print([index_to_word[i] for i in asort[:10]])
-        print()
 
 app = Flask(__name__)
 CORS(app)
