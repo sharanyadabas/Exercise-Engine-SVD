@@ -305,6 +305,7 @@ input[type=text] {
 }
 
 .answer-container {
+    position: relative;
     display: flex;
     align-items: center;
     /* Align items at the start to ensure they align at the top */
@@ -338,7 +339,19 @@ input[type=text] {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    gap: 80px;
+    gap: 40px;
+}
+
+.episode-container>img {
+    width: 200px;
+    height: 200px;
+    border: 3px solid #526D82
+}
+
+.exercise-info>img {
+    width: 100px;
+    height: 100px;
+    border: 3px solid #526D82
 }
 
 .video-container {
@@ -388,8 +401,15 @@ input[type=text] {
 }
 
 .episode-title {
+    position: absolute;
+    top: -0.8em;
+    left: 25px;
+    background-color: #DDE6ED;
+    padding: 0 10px;
+    font-size: 0.9em;
+    pointer-events: none;
     color: #27374D;
-    font-size: 25px;
+    font-size: 30px;
     font-family: 'Kanit', sans-serif;
     text-align: center;
 }
