@@ -24,30 +24,17 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     documents = [
         (
             x["Title"].upper(),
+            x["Desc"],
             x["all-text"],
-            x.get("Rating"),
-            x.get("YouTubeLink"),
-            x.get("BodyPart"),
-            x.get("Equipment"),
-            x.get("Level"),
         )
         for x in datalist
         if len(x["all-text"].split()) > 35
     ]
 
-    # Get exercises with no rating or rating of 0.0 to exclude
-    no_rating = []
-    counter = 0
-    for i, e in enumerate(documents):
-        if e[2] is None:
-            counter += 1
-        if e[2] is None or e[2] == "0.0":
-            no_rating.append(i)
-
     # Make term-document matrix
-    vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7, min_df=30)
-    td_matrix = vectorizer.fit_transform([x[1] for x in documents])
-    dt_matrix = vectorizer.fit_transform([x[1] for x in documents]).toarray()
+    vectorizer = TfidfVectorizer(stop_words="english", max_df=0.7, min_df=10)
+    td_matrix = vectorizer.fit_transform([x[2] for x in documents])
+    dt_matrix = vectorizer.fit_transform([x[2] for x in documents]).toarray()
 
     # Make title to index dictionary and index to title
     title_to_index = {doc[0]: i for i, doc in enumerate(documents)}
@@ -55,10 +42,10 @@ with open(json_file_path, "r", encoding="utf-8") as file:
 
     # Make word to index dictionary
     word_to_index = vectorizer.vocabulary_
-    index_to_word = {i:t for t,i in word_to_index.items()}
+    index_to_word = {i: t for t, i in word_to_index.items()}
 
     # Gets svd
-    docs_compressed, s, words_compressed = svds(td_matrix, k=40)
+    docs_compressed, s, words_compressed = svds(td_matrix, k=70)
 
     # Normalizes
     docs_compressed_normed = normalize(docs_compressed)
@@ -87,26 +74,21 @@ def closest_docs_from_words(query):
     sims = docs_compressed_normed.dot(query_vec)
     # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
-    # Excludes all the ones without ratings and itself
+    # Excludes all the ones without itself
     asort = asort[1:]
-    asort = asort[np.in1d(asort, no_rating, invert=True)]
     # Returns in nice dictionary format
     return [
         {
             "Title": documents[i][0],
             "Desc": documents[i][1],
-            "Rating": documents[i][2],
+            "all-text": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
-            "YT_link": documents[i][3],
-            "Muscles": documents[i][4],
-            "Equipment": documents[i][5],
-            "Difficulty": documents[i][6],
         }
-        for i in asort
+        for i in asort[:5]
     ]
 
 
-def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating):
+def closest_docs_from_docs(documents, doc_index, doc_repr_in):
     """
     Given a document index, finds the 5 closest documents using SVD
     doc matrix
@@ -116,22 +98,17 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in, no_rating):
     sims = doc_repr_in.dot(doc_repr_in[doc_index, :])
     # Gets index of sorting them according to similarity
     asort = np.argsort(-sims)
-    # Excludes all the ones without ratings and itself
+    # Excludes all the ones without itself
     asort = asort[1:]
-    asort = asort[np.in1d(asort, no_rating, invert=True)]
     # Returns in nice dictionary format
     return [
         {
             "Title": documents[i][0],
             "Desc": documents[i][1],
-            "Rating": documents[i][2],
+            "all-text": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
-            "YT_link": documents[i][3],
-            "Muscles": documents[i][4],
-            "Equipment": documents[i][5],
-            "Difficulty": documents[i][6],
         }
-        for i in asort
+        for i in asort[:5]
     ]
 
 
@@ -166,9 +143,7 @@ def create_recent_normal():
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(
-        documents, index, docs_compressed_normed, no_rating
-    )
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed)
     if len(muscle_groups) >= 1:
         recent_search = [
             search
@@ -258,7 +233,7 @@ def get_recent_title():
 @app.route("/get-titles")
 def get_titles():
     # Gets the title request, finds the index and returns the svd result
-    titles = [e[0] for e in documents[214:]]
+    titles = [e[0] for e in documents]
     titles.sort()
     return {"titles": titles}
 
@@ -282,9 +257,7 @@ def normal_search():
     equipments = request.args.get("equipmentFilter")
     difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
-    recent_search = closest_docs_from_docs(
-        documents, index, docs_compressed_normed, no_rating
-    )
+    recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed)
     if len(muscle_groups) >= 1:
         recent_search = [
             search

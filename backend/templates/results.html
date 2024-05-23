@@ -222,12 +222,7 @@
                         tempDiv.innerHTML = answerBoxTemplate(
                             row.Title,
                             row.Desc,
-                            row.Rating,
                             row.Sim,
-                            row.YT_link,
-                            row.Muscles,
-                            row.Equipment,
-                            row.Difficulty
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
@@ -385,23 +380,15 @@
             fetchTitlesAndPopulateDropdown
         );
 
-        function answerBoxTemplate(title, titleDesc, rating, sim, yt_link, muscles, equipment, difficulty) {
-            const embedUrl = yt_link;
-            const scaled_rating = rating / 2;
+        function answerBoxTemplate(title, titleDesc, sim) {
+            console.log(sim)
             return `
             <div class='answer-container'>
                 <div class='answer-box'>
                     <div class="episode-container">
                         <div class='heading-container'>
                             <h3 class='episode-title'>${title}</h3>
-                            <div class="rateYo" data-rating="${scaled_rating}"></div>
-                            <div class="difficulty-info">${difficulty}</div>
                         </div>
-                        <iframe class="video-container"
-                            width="560" height="315"
-                            src="${embedUrl}" frameborder="0"
-                            allowfullscreen>
-                        </iframe>
                     </div>
                     <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
                     <button id="more-button" onclick="showMore(this)">. . .</button>
@@ -411,14 +398,6 @@
                             <div class="meter cadetblue">
                                 <span data-progress="${sim * 100}" style="width:0;"></span>
                             </div>
-                        </div>
-                        <div class = "similarity-info">
-                            <p class='episode-sim'>Muscle Group:</p>
-                            <span class = "muscle-info">${muscles}</span>
-                        </div>
-                        <div class = "similarity-info">
-                            <p class='episode-sim'>Equipment:</p>
-                            <span class = "equipment-info">${equipment}</span>
                         </div>
                     </div>
                 </div>
@@ -445,7 +424,6 @@
 
         function filterText() {
             document.getElementById("answer-box").innerHTML = "";
-            console.log(document.getElementById("filter-text-val").value);
             const selectedMuscleGroups = [];
             const muscleGroupCheckboxes = document.querySelectorAll('.muscle-groups input[type="checkbox"]');
             muscleGroupCheckboxes.forEach(function (checkbox) {
@@ -499,12 +477,7 @@
                         tempDiv.innerHTML = answerBoxTemplate(
                             row.Title,
                             row.Desc,
-                            row.Rating,
                             row.Sim,
-                            row.YT_link,
-                            row.Muscles,
-                            row.Equipment,
-                            row.Difficulty
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
