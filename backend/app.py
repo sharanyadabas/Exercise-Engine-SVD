@@ -88,7 +88,7 @@ def closest_docs_from_words(query):
             "Muscles": documents[i][3],
             "Equipment": documents[i][4],
         }
-        for i in asort[:5]
+        for i in asort
     ]
 
 
@@ -114,7 +114,7 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in):
             "Muscles": documents[i][3],
             "Equipment": documents[i][4],
         }
-        for i in asort[:5]
+        for i in asort
     ]
 
 
@@ -130,6 +130,175 @@ def results():
     return render_template("results.html", title="results html")
 
 
+muscle_dict = {
+    "chest": [
+        "Pectoralis M. (Sternal-Clavicular)",
+        "Pectoralis",
+        "Pectoralis Clavicular Head",
+        "Pectoralis major, Minor",
+        "Pectoralis Major",
+        "Pectoralis Minor",
+        "Pectoralis Major, Clavicular",
+        "Pectoralis Major, Sternal-Lower",
+        "Pectoralis Major, Sternal",
+    ],
+    "shoulders": [
+        "Deltoids",
+        "Deltoids (Lateral)",
+        "Deltoid, Anterior",
+        "Lateral and Posterior Deltoid",
+        "Anterior Deltoid",
+        "Deltoids (Posterior, Lateral)",
+        "Posterior Deltoid",
+        "Lateral Deltoid",
+        "Front and Posterior Deltoid",
+    ],
+    "upper back": [
+        "Rhomboid",
+        "Rhomboids",
+        "Upper Trapezius",
+        "Trapezius (Lower, Middle)",
+        "Trapezius, Middle",
+        "Levator Scapula",
+        "Latissimus dorsi",
+        "Splenius Cervitis",
+        "Middle Scalene",
+        "Back",
+    ],
+    "lower back": [
+        "Lower Trapezius",
+        "Lower Back",
+        "Lower Back (Erector Spinae)",
+        "Quadratus Lumborum",
+        "Quadratus lumborum",
+        "Erector Spinae",
+        "Multifidus",
+        "Spinalis Cervicis",
+        "Iliocastalis lumborum",
+        "Iliocastalis thoracis",
+    ],
+    "biceps": ["Biceps Brachii", "Biceps", "Forearms, Biceps", "Brachialis"],
+    "triceps": [
+        "Triceps, Long Head",
+        "Triceps (Long Head)",
+        "Triceps Brachii",
+        "Dynamic Stabilizers Triceps, Long Head",
+    ],
+    "forearms": [
+        "Wrist Flexors",
+        "Wrist Extensors",
+        "Extensor Carpi Radialis",
+        "Flexor Carpi Radialis",
+        "Wrist and Forearm",
+        "Forearm Flexors",
+        "Wrist Flexor",
+        "Forearms",
+        "Forearms and Wrists",
+    ],
+    "core": [
+        "Rectus Abdominis",
+        "Transverse Abdominis",
+        "Stabilizers- Rectus Abdominis",
+        "Abdominal muscles",
+        "Internal oblique",
+        "Abdominals",
+        "Rectus abdominis",
+        "Obliques",
+        "Core Muscles",
+        "External oblique",
+        "Abdominal",
+        "Transverse abdominis",
+        "Abs",
+        "Abdominals (Core Muscles)",
+    ],
+    "quadriceps": [
+        "Quadriceps",
+        "Rectus Femoris",
+        "Sartorius",
+        "Tensor Fasciae Latae",
+        "Tensor fasciae latae",
+        "Leg",
+    ],
+    "glutes": [
+        "Glutes",
+        "Gluteus Medius and Minimus",
+        "Gluteus Maximus, Lower Fibers",
+        "Gluteus Maximus",
+        "Gluteus Medius",
+        "Gluteus Medius, Minius",
+        "Gluteus Minimus",
+        "Gluteus medius",
+        "Gluteal Muscles",
+        "Hip Abductors",
+    ],
+    "hamstrings": ["Hamstring", "Hamstrings"],
+    "adductors": [
+        "Hip Adductors",
+        "Adductors (Inner Thigh Muscles)",
+        "Adductor Magnus",
+        "Adductor longus",
+        "Adductor Longus",
+        "Adductor Brevis",
+        "Hip Adductors/Abductors",
+        "Hip Adductors and Abductors",
+        "Hip, Adductors",
+        "Obturator externus",
+        "Hip Adductors and Abductors",
+    ],
+    "calves": [
+        "Calves",
+        "Calf Muscles",
+        "Soleus",
+        "Gastrocnemius",
+        "Tibialis Anterior",
+        "Plantar Flexion",
+        "Ankle Stabilizers",
+    ],
+    "neck": [
+        "Sternocleidomastoideus",
+        "Platysma",
+        "Longus colli",
+        "Longissimus Capitis",
+        "Sternocleidomastoid",
+        "Longissimus Cervicis",
+        "Scalene",
+        "Scalene Muscles",
+        "Splenius Cervicis",
+        "Splenius Capitis",
+        "Anterior Scalene",
+        "Omohyoid",
+    ],
+    "rotator cuff": [
+        "Teres Major",
+        "Teres Minor",
+        "Subscapularis",
+        "Supraspinatus",
+        "Infraspinatus",
+        "Rotator Cuff",
+    ],
+    "spine": [
+        "Spinalis Cervicis",
+        "Erectos Spinae",
+        "Spinalis Capitis",
+        "Iliocastalis lumborum",
+        "Iliocastalis thoracis",
+        "Longissimus Cervicis",
+        "Longissimus Capitis",
+    ],
+    "other": [
+        "Diaphragm",
+        "Pelvic floor",
+        "Stabilizers -Upper Trapezius",
+        "Splenius",
+        "Levatos Scapula",
+        "Clavicular",
+        "Pectoralis Major, (Clavicular)",
+        "Omohyoid",
+        "Scapula",
+    ],
+}
+
+
 @app.route("/create-recent-normal")
 def create_recent_normal():
     """
@@ -142,32 +311,36 @@ def create_recent_normal():
     global muscle_groups
     global equipments
     global difficulties
+    global muscle_dict
 
     was_AH = False
     title = request.args.get("title")
-    muscle_groups = request.args.get("muscleFilter")
-    equipments = request.args.get("equipmentFilter")
-    difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
     recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed)
+
+    muscle_list = request.args.get("muscleFilter")
+    muscle_groups = muscle_list.split(",") if (muscle_list != "") else []
+
+    equipment_list = request.args.get("equipmentFilter")
+    equipment_groups = equipment_list.split(",") if (equipment_list != "") else []
+
     if len(muscle_groups) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Muscles"].lower() in muscle_groups
-        ]
-    if len(equipments) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Equipment"].lower() in equipments
-        ]
-    if len(difficulties) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Difficulty"].lower() in difficulties
-        ]
+        new_search = []
+        for search in recent_search:
+            for filter_muscle in muscle_groups:
+                for exercise_muscle in search["Muscles"]:
+                    if exercise_muscle in muscle_dict[filter_muscle]:
+                        new_search.append(search)
+        recent_search = new_search
+
+    if len(equipment_groups) >= 1:
+        new_search = []
+        for search in recent_search:
+            for equipment in search["Equipment"]:
+                if equipment.lower() in equipment_groups:
+                    new_search.append(search)
+        recent_search = new_search
+
     if len(recent_search) > 5:
         recent_search = recent_search[:5]
     recent_title = title
@@ -186,30 +359,35 @@ def create_recent_AH():
     global muscle_groups
     global equipments
     global difficulties
+    global muscle_dict
+
     was_AH = True
     title = request.args.get("title")
-    muscle_groups = request.args.get("muscleFilter")
-    equipments = request.args.get("equipmentFilter")
-    difficulties = request.args.get("difficultyFilter")
     recent_search = closest_docs_from_words(title)
+
+    muscle_list = request.args.get("muscleFilter")
+    muscle_groups = muscle_list.split(",") if (muscle_list != "") else []
+
+    equipment_list = request.args.get("equipmentFilter")
+    equipment_groups = equipment_list.split(",") if (equipment_list != "") else []
+
     if len(muscle_groups) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Muscles"].lower() in muscle_groups
-        ]
-    if len(equipments) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Equipment"].lower() in equipments
-        ]
-    if len(difficulties) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Difficulty"].lower() in difficulties
-        ]
+        new_search = []
+        for search in recent_search:
+            for filter_muscle in muscle_groups:
+                for exercise_muscle in search["Muscles"]:
+                    if exercise_muscle in muscle_dict[filter_muscle]:
+                        new_search.append(search)
+        recent_search = new_search
+
+    if len(equipment_groups) >= 1:
+        new_search = []
+        for search in recent_search:
+            for equipment in search["Equipment"]:
+                if equipment.lower() in equipment_groups:
+                    new_search.append(search)
+        recent_search = new_search
+
     if len(recent_search) > 5:
         recent_search = recent_search[:5]
     recent_title = title
@@ -256,32 +434,37 @@ def normal_search():
     global recent_search
     global recent_title
     global was_AH
+    global muscle_dict
+
     was_AH = False
     title = request.args.get("title")
     recent_title = title
-    muscle_groups = request.args.get("muscleFilter")
-    equipments = request.args.get("equipmentFilter")
-    difficulties = request.args.get("difficultyFilter")
     index = title_to_index[title]
     recent_search = closest_docs_from_docs(documents, index, docs_compressed_normed)
+
+    muscle_list = request.args.get("muscleFilter")
+    muscle_groups = muscle_list.split(",") if (muscle_list != "") else []
+
+    equipment_list = request.args.get("equipmentFilter")
+    equipment_groups = equipment_list.split(",") if (equipment_list != "") else []
+
     if len(muscle_groups) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Muscles"].lower() in muscle_groups
-        ]
-    if len(equipments) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Equipment"].lower() in equipments
-        ]
-    if len(difficulties) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Difficulty"].lower() in difficulties
-        ]
+        new_search = []
+        for search in recent_search:
+            for filter_muscle in muscle_groups:
+                for exercise_muscle in search["Muscles"]:
+                    if exercise_muscle in muscle_dict[filter_muscle]:
+                        new_search.append(search)
+        recent_search = new_search
+
+    if len(equipment_groups) >= 1:
+        new_search = []
+        for search in recent_search:
+            for equipment in search["Equipment"]:
+                if equipment.lower() in equipment_groups:
+                    new_search.append(search)
+        recent_search = new_search
+
     if len(recent_search) > 5:
         return recent_search[:5]
     return recent_search
@@ -298,31 +481,36 @@ def AH_search():
     global recent_search
     global was_AH
     global recent_title
+    global muscle_dict
+
     was_AH = True
     title = request.args.get("title")
     recent_title = title
-    muscle_groups = request.args.get("muscleFilter")
-    equipments = request.args.get("equipmentFilter")
-    difficulties = request.args.get("difficultyFilter")
     recent_search = closest_docs_from_words(title)
+
+    muscle_list = request.args.get("muscleFilter")
+    muscle_groups = muscle_list.split(",") if (muscle_list != "") else []
+
+    equipment_list = request.args.get("equipmentFilter")
+    equipment_groups = equipment_list.split(",") if (equipment_list != "") else []
+
     if len(muscle_groups) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Muscles"].lower() in muscle_groups
-        ]
-    if len(equipments) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Equipment"].lower() in equipments
-        ]
-    if len(difficulties) >= 1:
-        recent_search = [
-            search
-            for search in recent_search
-            if search["Difficulty"].lower() in difficulties
-        ]
+        new_search = []
+        for search in recent_search:
+            for filter_muscle in muscle_groups:
+                for exercise_muscle in search["Muscles"]:
+                    if exercise_muscle in muscle_dict[filter_muscle]:
+                        new_search.append(search)
+        recent_search = new_search
+
+    if len(equipment_groups) >= 1:
+        new_search = []
+        for search in recent_search:
+            for equipment in search["Equipment"]:
+                if equipment.lower() in equipment_groups:
+                    new_search.append(search)
+        recent_search = new_search
+
     if len(recent_search) > 5:
         return recent_search[:5]
     return recent_search

@@ -13,14 +13,24 @@ json_file_path = os.path.join(current_directory, "../init.json")
 
 with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
-    datalist = data['exercises']
+    datalist = data["exercises"]
 
     count = 0
-    count1 = 0
+    muscleSet = set()
+    equipmentSet = set()
     for exercise in datalist:
-      if exercise.get('Desc') is None:
-        count1 += 1
-        if exercise['Rating'] == '0.0':
-          count += 1
-    print(count1)
-    print(count)
+        count += 1
+        print(exercise["Title"] + " " + str(count) + "/ 214")
+        for muscle in exercise["muscle-group"]:
+            muscleSet.add(muscle)
+        for equipment in exercise["equipment"]:
+            equipmentSet.add(equipment)
+
+output_data = {"muscle_groups": list(muscleSet), "equipment": list(equipmentSet)}
+
+# Specify the path for the output JSON file
+output_json_file_path = os.path.join(current_directory, "../exercise_info.json")
+
+# Write the output data to the JSON file
+with open(output_json_file_path, "w", encoding="utf-8") as output_file:
+    json.dump(output_data, output_file, indent=4)
