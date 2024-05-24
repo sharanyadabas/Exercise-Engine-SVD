@@ -28,7 +28,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     ]
 
     # Make term-document matrix
-    vectorizer = TfidfVectorizer(stop_words="english", max_df=0.85, min_df=0.1)
+    vectorizer = TfidfVectorizer(stop_words="english", max_df=0.85, min_df=0.15)
     td_matrix = vectorizer.fit_transform([x[2] for x in documents])
     dt_matrix = vectorizer.fit_transform([x[2] for x in documents]).toarray()
 
@@ -41,7 +41,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     index_to_word = {i: t for t, i in word_to_index.items()}
 
     # Gets svd
-    docs_compressed, s, words_compressed = svds(td_matrix, k=150)
+    docs_compressed, s, words_compressed = svds(td_matrix, k=40)
 
     # Normalizes
     docs_compressed_normed = normalize(docs_compressed)
