@@ -300,6 +300,8 @@ input[type=text] {
 }
 
 .answer-box {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     /* Allows the answer box to take up the remaining space */
 }
@@ -311,8 +313,8 @@ input[type=text] {
     /* Align items at the start to ensure they align at the top */
     justify-content: space-between;
     /* This ensures the elements are spaced out properly */
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 20px;
     border: 3px solid #526D82;
     border-radius: 10px;
@@ -338,19 +340,15 @@ input[type=text] {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
     padding: 20px;
     gap: 40px;
 }
 
 .episode-container>img {
+    border-radius: 10px;
     width: 200px;
     height: 200px;
-    border: 3px solid #526D82
-}
-
-.exercise-info>img {
-    width: 100px;
-    height: 100px;
     border: 3px solid #526D82
 }
 
@@ -379,6 +377,11 @@ input[type=text] {
     color: #526D82;
     font-family: 'Montserrat', sans-serif;
     margin-top: 0;
+}
+
+.description-container {
+    border-radius: 10px;
+    padding: 13px 20px 13px 0px;
 }
 
 #more-button {
@@ -413,6 +416,33 @@ input[type=text] {
     font-family: 'Kanit', sans-serif;
     text-align: center;
 }
+
+.muscle-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.muscle-group .line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #526D82;
+    margin: 0 10px;
+}
+
+.muscle-group>p {
+    color: #DDE6ED;
+    text-align: center;
+    background-color: #526D82;
+    padding: 10px;
+    border-radius: 30px;
+    font-family: 'trebuchet ms', sans-serif;
+    margin: 0px;
+    font-size: 16px;
+}
+
 
 .episode-rating {
     color: #DDE6ED;

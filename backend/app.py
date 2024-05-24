@@ -22,11 +22,7 @@ with open(json_file_path, "r", encoding="utf-8") as file:
     data = json.load(file)
     datalist = data["exercises"]
     documents = [
-        (
-            x["Title"].upper(),
-            x["Desc"],
-            x["all-text"],
-        )
+        (x["Title"].upper(), x["Desc"], x["all-text"], x["muscle-group"])
         for x in datalist
         if len(x["all-text"].split()) > 35
     ]
@@ -83,6 +79,7 @@ def closest_docs_from_words(query):
             "Desc": documents[i][1],
             "all-text": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
+            "Muscles": documents[i][3],
         }
         for i in asort[:5]
     ]
@@ -107,6 +104,7 @@ def closest_docs_from_docs(documents, doc_index, doc_repr_in):
             "Desc": documents[i][1],
             "all-text": documents[i][2],
             "Sim": "{0:.4f}".format(sims[i]),
+            "Muscles": documents[i][3],
         }
         for i in asort[:5]
     ]

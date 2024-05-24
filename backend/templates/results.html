@@ -223,14 +223,13 @@
                             row.Title,
                             row.Desc,
                             row.Sim,
+                            row.Muscles
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
                     initializeRateYo();
                     setProgressBars();
                 });
-
-            cacheImages(imageArray);
 
             fetch("/get-recent-info").then((response => response.json()))
                 .then((data) => {
@@ -315,12 +314,12 @@
 
         function showMore(button) {
             var descDiv = button.previousElementSibling;
-            if (descDiv.style.height === "60px") {
+            if (descDiv.style.height === "155px") {
                 descDiv.style.height = "auto";
                 descDiv.style.overflow = "visible";
                 button.textContent = ". . .";
             } else {
-                descDiv.style.height = "60px";
+                descDiv.style.height = "155px";
                 descDiv.style.overflow = "hidden";
                 button.textContent = ". . .";
             }
@@ -382,19 +381,24 @@
             fetchTitlesAndPopulateDropdown
         );
 
-        function answerBoxTemplate(title, titleDesc, sim) {
+        function answerBoxTemplate(title, titleDesc, sim, muscles) {
+            const muscleElements = muscles.slice(0, 5).map(muscle => `<p>${muscle}</p>`).join('');
             return `
             <div class='answer-container'>
                 <label class="episode-title">${title}</label>
                 <div class='answer-box'>
                     <div class="episode-container">
                         <div class="description-container">
-                            <div class="episode-desc" style="overflow:hidden; height:60px;">${titleDesc}</div>
+                            <div class="episode-desc" style="overflow:hidden; height:155px;">${titleDesc}</div>
                             <button id="more-button" onclick="showMore(this)">. . .</button>    
                         </div>
                         <img src= "../static/images/exercises/${title.replace(/ /g, "_")}.gif" alt="Image of ${title}">
                     </div>
-                    
+                    <div class = "muscle-group">
+                        <div class="line"></div>
+                        ${muscleElements}
+                        <div class="line"></div>
+                    </div>
                     <div class = "exercise-info">
                         <div class = "similarity-info">
                             <p class='episode-sim'>Similarity Score:</p>
@@ -481,6 +485,7 @@
                             row.Title,
                             row.Desc,
                             row.Sim,
+                            row.Muscles
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });

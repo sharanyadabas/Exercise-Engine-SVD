@@ -7,7 +7,7 @@ import json
 def download_image(url, folder_path, file_name):
     try:
         response = requests.get(url)
-        response.raise_for_status()  # Check for HTTP errors
+        response.raise_for_status()
         with open(os.path.join(folder_path, file_name), "wb") as file:
             file.write(response.content)
         print(f"Successfully downloaded {file_name}")
@@ -31,10 +31,7 @@ def download_images_from_json(json_file_path, folder_path):
             download_image(exercise_image_url, folder_path, file_name)
 
 
-# Example usage
-json_file_path = "backend/init.json"  # Replace with the path to your JSON file
-folder_path = (
-    "backend/static/images/exercises"  # Replace with the path to your download folder
-)
+json_file_path = "backend/init.json"
+folder_path = "backend/static/images/exercises"
 
 download_images_from_json(json_file_path, folder_path)
