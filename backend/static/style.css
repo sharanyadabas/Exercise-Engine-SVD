@@ -403,6 +403,30 @@ input[type=text] {
     margin-bottom: 22px;
 }
 
+.progress {
+    background-color: #DDE6ED;
+    border-radius: 20px;
+    border: 2px solid #526D82;
+    position: relative;
+    margin: 15px 0;
+    height: 30px;
+    width: 300px;
+}
+
+.progress-done {
+    background: linear-gradient(to left, #526D82, #9DB2BF);
+    border-radius: 20px;
+    color: #DDE6ED;
+    font-family: 'trebuchet ms', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 0;
+    opacity: 0;
+    transition: 1s ease 0.3s;
+}
+
 .episode-title {
     position: absolute;
     top: -0.8em;
@@ -429,7 +453,6 @@ input[type=text] {
     flex-grow: 1;
     height: 2px;
     background-color: #526D82;
-    margin: 0 10px;
 }
 
 .muscle-group>p {
@@ -437,7 +460,7 @@ input[type=text] {
     text-align: center;
     background-color: #526D82;
     padding: 10px;
-    border-radius: 30px;
+    border-radius: 20px;
     font-family: 'trebuchet ms', sans-serif;
     margin: 0px;
     font-size: 16px;
@@ -467,6 +490,7 @@ input[type=text] {
 }
 
 .similarity-info {
+    padding-left: 20px;
     text-align: center;
 }
 

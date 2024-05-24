@@ -227,8 +227,7 @@
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
-                    initializeRateYo();
-                    setProgressBars();
+                    updateProgressBars();
                 });
 
             fetch("/get-recent-info").then((response => response.json()))
@@ -330,23 +329,6 @@
             const is_checked = search_method.getAttribute("checked");
         }
 
-        function initializeRateYo() {
-            $(".rateYo").each(function () {
-                $(this)
-                    .rateYo({
-                        rating: $(this).attr("data-rating"),
-                        numStars: 5,
-                        precision: 1,
-                        starWidth: "30px",
-                        readOnly: true,
-                        normalFill: "#9DB2BF",
-                        ratedFill: "#27374D",
-                        spacing: "5px",
-                    })
-                    .on("rateyo.change", function (e, data) { });
-            });
-        }
-
         // This function fetches the exercise titles and populates the dropdown
         function fetchTitlesAndPopulateDropdown() {
             fetch("/get-titles")
@@ -383,6 +365,7 @@
 
         function answerBoxTemplate(title, titleDesc, sim, muscles) {
             const muscleElements = muscles.slice(0, 5).map(muscle => `<p>${muscle}</p>`).join('');
+            const similarity = sim * 100;
             return `
             <div class='answer-container'>
                 <label class="episode-title">${title}</label>
@@ -402,8 +385,10 @@
                     <div class = "exercise-info">
                         <div class = "similarity-info">
                             <p class='episode-sim'>Similarity Score:</p>
-                            <div class="meter cadetblue">
-                                <span data-progress="${sim * 100}" style="width:0;"></span>
+                            <div class="progress">
+                                <div class="progress-done" data-done="${similarity}">
+                                    ${Math.floor(similarity)}%
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -411,19 +396,15 @@
             </div>`;
         }
 
-        function setProgressBars() {
-            const bars = document.querySelectorAll(".meter > span");
-            bars.forEach((bar) => {
-                const getWidth = parseFloat(bar.dataset.progress);
-                for (i = 0; i < getWidth; i++) {
-                    bar.style.width = i + "%";
-                }
+        function updateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-done');
+            console.log("hello");
+            progressBars.forEach(element => {
+                console.log(element.getAttribute('data-done'));
+                element.style.width = element.getAttribute('data-done') + '%';
+                element.style.opacity = 1;
             });
         }
-
-        $(document).ready(function () {
-            initializeRateYo();
-        });
 
         function sendFocus() {
             document.getElementById("filter-text-val").focus();
@@ -489,8 +470,7 @@
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
-                    initializeRateYo();
-                    setProgressBars();
+                    updateProgressBars();
                 });
         }
 

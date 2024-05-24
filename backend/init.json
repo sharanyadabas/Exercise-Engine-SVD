@@ -756,7 +756,13 @@
       "Title": "WALL WALK",
       "Desc": " 1- To perform the wall walk, lie face down on the floor. Keep your body in a straight line from your head to your heels. 2- Place your hands on the ground and begin walking your feet up the wall until you are in a handstand position with your feet touching the wall. 3- Hold this position for a moment, then slowly lower yourself back to the starting position by walking your feet back down the wall. 4- Repeat the exercise for the desired number of sets and reps. Personal trainer tips: It is important to maintain proper form throughout the exercise to avoid injury and maximize the benefits of wall walk. Your hands should be shoulder-width apart, and your elbows should be close to your sides. Avoid arching your back or letting your hips sink as you walk up the wall, as this can lead to injury. If you are a beginner, start with just a few repetitions and gradually increase as you build strength. Note: As with any exercise, it is always a good idea to warm up before performing the Wall Walk, and to stretch after the exercise to prevent injury and promote recovery. The wall walk is a bodyweight exercise that primarily targets the shoulders, arms, and upper back. It is a functional movement that requires coordination, balance, and strength. Full body activation: Wall walks are a challenging exercise that can help to increase upper body strength, particularly in the shoulder and upper back muscles. It works many muscle groups, including the shoulders, triceps, upper back, and core, making it a full-body workout. Improved shoulder stability: The wall walk exercise requires stability and control of the shoulder blades, which helps to improve shoulder stability and reduce the risk of injury. Core engagement: Wall walks also engage the core muscles, helping to improve core stability and overall strength. Improved coordination and balance: The wall walk exercise requires coordination and balance, making it a functional exercise that can help improve overall fitness and athletic performance. Versatility: Wall walks can be easily modified for different fitness levels, making it a suitable exercise for a wide range of individuals. Improved posture: Wall walks help improve posture by strengthening the muscles that support good posture, such as the upper back and shoulders. Incorporating it into your workout routine can help improve overall strength, stability, and fitness. The Wall Walk exercise primarily works the following muscle groups: Shoulders: The shoulders are heavily engaged throughout the Wall Walk, especially the rotator cuff muscles and deltoids, which help keep the arms extended overhead. Triceps: The triceps help extend the arms overhead and assist in keeping the body in proper alignment. Upper back: The upper back muscles, including the rhomboids, trapezius, and lats, work to maintain proper posture and stability throughout the exercise. Chest: While in the push-up position, the chest muscles can play a supporting role by being involved in the movement, but the main focus is on strengthening other muscle groups. Core: The core muscles, including the rectus abdominis, obliques, and transverse abdominis, are engaged to maintain stability and balance. Glutes: The glutes are activated to help maintain proper form and control throughout the Wall Walk. Additionally, the Wall Walk requires coordination and balance, which engages the stabilizing muscles in the legs, hips, and feet. Overall, the Wall Walk is a full-body exercise that requires the use of multiple muscle groups, making it a great addition to any workout routine.",
       "instructions": null,
-      "muscle-group": null,
+      "muscle-group": [
+        "Shoulders",
+        "Triceps",
+        "Upper Back",
+        "Chest",
+        "Abdominals (Core Muscles)"
+      ],
       "equipment": [
         "Full Gym",
         "NO EQUIPMENT"
@@ -1860,7 +1866,13 @@
         "6": "Climb Continuously: Continue the hand-over-hand motion while maintaining the hollow body position. Use your arms to generate the pulling power and maintain your grip on the rope.",
         "7": "Top Position: Keep climbing until you reach the top of the rope or your desired height. At the top, you can use your arms to grip the rope and stabilize yourself if needed."
       },
-      "muscle-group": null,
+      "muscle-group": [
+        "Upper Back",
+        "Shoulder",
+        "Forearms, Biceps",
+        "Abdominals (Core Muscles)",
+        "Chest (Pectoral Muscles)"
+      ],
       "equipment": [
         "Full Gym"
       ],
@@ -1987,7 +1999,13 @@
         "5": "In the dip position, your arms should be fully extended with your shoulders locked out, and your body should be in a hollow position with your feet slightly in front of you. Keep your core tight throughout the movement to help maintain control and stability.",
         "6": "Lower yourself down from the dip position, reversing the movement back to the starting position."
       },
-      "muscle-group": null,
+      "muscle-group": [
+        "Latissimus Dorsi",
+        "Forearms, Biceps",
+        "Chest (Pectoral Muscles)",
+        "Triceps",
+        "Abdominals (Core Muscles)"
+      ],
       "equipment": [
         "Full Gym"
       ],
@@ -5643,7 +5661,13 @@
         "4": "Push back up: Once your chest is close to the ground, push back up to the starting position by straightening your arms.",
         "5": "Repeat: Repeat the exercise for the desired number of reps, making sure to maintain proper form throughout the movement."
       },
-      "muscle-group": null,
+      "muscle-group": [
+        "Chest (Pectoral Muscles)",
+        "Triceps",
+        "Deltoid",
+        "Abdominals (Core Muscles)",
+        "Trapezius"
+      ],
       "equipment": [
         "Full Gym",
         "NO EQUIPMENT"
