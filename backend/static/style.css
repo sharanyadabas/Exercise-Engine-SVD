@@ -326,6 +326,7 @@ input[type=text] {
     box-shadow: 0 14px 28px rgba(39, 55, 77, 0.25), 0 4px 4px rgba(39, 55, 77, 0.22);
 }
 
+
 .heading-container {
     display: flex;
     flex-direction: column;
@@ -410,7 +411,7 @@ input[type=text] {
     position: relative;
     margin: 15px 0;
     height: 30px;
-    width: 300px;
+    width: 400px;
 }
 
 .progress-done {
@@ -466,6 +467,27 @@ input[type=text] {
     font-size: 16px;
 }
 
+.equipment {
+    text-align: center;
+}
+
+.equipment-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.equipment-group>p {
+    color: #526D82;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    font-family: 'trebuchet ms', sans-serif;
+    margin: 0px;
+    font-size: 16px;
+    border: 2px solid #526D82
+}
+
 
 .episode-rating {
     color: #DDE6ED;
@@ -486,20 +508,12 @@ input[type=text] {
 
 .exercise-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .similarity-info {
     padding-left: 20px;
     text-align: center;
-}
-
-.muscle-info,
-.equipment-info {
-    background-color: #526D82;
-    color: #DDE6ED;
-    border-radius: 5px;
-    padding: 7px;
 }
 
 .difficulty-info {

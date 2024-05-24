@@ -223,7 +223,8 @@
                             row.Title,
                             row.Desc,
                             row.Sim,
-                            row.Muscles
+                            row.Muscles,
+                            row.Equipment
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
@@ -363,8 +364,9 @@
             fetchTitlesAndPopulateDropdown
         );
 
-        function answerBoxTemplate(title, titleDesc, sim, muscles) {
+        function answerBoxTemplate(title, titleDesc, sim, muscles, exercises) {
             const muscleElements = muscles.slice(0, 5).map(muscle => `<p>${muscle}</p>`).join('');
+            const exerciseElements = exercises.map(exercise => `<p>${exercise}</p>`).join('');
             const similarity = sim * 100;
             return `
             <div class='answer-container'>
@@ -384,11 +386,17 @@
                     </div>
                     <div class = "exercise-info">
                         <div class = "similarity-info">
-                            <p class='episode-sim'>Similarity Score:</p>
+                            <p class='episode-sim'>Similarity Score</p>
                             <div class="progress">
                                 <div class="progress-done" data-done="${similarity}">
                                     ${Math.floor(similarity)}%
                                 </div>
+                            </div>
+                        </div>
+                        <div class = "equipment">
+                            <p class='episode-sim'>Equipment</p>
+                            <div class = "equipment-group">
+                                ${exerciseElements}
                             </div>
                         </div>
                     </div>
@@ -466,7 +474,8 @@
                             row.Title,
                             row.Desc,
                             row.Sim,
-                            row.Muscles
+                            row.Muscles,
+                            row.Equipment
                         );
                         document.getElementById("answer-box").appendChild(tempDiv);
                     });
