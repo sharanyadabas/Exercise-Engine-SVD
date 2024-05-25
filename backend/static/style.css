@@ -294,7 +294,7 @@ input[type=text] {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 50px;
+    gap: 60px;
     margin-top: 50px;
     margin-bottom: 60px;
 }
@@ -318,14 +318,8 @@ input[type=text] {
     padding-bottom: 20px;
     border: 3px solid #526D82;
     border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(39, 55, 77, 0.12), 0 1px 2px rgba(39, 55, 77, 0.24);
-    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    box-shadow: 0 10px 20px rgba(39, 55, 77, 0.19), 0 6px 6px rgba(39, 55, 77, 0.23);
 }
-
-.answer-container:hover {
-    box-shadow: 0 14px 28px rgba(39, 55, 77, 0.25), 0 4px 4px rgba(39, 55, 77, 0.22);
-}
-
 
 .heading-container {
     display: flex;
@@ -351,27 +345,6 @@ input[type=text] {
     width: 200px;
     height: 200px;
     border: 3px solid #526D82
-}
-
-.video-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    height: 210px;
-    border: 4px solid #526D82;
-    border-radius: 10px;
-}
-
-.yt-button {
-    display: inline-block;
-    text-decoration: none;
-}
-
-.yt-button img {
-    width: 40px;
-    height: auto;
 }
 
 .episode-desc {
@@ -434,10 +407,9 @@ input[type=text] {
     left: 25px;
     background-color: #DDE6ED;
     padding: 0 10px;
-    font-size: 0.9em;
     pointer-events: none;
     color: #27374D;
-    font-size: 30px;
+    font-size: 35px;
     font-family: 'Kanit', sans-serif;
     text-align: center;
 }
@@ -489,22 +461,11 @@ input[type=text] {
     border: 2px solid #526D82
 }
 
-
 .episode-rating {
     color: #DDE6ED;
     font-size: 25px;
     margin-left: 50px;
     font-family: 'trebuchet ms', sans-serif;
-}
-
-.circle-rating {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    border-radius: 50%;
-    background-color: #526D82;
-    text-align: center;
 }
 
 .exercise-info {
@@ -516,14 +477,6 @@ input[type=text] {
     padding-left: 20px;
     text-align: center;
 }
-
-.difficulty-info {
-    margin-top: 25px;
-    color: #526D82;
-    font-style: italic;
-    font-size: 18px;
-}
-
 
 #search-icon {
     cursor: pointer;
@@ -630,24 +583,20 @@ input[type=text] {
     background-color: #DDE6ED;
 }
 
-/* On mouse-over, add a grey background color */
 .filter-checkbox:hover input~.checkmark {
     background-color: #9DB2BF;
 }
 
-/* When the checkbox is checked, add a blue background */
 .filter-checkbox input:checked~.checkmark {
     background-color: #DDE6ED;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-/* Show the checkmark when checked */
 .filter-checkbox input:checked~.checkmark:after {
     display: block;
 }
@@ -673,10 +622,10 @@ input[type=text] {
     justify-content: center;
 }
 
+/* Style toggle between ad-hoc and dropdown search */
 .toggle-container,
 .toggle-switch {
     cursor: pointer;
-    /*change the width and height here, the rest will follow! */
     width: 160px;
     height: 45px;
     font-size: 14px;
@@ -738,45 +687,4 @@ input[type=text] {
 
 .toggle-switch:hover:after {
     box-shadow: 0 0 7.5px #DDE6ED;
-}
-
-.meter {
-    background: #DDE6ED;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    border-radius: 25px;
-    box-shadow: inset 0 -1px 1px rgba(255, 255, 255, 0.3);
-    display: block;
-    height: 5px;
-    width: 200px;
-    margin-bottom: 10px;
-    padding: 8px;
-    position: relative;
-    padding-bottom: 5px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #27374D;
-
-    >span {
-        display: block;
-        height: 240%;
-        margin-bottom: 3px;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        background-color: rgb(43, 194, 83);
-        background-image: linear-gradient(to top, rgb(43, 194, 83) 37%, rgb(84, 240, 84) 69%);
-        box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3) inset 0 -2px 6px rgba(0, 0, 0, 0.4);
-        position: relative;
-        overflow: hidden;
-        transition: width 2s ease-out;
-    }
-}
-
-.cadetblue {
-    >span {
-        background-color: #DDE6ED;
-        background-image: linear-gradient(to bottom, #526D82, #9DB2BF);
-    }
 }

@@ -499,6 +499,7 @@ input[type=text] {
     transform: rotate(45deg);
 }
 
+/* Toggle between ad-hoc and dropdown search */
 .toggle-container {
     text-align: center;
     display: flex;
@@ -508,7 +509,6 @@ input[type=text] {
 .toggle-container,
 .toggle-switch {
     cursor: pointer;
-    /*change the width and height here, the rest will follow! */
     width: 160px;
     height: 45px;
     font-size: 14px;
