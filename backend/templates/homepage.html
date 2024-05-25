@@ -15,7 +15,6 @@
 </head>
 
 <body>
-    <img class="background" src="../static/images/gym.jpg" alt="Gym Picture" />
     <div class="full-body-container">
         <div class="complete-container">
             <div class="vertical-bar" style="display:none">
@@ -32,21 +31,20 @@
                         <h1 id="title">Exercise Engine</h1>
                     </div>
                     <div class="search-line">
-                        <div class="toggle-container">
-                            <input id="search-method" class="skills-toggle" type="checkbox">
-                            <label for="search-method">
-                                <div class="toggle-switch" data-checked="Freeform" data-unchecked="Exercises"></div>
-                            </label>
-                        </div>
                         <select id="filter-text-val" class="dropdown" onchange="dropdownChange()"></select>
                         <input id="ad-hoc" class="dropdown" type="text" placeholder="Enter some exercise features" />
                         <img id="search-icon" src="../static/images/dumbbell.png" onclick="redirect()" />
-                        <div class="toggle-container" style="padding-left: 0;"></div>
                     </div>
                 </div>
                 <div id="answer-box">
                 </div>
                 <div class="filter-container">
+                    <div class="toggle-container">
+                        <input id="search-method" class="skills-toggle" type="checkbox">
+                        <label for="search-method">
+                            <div class="toggle-switch" data-checked="Freeform" data-unchecked="Exercises"></div>
+                        </label>
+                    </div>
                     <div class="filter-button" id="muscle-filter">
                         <div class="filter-header">Muscle groups
                             <button id="toggle-muscle-groups" onclick="toggleFilter(this)"></button>
@@ -173,7 +171,6 @@
                             </label>
                         </div>
                     </div>
-                    <div class="filter-buffer" style="width:90px;"></div>
                 </div>
             </div>
             <!-- Invisible div for balancing -->

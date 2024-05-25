@@ -61,6 +61,8 @@ CORS(app)
 recent_search = []
 recent_title = ""
 was_AH = False
+muscle_groups = []
+equipment_groups = []
 
 
 def closest_docs_from_words(query):
@@ -309,7 +311,7 @@ def create_recent_normal():
     global recent_title
     global was_AH
     global muscle_groups
-    global equipments
+    global equipment_groups
     global difficulties
     global muscle_dict
 
@@ -357,7 +359,7 @@ def create_recent_AH():
     global recent_title
     global was_AH
     global muscle_groups
-    global equipments
+    global equipment_groups
     global difficulties
     global muscle_dict
 
@@ -408,8 +410,7 @@ def get_recent_title():
             "title": recent_title,
             "was_AH": was_AH,
             "muscle_groups": muscle_groups,
-            "equipments": equipments,
-            "difficulties": difficulties,
+            "equipments": equipment_groups,
         }
     )
 
@@ -435,6 +436,8 @@ def normal_search():
     global recent_title
     global was_AH
     global muscle_dict
+    global muscle_groups
+    global equipment_groups
 
     was_AH = False
     title = request.args.get("title")
@@ -482,6 +485,8 @@ def AH_search():
     global was_AH
     global recent_title
     global muscle_dict
+    global muscle_groups
+    global equipment_groups
 
     was_AH = True
     title = request.args.get("title")
