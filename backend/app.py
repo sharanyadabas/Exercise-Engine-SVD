@@ -399,7 +399,7 @@ def create_recent_AH():
 @app.route("/get-recent")
 def get_recent():
     # Returns the most recent results
-    return recent_search
+    return recent_search[:5]
 
 
 @app.route("/get-recent-info")
