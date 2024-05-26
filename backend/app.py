@@ -8,8 +8,9 @@ from scipy.sparse.linalg import svds
 import numpy as np
 from mangum import Mangum
 
+# Lambda handler
+lambda_handler = Mangum(app)
 # ROOT_PATH for linking with all your files.
-# Feel free to use a config.py or settings.py with a global export variable
 os.environ["ROOT_PATH"] = os.path.abspath(os.path.join("..", os.curdir))
 
 # Get the directory of the current script
