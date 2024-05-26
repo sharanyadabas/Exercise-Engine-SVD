@@ -2,7 +2,7 @@ services:
         exercise_engine:
                 image: exercise_engine
                 ports:
-                        - "5001:5001"
+                        - "8080:8080"
 volumes:
         flask_volume:
 networks:
