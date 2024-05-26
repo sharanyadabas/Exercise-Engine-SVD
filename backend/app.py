@@ -6,6 +6,7 @@ from flask_cors import CORS
 from sklearn.preprocessing import normalize
 from scipy.sparse.linalg import svds
 import numpy as np
+from mangum import Mangum
 
 # ROOT_PATH for linking with all your files.
 # Feel free to use a config.py or settings.py with a global export variable
