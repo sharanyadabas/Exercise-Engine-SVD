@@ -6,10 +6,7 @@ from flask_cors import CORS
 from sklearn.preprocessing import normalize
 from scipy.sparse.linalg import svds
 import numpy as np
-from mangum import Mangum
 
-# Lambda handler
-lambda_handler = Mangum(app)
 # ROOT_PATH for linking with all your files.
 os.environ["ROOT_PATH"] = os.path.abspath(os.path.join("..", os.curdir))
 
